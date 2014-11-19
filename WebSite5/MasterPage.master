@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>TXT</title>
+<meta charset="utf-8 />
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700|Open+Sans+Condensed:700" rel="stylesheet">
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none&amp;mobileUI.titleBarOverlaid=1"></script>
+<noscript>
+<link rel="stylesheet" href="5grid/core.css">
+<link rel="stylesheet" href="5grid/core-desktop.css">
+<link rel="stylesheet" href="5grid/core-1200px.css">
+<link rel="stylesheet" href="5grid/core-noscript.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style-desktop.css">
+</noscript>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+<header id="header">
+  <div class="logo">
+    <div>
+      <h1><a href="#" class="mobileUI-site-name">TXT</a></h1>
+      <span class="byline">A responsive site template by HTML5 Up!</span> </div>
+  </div>
+</header>
+<nav id="nav" class="mobileUI-site-nav">
+  <ul>
+    <li class="current_page_item"><a href="index.html">Home</a></li>
+    <li><a href="left-sidebar.html">Left Sidebar</a></li>
+    <li><a href="right-sidebar.html">Right Sidebar</a></li>
+    <li><a href="no-sidebar.html">No Sidebar</a></li>
+  </ul>
+</nav>
+<div id="banner-wrapper">
+  <section id="banner">
+    <h2>You are in a dimly lit stairwell</h2>
+    <span class="byline">The stench is unbearable. You wonder why all stairwells smell this way.</span> <a href="#" class="button">Hold Breath and Continue</a> </section>
+</div>
+<div id="main-wrapper">
+  <div id="main" class="5grid-layout">
+    <div class="row">
+      <div class="12u">
+        <section class="is-highlight">
+          <ul class="special">
+            <li><a href="#" class="battery">Battery</a></li>
+            <li><a href="#" class="tablet">Tablet</a></li>
+            <li><a href="#" class="flask">Flask</a></li>
+            <li><a href="#" class="chart">Pie Chart?</a></li>
+          </ul>
+          <header>
+            <h2>You check the contents of your inventory</h2>
+            <span class="byline">it contains: many items that seem important but actually aren’t</span></header>
+          <p> Phasellus quam turpis, feugiat sit amet ornare in, hendrerit in lectus. Praesent semper mod quis eget mi. Etiam eu<br>
+            ante risus. Aliquam erat volutpat. Aliquam luctus et mattis lectus amet pulvinar. Nam nec turpis consequat. </p>
+        </section>
+      </div>
+    </div>
+    <div class="row">
+      <div class="12u">
+        <section class="is-features">
+          <h2 class="major"><span>Valid Commands</span></h2>
+          <div class="5grid">
+            <div class="row">
+              <div class="3u">
+                <section class="is-feature"> <a href="#" class="image image-full"><img src="images/pic01.jpg" alt="" /></a>
+                  <h3><a href="#">Look Up</a></h3>
+                  <p> Phasellus quam turpis, feugiat sit amet ornare in, a hendrerit in lectus dolore. Praesent semper mod quis eget sed etiam eu ante risus. </p>
+                </section>
+              </div>
+              <div class="3u">
+                <section class="is-feature"> <a href="#" class="image image-full"><img src="images/pic02.jpg" alt=""></a>
+                  <h3><a href="#">Look Down</a></h3>
+                  <p> Phasellus quam turpis, feugiat sit amet ornare in, a hendrerit in lectus dolore. Praesent semper mod quis eget sed etiam eu ante risus. </p>
+                </section>
+              </div>
+              <div class="3u">
+                <section class="is-feature"> <a href="#" class="image image-full"><img src="images/pic03.jpg" alt=""></a>
+                  <h3><a href="#">Examine Room</a></h3>
+                  <p> Phasellus quam turpis, feugiat sit amet ornare in, a hendrerit in lectus dolore. Praesent semper mod quis eget sed etiam eu ante risus. </p>
+                </section>
+              </div>
+              <div class="3u">
+                <section class="is-feature"> <a href="#" class="image image-full"><img src="images/pic04.jpg" alt=""></a>
+                  <h3><a href="#">Get Lamp</a></h3>
+                  <p> Phasellus quam turpis, feugiat sit amet ornare in, a hendrerit in lectus dolore. Praesent semper mod quis eget sed etiam eu ante risus. </p>
+                </section>
+              </div>
+            </div>
+            <div class="row">
+              <div class="12u">
+                <div class="actions"> <a href="#" class="button button-big">Do Something</a> <a href="#" class="button button-alt button-big">Think About It</a></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="row">
+      <div class="12u">
+        <section class="is-blog">
+          <h2 class="major"><span>Adventure Log</span></h2>
+          <div class="5grid">
+            <div class="row">
+              <div class="9u">
+                <div class="content content-left">
+                  <article class="is-post">
+                    <header>
+                      <h3><a href="#">You mean I have to read stuff?</a></h3>
+                      <span class="byline">I’m going back to playing call of Modern Halostrike 15</span>
+                      <ul class="meta">
+                        <li class="timestamp">15 minutes ago</li>
+                        <li class="comments"><a href="#">8</a></li>
+                      </ul>
+                    </header>
+                    <a href="#" class="image image-full"><img src="images/pic05.jpg" alt=""></a>
+                    <p> Phasellus quam turpis, feugiat sit amet ornare in, a hendrerit in lectus. Praesent semper mod quis eget mi. Etiam sed ante risus aliquam erat et volutpat. Praesent a dapibus velit. Curabitur sed nisi nunc, accumsan vestibulum lectus. Lorem ipsum dolor sit non aliquet sed, tempor et dolor. Praesent a dapibus velit. Curabitur accumsan. </p>
+                    <a href="#" class="button">Continue Reading</a></article>
+                </div>
+              </div>
+              <div class="3u">
+                <div class="sidebar">
+                  <ul class="style2">
+                    <li>
+                      <article class="is-post-summary">
+                        <h3><a href="#">Where are the graphics?</a></h3>
+                        <ul class="meta">
+                          <li class="timestamp">6 hours ago</li>
+                          <li class="comments"><a href="#">34</a></li>
+                        </ul>
+                      </article>
+                    </li>
+                    <li>
+                      <article class="is-post-summary">
+                        <h3><a href="#">What achievements are there</a></h3>
+                        <ul class="meta">
+                          <li class="timestamp">9 hours ago</li>
+                          <li class="comments"><a href="#">27</a></li>
+                        </ul>
+                      </article>
+                    </li>
+                    <li>
+                      <article class="is-post-summary">
+                        <h3><a href="#">Can I play w/a controller</a></h3>
+                        <ul class="meta">
+                          <li class="timestamp">Yesterday</li>
+                          <li class="comments"><a href="#">184</a></li>
+                        </ul>
+                      </article>
+                    </li>
+                    <li>
+                      <article class="is-post-summary">
+                        <h3><a href="#">How is this a game??</a></h3>
+                        <ul class="meta">
+                          <li class="timestamp">2 days ago</li>
+                          <li class="comments"><a href="#">286</a></li>
+                        </ul>
+                      </article>
+                    </li>
+                    <li>
+                      <article class="is-post-summary">
+                        <h3><a href="#">Imagination is lost on me</a></h3>
+                        <ul class="meta">
+                          <li class="timestamp">3 days ago</li>
+                          <li class="comments"><a href="#">8,086</a></li>
+                        </ul>
+                      </article>
+                    </li>
+                  </ul>
+                  <a href="#" class="button button-alt">Browse Archives</a> </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+<footer id="footer" class="5grid-layout">
+  <div class="row">
+    <div class="12u">
+      <section>
+        <h2 class="major"><span>What's this about?</span></h2>
+        <p> This is TXT, a free site template designed by n33 for HTML5 Up! It's built on the 5grid framework, uses well-thought out HTML5 and CSS3, and is fully responsive making it a great starting point for your own projects. And, like everything else we make, it's also free to use for pretty much any personal or commercial work under the Creative Commons Attribution license, so go ahead and use it &ndash; just don't forget to credit us! </p>
+      </section>
+    </div>
+  </div>
+  <div class="row">
+    <div class="12u">
+      <section>
+        <h2 class="major"><span>Get in touch</span></h2>
+        <ul class="contact">
+          <li><a href="#" class="facebook">Facebook</a></li>
+          <li><a href="#" class="twitter">Twitter</a></li>
+          <li><a href="#" class="rss">RSS</a></li>
+          <li><a href="#" class="dribbble">Dribbble</a></li>
+          <li><a href="#" class="linkedin">LinkedIn</a></li>
+          <li><a href="#" class="googleplus">Google+</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+  <div class="row">
+    <div id="copyright"> &copy; 2045 Untitled Something | Images: <a href="http://fotogrph.com">Fotogrph</a> + <a href="http://iconify.it">Iconify.it</a> | Design: <a href="http://html5up.net/">HTML5 Up!</a> </div>
+  </div>
+</footer>
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
