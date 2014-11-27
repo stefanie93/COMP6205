@@ -10,6 +10,33 @@
 </head>
 <body>
     <form id="form1" runat="server">
+      <div class="container">
+          <div class="header clearfix">
+            <div class = "nav">
+              <input type="checkbox" id="toggle">
+                <label for="toggle" class="toggle" onclick=""></label>
+                <ul class="menu">
+                  <li>
+                    <a href="HomePage.aspx">Home</a>
+                  </li>
+                  <li>
+                    <a href="Rooms.aspx">Rooms</a>
+                  </li>
+                  <li>
+                    <a href="AboutUs.aspx">About Us</a>
+                  </li>
+                  <li>
+                    <a href="ContactUs.aspx">Contact Us</a>
+                  </li>
+                  <li>
+                    <a href="Login.aspx">Login</a>
+                  </li>
+                </ul>
+              </input>
+            </div>
+          </div>
+        </div>
+
     <div>
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         

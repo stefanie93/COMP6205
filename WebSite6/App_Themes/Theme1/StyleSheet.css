@@ -36,9 +36,12 @@
 }
 
 .nav{ 
-	display: block; 
-	float: right; 
-}
+	position:absolute;
+left:60%;top:0;
+margin-left:-375px; /* negative margin equal to half the width */
+width:750px;
+list-style:none;
+    }
 
 .nav, .menu, .menu > li, .menu > li > a{ 
 	height: 100%; 
