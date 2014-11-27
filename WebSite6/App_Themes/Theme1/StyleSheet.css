@@ -137,14 +137,21 @@ display:inline;
 	}
 }
 
-#page_header
+
+.page_header
 {
+
     margin-top:10px;
+    margin-bottom:10px;
  }
  
+#page_footer{
+    clear:both;
+}
   .logo
   {
-      position:absolute;
+      width:10%;
+      position:relative;
       display:inline;
       vertical-align:middle;
   }
