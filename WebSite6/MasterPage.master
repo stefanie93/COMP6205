@@ -10,8 +10,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-      <div class="container">
+    <div id="page_header">
           <div class="header clearfix">
+          <img src="logo.jpg" alt="logo" width='232' height='100' class="logo" />
             <div class = "nav">
               <input type="checkbox" id="toggle">
                 <label for="toggle" class="toggle" onclick=""></label>
@@ -36,7 +37,6 @@
             </div>
           </div>
         </div>
-
     <div>
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         

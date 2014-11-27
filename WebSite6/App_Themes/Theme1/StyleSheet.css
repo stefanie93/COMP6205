@@ -41,6 +41,7 @@ left:60%;top:0;
 margin-left:-375px; /* negative margin equal to half the width */
 width:750px;
 list-style:none;
+display:inline;
     }
 
 .nav, .menu, .menu > li, .menu > li > a{ 
@@ -135,3 +136,15 @@ list-style:none;
 		text-align: center; width: 100%; 
 	}
 }
+
+#page_header
+{
+    margin-top:10px;
+ }
+ 
+  .logo
+  {
+      position:absolute;
+      display:inline;
+      vertical-align:middle;
+  }
