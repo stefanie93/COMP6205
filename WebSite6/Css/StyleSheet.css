@@ -1,0 +1,181 @@
+﻿body 
+{
+    font-family:Sans-Serif;
+    margin: 0 0 0 0;
+}
+
+#page_wrapper 
+{
+    background:none repeat scroll 0 0 #f4f4f4;
+    position:relative;
+    right:0;
+    left:0;
+    top:0;
+    bottom:0;
+    width:100%;
+    overflow:hidden;
+}
+.main_title 
+{
+    background-color:#f4f4f4;
+    border:none;
+    height:50px;
+    vertical-align:middle;    
+}
+
+#top_title 
+{
+    background-color:#f4f4f4;
+    text-align:center;
+    color:#000000;
+    font-weight:bold;
+    margin: 10 0 0 0;
+}
+
+.img_title 
+{
+    height:600px; 
+    background-image: url(http://localhost:13864/WebSite6/images/soton_nature.jpg);
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+#banner
+{
+   width:100%;
+   background-color:#ffffff;
+   position:fixed;
+}
+
+#navigation
+{
+    width:1080px;
+    height:60px;
+    padding:10px;
+    margin:0 auto;
+    background-color:#ffffff;
+}
+
+#nav
+{
+    list-style:none;
+    text-transform:uppercase;
+    color:#000000;
+    font-family:Berlin Sans FB;
+    margin-left:0;  
+}
+
+#nav ul 
+{
+    list-style:none;
+    margin:0;
+    padding:0;
+    width:auto;
+    display:none;
+}
+
+
+
+#nav li 
+{
+    font-size:20px;
+    float:left;
+    text-align:left;
+    position:relative;
+    height:50px;
+    margin-right:20px;
+    
+}
+
+/*
+#nav li:after 
+{
+    font-size:15px;
+    color:Gray;
+    content: '•';  
+}
+
+# nav li.last:after {
+    content: '';
+}
+*/
+
+#nav_book li
+{
+     border: 1px solid #000000;
+     font-size:25px;
+     background-color:Red;
+     margin-left:50px;
+     margin-right:35px;
+     color:#ffffff;
+     width:100px;
+}
+
+
+#nav a:link, #nav a:active, #nav a:visited 
+{
+    display:block;
+    color:Black;
+    text-decoration:none;
+}
+
+#nav a:hover 
+{
+    color:Black;
+}
+
+
+#wrapper
+{
+  width: 1080px;  
+  margin: 0 auto;
+  padding:10px;
+  background-color:#fff;
+}
+
+
+.content_area
+{
+    float:left;
+    margin:0 0 0 0;
+    border:3px solid #E3E3E3;
+    z-index: -1;
+    
+}
+
+#footer
+{
+    clear:both;
+    width:auto;
+    height:40px;
+    margin-top:20px;
+}
+
+.content_wrap
+{
+    background-color:#f4f4f4;
+    width:1060px;
+    height:500px;
+    float:left;
+    position:relative;
+    right:0;
+    left:0;
+    top:0;
+    bottom:0;
+    z-index:-1;
+     
+}
+
+.wrap_title h1
+{
+    border:5px solid #3232CD;
+    width:150px;
+    height:50px;
+    color:#000000;
+    background-color:#ffffff;
+}
+
+#wrapper2
+{
+    
+}

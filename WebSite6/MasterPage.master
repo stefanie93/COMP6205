@@ -4,44 +4,76 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Student Accommodation</title>
+    <link rel="Stylesheet" type="text/css" href="Css/StyleSheet.css" />
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id="fixed">
-            <div class="header clearfix">
-                <img src="logo.jpg" alt="logo" width='232' height='100' class="logo" />
-                <div class="nav">
 
-                    <label for="toggle" class="toggle" onclick=""></label>
-                    <ul class="menu">
-                        <li>
-                            <a href="HomePage.aspx">Home</a>
-                        </li>
-                        <li>
-                            <a href="Rooms.aspx">Rooms</a>
-                        </li>
-                        <li>
-                            <a href="AboutUs.aspx">About Us</a>
-                        </li>
-                        <li>
-                            <a href="ContactUs.aspx">Contact Us</a>
-                        </li>
-                        <li>
-                            <a href="Login.aspx">Login</a>
-                        </li>
-                    </ul>
+    <div  id="page_wrapper">
+        <div id="banner">
+    <div id="navigation">
+            <ul id="nav">
+                <li><a href="#">Up</a></li>
+                <li><a href="#rooms">Rooms</a></li>
+                <li><a href="#facilities">Facilities</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li class="last"><a href="#contact">Contact Us</a></li>
 
-                </div>
-            </div>
+                
+            </ul>
+ <!--          
+            <li id="nav_book"><a href="#">Book</a></li>
+
+             <ul id="nav_login">
+                <li><a href="#">Log In</a></li>
+            </ul> 
+ -->
+         
+        </div>    
         </div>
-    <div>
-        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        <div class="img_title">  </div>
+        <div class="main_title">
+            <h1 id="top_title"> Student Accommodation</h1>
+        </div>
+ 
+       <div id="wrapper">
+
+            <div class="wrap_title" id="rooms">
+            <h1>Rooms</h1>
+
+             <div class="content_area">
+            <div class="content_wrap">
+            </div>
+              </div>
+            </div>
+
+       
+
+            <div class="wrap_title" id="facilities">
+            <h1>Facilities</h1>
+            </div><br />
+
+            <div class="content_wrap" id="about">
+            <h1>About Us</h1>
+            </div><br />
+
+            <div class="content_wrap" id="contact">
+            <h1>Contact Us</h1>
+            </div><br />
+        </div>
         
-        </asp:ContentPlaceHolder>
+        <div id="footer">
+        
+        </div>
     </div>
+   </div>
     </form>
 </body>
 </html>
+
+<asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>

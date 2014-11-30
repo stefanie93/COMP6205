@@ -28,6 +28,9 @@
   display: block;
   margin-bottom: 10px;
   position: relative;
+    top: -15px;
+    left: 1px;
+    height: 37px;
 }
 
 .login-card input[type=text], input[type=password] {
