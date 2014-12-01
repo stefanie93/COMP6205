@@ -1,0 +1,116 @@
+﻿body 
+{
+    font-family:Sans-Serif;
+    margin: 0 0 0 0;
+}
+
+#page_wrapper 
+{
+    background:#f4f4f4 none repeat scroll 0 0;
+    position:relative;
+    right:0;
+    left:0;
+    top:0;
+    width:100%;
+    overflow:hidden;
+}
+
+header
+{
+  
+}
+
+#banner
+{
+   width:100%;
+   background-color:#ffffff;
+   position:fixed;
+}
+
+#navigation
+{
+    width:1080px;
+    height:50px;
+    padding:10px;
+    margin:0 auto;
+    background-color:#ffffff;
+}
+
+#nav
+{
+    list-style:none;
+    text-transform:uppercase;
+    color:#000000;
+    font-family:Berlin Sans FB;
+    margin-left:0;
+    display:inline;
+      
+}
+
+#nav li 
+{
+    list-style:none;
+    font-size:20px;
+    float:left;
+    text-align:left;
+    position:relative;
+    height:50px;
+    width:40px;
+}
+
+#top_title
+{
+    display:inline;
+    text-transform:uppercase;
+    text-align:center;
+    text-indent:45%;
+}
+
+.img_title 
+{
+    width:100%;
+    height:400px;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+
+
+#wrapper
+{
+  width: 1080px;  
+  margin: 0 auto;
+  padding:10px;
+  background-color:#fff;
+}
+
+.content_area
+{
+    float:left;
+    margin:0 0 0 0;
+    border:3px solid #E3E3E3;
+    z-index: -1; 
+}
+
+.content_wrap
+{
+    background-color:#f4f4f4;
+    width:1060px;
+    height:806px;
+    float:left;
+    position:relative;
+    right:-10px;
+    left:10px;
+    top:0;
+    bottom:0px;
+     
+}
+
+.wrap_title h1
+{
+    border:5px solid #3232CD;
+    width:150px;
+    height:50px;
+    color:#000000;
+    background-color:#ffffff;
+}
