@@ -21,6 +21,7 @@
                 <li><a href="#facilities">Facilities</a></li>
                 <li><a href="#about">About Us</a></li>
                 <li class="last"><a href="#contact">Contact Us</a></li>
+                <li><a href=LogIn.aspx>Login</a></li>
 
                 
             </ul>
