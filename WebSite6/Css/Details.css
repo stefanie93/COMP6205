@@ -23,7 +23,7 @@ header
 #banner
 {
    width:100%;
-   background-color:#ffffff;
+   background-color:ThreeDLighShadow;
    position:fixed;
 }
 
@@ -33,7 +33,8 @@ header
     height:50px;
     padding:10px;
     margin:0 auto;
-    background-color:#ffffff;
+    background-color:black:transparent;
+    z-index:9999;
 }
 
 #nav
@@ -42,28 +43,36 @@ header
     text-transform:uppercase;
     color:#000000;
     font-family:Berlin Sans FB;
-    margin-left:0;
-    display:inline;
-      
+    margin-left:0;      
 }
 
 #nav li 
 {
     list-style:none;
     font-size:20px;
-    float:left;
+    float:right;
     text-align:left;
     position:relative;
     height:50px;
     width:40px;
 }
 
+.main_title 
+{
+    background-color:#f4f4f4;
+    border:none;
+    height:50px;
+    vertical-align:middle;    
+}
+
 #top_title
 {
-    display:inline;
     text-transform:uppercase;
+    background-color:#f4f4f4;
     text-align:center;
-    text-indent:45%;
+    color:#000000;
+    font-weight:bold;
+    margin: 10 0 0 0;
 }
 
 .img_title 
@@ -109,7 +118,7 @@ header
 .wrap_title h1
 {
     border:5px solid #3232CD;
-    width:150px;
+    width:200px;
     height:50px;
     color:#000000;
     background-color:#ffffff;
