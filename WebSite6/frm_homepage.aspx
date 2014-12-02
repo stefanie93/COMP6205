@@ -1,12 +1,12 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="frm_homepage.aspx.cs" Inherits="frm_homepage" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <title>Student Accommodation</title>
     <link rel="Stylesheet" type="text/css" href="Css/StyleSheet.css" />
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+
 </head>
 <body>
     <form id="form1" runat="server">
@@ -19,8 +19,13 @@
                     <li><a href="#facilities">Facilities</a></li>
                     <li><a href="#about">About Us</a></li>
                     <li class="last"><a href="#contact">Contact Us</a></li>
-                    <li><a href="frm_login.aspx">Login</a></li>
-                    <asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Button" />
+                    <li><a href="Form_Login.aspx">Login</a></li>
+                   
+                    <asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Login" />
+                   
+                        <asp:Button ID="Button2" runat="server" onclick="Button2_Click" 
+                            Text="book a room" />
+                   
                 </ul>
                 <!--          
             <li id="nav_book"><a href="#">Book</a></li>
@@ -44,6 +49,9 @@
                     Rooms</h1>
                 <div class="content_area">
                     <div class="content_wrap">
+                        <asp:TextBox ID="txt_valueForm" runat="server"></asp:TextBox>
+                         <asp:TextBox ID="txt_userID" runat="server"></asp:TextBox>
+                         <asp:TextBox ID="txt_login" runat="server"></asp:TextBox>
                     </div>
                 </div>
             </div>
@@ -70,6 +78,3 @@
     </form>
 </body>
 </html>
-<asp:contentplaceholder id="ContentPlaceHolder1" runat="server">
-        
-        </asp:contentplaceholder>

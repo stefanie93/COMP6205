@@ -25,13 +25,18 @@
         </header>
         <div id="wrapper">
             <div class="wrap_title" id="rooms">
-                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                        ConnectionString="<%$ ConnectionStrings:PersonalData_ConnectionString %>" 
-                        onselecting="SqlDataSource1_Selecting" 
-                        SelectCommand="SELECT * FROM [PersonalData]">
-                    </asp:SqlDataSource>
+                    
                 <h1>
                     Details</h1>
+               
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:PersonalData_ConnectionString %>" 
+                    SelectCommand="SELECT * FROM [PersonalData]"></asp:SqlDataSource>
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:Registration_ConnectionString %>" 
+                    SelectCommand="SELECT * FROM [Users]"></asp:SqlDataSource>
+                <asp:TextBox ID="txt_valueForm" runat="server" Visible="False"></asp:TextBox>
+                <br />
                
                 <div class="content_area">
                     <div class="content_wrap">

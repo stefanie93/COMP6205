@@ -11,6 +11,15 @@ public partial class PersonalInfo : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        txt_valueForm.Text = "d";
+        string user_id;
+        System.Collections.Specialized.NameValueCollection previuseFormCollection = Request.Form;
+        user_id = previuseFormCollection["txt_userID"];
+        if (previuseFormCollection["txt_login"] == "")
+        {
+            Server.Transfer("~/Form_Login.aspx", true);
+        }
+
         dp_Day.Items.Insert(0, new ListItem("dd"));
         for(int i = 1; i<=31; i++)
         {
