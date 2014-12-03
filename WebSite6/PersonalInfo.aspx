@@ -64,17 +64,17 @@
                         <br />
                         <asp:Label ID="Label3" runat="server" Text="Your Gender *"></asp:Label>
                         <br />
-                        <asp:RadioButton ID="MaleRButton" runat="server" Text="Male" Width="100px" 
-                            oncheckedchanged="MaleRButton_CheckedChanged" />
-                        <asp:RadioButton ID="FemaleRButton" runat="server" Text="Female" 
+                        <asp:RadioButton ID="MaleRButton" runat="server" GroupName = "a" Text="Male" Width="100px" 
+                            oncheckedchanged="MaleRButton_CheckedChanged"/>
+                        <asp:RadioButton ID="FemaleRButton" runat="server" GroupName = "a" Text="Female" 
                             Width="100px" oncheckedchanged="FemaleRButton_CheckedChanged" />
                         <br />
                         <br />
                         <asp:Label ID="Label4" runat="server" Text="Are you a smoker? *"></asp:Label>
                         <br />
-                        <asp:RadioButton ID="smokerNo" runat="server" Text="No" Width="100px" 
+                        <asp:RadioButton ID="smokerNo" runat="server" Text="No" GroupName = "b" Width="100px" 
                             oncheckedchanged="smokerNo_CheckedChanged" />
-                        <asp:RadioButton ID="smokerYes" runat="server" Text="Yes" Width="100px" 
+                        <asp:RadioButton ID="smokerYes" runat="server" Text="Yes" GroupName = "b" Width="100px" 
                             oncheckedchanged="smokerYes_CheckedChanged" />
                         <br />
                         <br />
@@ -99,19 +99,21 @@
                         <asp:DropDownList ID="dp_nationalityList" runat="server" 
                             onselectedindexchanged="DropDownList2_SelectedIndexChanged" Width="1000px">
                             <asp:ListItem Selected="True">Please Select...</asp:ListItem>
+                            <asp:ListItem Value="cypriot"></asp:ListItem>
                         </asp:DropDownList>
                         <br />
                         <br />
                         
                         <asp:Label ID="Label8" runat="server" Text="Phone number *"></asp:Label>
                         <br />
-                        <asp:TextBox ID="CountryCodeTBox" runat="server" MaxLength="6" Width="70px"></asp:TextBox>
+                        <asp:TextBox ID="CountryCodeTBox" runat="server" MaxLength="6" Width="37px" 
+                            Enabled="False" ontextchanged="CountryCodeTBox_TextChanged">+44</asp:TextBox>
                         <asp:TextBox ID="telephoneTBox" runat="server" MaxLength="20"></asp:TextBox>
                         <br />
                         <br />
                         <br />
                         Home Address<br />
-                        <asp:Panel ID="Panel1" runat="server">
+                        <asp:Panel ID="Panel1" runat="server" Height="524px">
                             <asp:Label ID="Label9" runat="server" Text="Address line 1 *"></asp:Label>
                             <br />
                             <asp:TextBox ID="AddressTBox1" runat="server" Width="1000px"></asp:TextBox>
@@ -143,9 +145,19 @@
                             <br />
                             <asp:Button ID="btn_next" runat="server" onclick="btn_next_Click" 
                                 style="height: 26px" Text="Next" />
+                            <br />
+                            <br />
+                            <br />
                         </asp:Panel>
                         
                     </div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                 </div>
                 
             </div>
