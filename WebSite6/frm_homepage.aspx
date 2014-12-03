@@ -49,9 +49,9 @@
                     Rooms</h1>
                 <div class="content_area">
                     <div class="content_wrap">
-                        <asp:TextBox ID="txt_valueForm" runat="server"></asp:TextBox>
-                         <asp:TextBox ID="txt_userID" runat="server"></asp:TextBox>
-                         <asp:TextBox ID="txt_login" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txt_Home_valueForm" runat="server"></asp:TextBox>
+                         <asp:TextBox ID="txt_Home_userID" runat="server"></asp:TextBox>
+                         <asp:TextBox ID="txt_home_login" runat="server"></asp:TextBox>
                     </div>
                 </div>
             </div>

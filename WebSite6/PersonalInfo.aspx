@@ -35,7 +35,7 @@
                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
                     ConnectionString="<%$ ConnectionStrings:Registration_ConnectionString %>" 
                     SelectCommand="SELECT * FROM [Users]"></asp:SqlDataSource>
-                <asp:TextBox ID="txt_valueForm" runat="server" Visible="False"></asp:TextBox>
+                <asp:TextBox ID="txt_PIvalueForm" runat="server" Visible="False"></asp:TextBox>
                 <br />
                
                 <div class="content_area">
@@ -64,15 +64,18 @@
                         <br />
                         <asp:Label ID="Label3" runat="server" Text="Your Gender *"></asp:Label>
                         <br />
-                        <asp:RadioButton ID="MaleRButton" runat="server" Text="Male" Width="100px" />
+                        <asp:RadioButton ID="MaleRButton" runat="server" Text="Male" Width="100px" 
+                            oncheckedchanged="MaleRButton_CheckedChanged" />
                         <asp:RadioButton ID="FemaleRButton" runat="server" Text="Female" 
-                            Width="100px" />
+                            Width="100px" oncheckedchanged="FemaleRButton_CheckedChanged" />
                         <br />
                         <br />
                         <asp:Label ID="Label4" runat="server" Text="Are you a smoker? *"></asp:Label>
                         <br />
-                        <asp:RadioButton ID="smokerNo" runat="server" Text="No" Width="100px" />
-                        <asp:RadioButton ID="smokerYes" runat="server" Text="Yes" Width="100px" />
+                        <asp:RadioButton ID="smokerNo" runat="server" Text="No" Width="100px" 
+                            oncheckedchanged="smokerNo_CheckedChanged" />
+                        <asp:RadioButton ID="smokerYes" runat="server" Text="Yes" Width="100px" 
+                            oncheckedchanged="smokerYes_CheckedChanged" />
                         <br />
                         <br />
                         <asp:Label ID="Label5" runat="server" 

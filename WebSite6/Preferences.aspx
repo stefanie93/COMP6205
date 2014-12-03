@@ -73,9 +73,8 @@
                         </asp:Panel>
                         <br />
                         <br />
+                        <asp:Button ID="btn_Confirmation" runat="server" Text="Next - Confirmation" />
                         <br />
-                        <asp:Button ID="cmd_confirmation" runat="server" onclick="Button1_Click" 
-                            Text="Next - Confirmation" />
                     </asp:Panel>
 
                     </div>

@@ -16,10 +16,11 @@ public partial class Form_Login : System.Web.UI.Page
     public void Page_Load(object sender, EventArgs e)
     {
         System.Collections.Specialized.NameValueCollection previuseFormCollection = Request.Form;
-        if (previuseFormCollection["txt_valueForm"] != "d")
+        if (previuseFormCollection["txt_Home_valueForm"] != "d")
         {
             home = true;
         }
+        
     }
 
     public void btn_login_Click(object sender, EventArgs e)
@@ -49,12 +50,12 @@ public partial class Form_Login : System.Web.UI.Page
                 if (home == true)
                 {
                     Server.Transfer("~/frm_homepage.aspx");
-                    txt_userID.Text = "1";
+                    txt_Login_userID.Text = "1";
                 }
                 else
                 {
                     Server.Transfer("~/PersonalInfo.aspx");
-                    txt_userID.Text = "1";
+                    txt_Login_userID.Text = "1";
                 }
                 connect.Close();
             }
