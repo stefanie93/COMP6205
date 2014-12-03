@@ -33,13 +33,17 @@ public partial class frm_homepage : System.Web.UI.Page
     }
     protected void Button2_Click(object sender, EventArgs e)
     {
-        if (logedin == true)
-        {
+        //if (logedin == true)
+        //{
             Server.Transfer("~/PersonalInfo.aspx", true);
-        }
-        else
-        {
-            Server.Transfer("~/Form_Login.aspx", true);
-        }
+        //}
+        //else
+        //{
+        //    Server.Transfer("~/Form_Login.aspx", true);
+        //}
+    }
+    protected void Menu1_MenuItemClick(object sender, MenuEventArgs e)
+    {
+      
     }
 }

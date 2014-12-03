@@ -34,7 +34,7 @@
 
 .img_title 
 {
-    height:40%; 
+    height:100%; 
     width:100%;
     background-repeat:no-repeat;
     background-size:cover;
@@ -122,8 +122,9 @@
 }
 
 
-#wrapper
+.wrapper
 {
+  height:60%;
   width: 1080px;  
   margin: 0 auto;
   padding:10px;
@@ -136,7 +137,7 @@
     float:left;
     margin:0 0 0 0;
     border:3px solid #E3E3E3;
-    z-index: -1; 
+    z-index: 0; 
 }
 
 .content_wrap
@@ -160,7 +161,7 @@
     width:150px;
     height:50px;
     color:#000000;
-    background-color:#ffffff;
+    background-color:#3232CD;
 }
 
 #footer
@@ -171,8 +172,7 @@
     margin-top:20px;
 }
 
-
-#wrapper2
+.wrap_itemsr2
 {
     
 }
