@@ -13,6 +13,15 @@
         <asp:Button ID="btn_generate" runat="server" onclick="btn_generate_Click" 
             Text="Generate" />
         <br />
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" DatasourceMode="DataSet"
+            ConnectionString="<%$ ConnectionStrings:PersonalData_ConnectionString %>" 
+            onselecting="SqlDataSource1_Selecting" 
+            SelectCommand="SELECT * FROM [PersonalData]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource2" runat="server" DatasourceMode="DataSet"
+            ConnectionString="<%$ ConnectionStrings:PersonalData_ConnectionString %>" 
+            onselecting="SqlDataSource1_Selecting" 
+            SelectCommand="SELECT * FROM [Users]"></asp:SqlDataSource>
+
         <br />
         <asp:Label ID="lbl_Message" runat="server"></asp:Label>
     
