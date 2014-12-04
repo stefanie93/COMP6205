@@ -64,86 +64,58 @@ public partial class Preferences : System.Web.UI.Page
                 string customer = customerCommand.ExecuteScalar().ToString();
                 customer = customer.Trim();
                 int customerID = Convert.ToInt32(customer);
-
+                
+                int coursePreference = 1;
                 int agePreference = Convert.ToInt32(dp_agePref.SelectedValue);
+                int genderPreference = Convert.ToInt32(dp_genderPref.SelectedValue);
+                int nationalityPreference = 1;
+
+                if (rb_course_dontMind.Checked == true)
+                {
+                    coursePreference = 5;
+                }
+                else if (rb_noCoursePref.Checked == true)
+                { 
+                    coursePreference = 2;
+                }
+                else if (rb_yesCoursePref.Checked == true)
+                {
+                    coursePreference = 1;
+                }
+
+                if (rb_nationality_dontMind.Checked == true)
+                {
+                    nationalityPreference = 3;
+                }
+                else if (rb_noNationPref.Checked == true)
+                {
+                    nationalityPreference = 2;
+                }
+                else if (rb_yesNationPref.Checked == true)
+                {
+                    nationalityPreference = 1;
+                }
+
+                string update_age_Query = "update PersonalData set age_preference_id=" +  agePreference + "where customer_ID=" + customerID;
+                SqlCommand update_age_Query_Command = new SqlCommand(update_age_Query, connect);
+                update_age_Query_Command.ExecuteNonQuery();
+
+                string update_course_Query = "update PersonalData set course_preference_id=" + coursePreference + "where customer_ID=" + customerID;
+                SqlCommand update_course_Query_Command = new SqlCommand(update_course_Query, connect);
+                update_course_Query_Command.ExecuteNonQuery();
+
+                string update_gender_Query = "update PersonalData set gender_preference_id=" + genderPreference + "where customer_ID=" + customerID;
+                SqlCommand update_gender_Query_Command = new SqlCommand(update_gender_Query, connect);
+                update_gender_Query_Command.ExecuteNonQuery();
+
+                string update_nationality_Query = "update PersonalData set nationality_preference_id=" + nationalityPreference + "where customer_ID=" + customerID;
+                SqlCommand update_nationality_Query_Command = new SqlCommand(update_nationality_Query, connect);
+                update_nationality_Query_Command.ExecuteNonQuery();
+
+                string update_status_Query = "update Users set state=" + "2" + "where User_ID=" + userId;
+                SqlCommand update_status_Query_Command = new SqlCommand(update_status_Query, connect);
+                update_status_Query_Command.ExecuteNonQuery();
                 
-                string updateQuery = "update PersonalData set age_preference_id=" +  agePreference + "where customer_ID=" + customerID;
-                SqlCommand updateQueryCommand = new SqlCommand(updateQuery, connect);
-                updateQueryCommand.ExecuteNonQuery();
-                
-                //string newPersonel = "insert into PersonalData (course, User_ID, YearOfStudy, Gender, Smoker, DateOfBirth, Nationality, PhoneNumber, AddressLine1, AddressLine2, AddressLine3, AddressLine4, City_Country, Postcode, age_preference_id, course_preference_id, gender_preference_id, nationality_preference_id) values(@course, @user_ID, @yearOfStudy, @gender, @smoker, @dateOfBirth, @nationality, @phoneNumber, @addressLine1, @addressLine2, @addressLine3, @addressLine4, @city_Country, @postcode, @age_preference_id, @course_preference_id, @gender_preference_id, @nationality_preference_id)";
-                //SqlCommand newPersonelCommand = new SqlCommand(newPersonel, connect);
-
-                //newPersonelCommand.Parameters.AddWithValue("@course", CourseTextBox.Text.Trim());
-                //newPersonelCommand.Parameters.AddWithValue("@user_ID", 1);
-                //newPersonelCommand.Parameters.AddWithValue("@yearOfStudy", dp_StudyYear.SelectedItem.ToString().Trim());
-                //string gend = "male";
-                //string smoke = "no";
-                //if (rb_nationality_dontMind.Checked == true)
-                //{
-                //    gend = "male";
-                //}
-                //else
-                //{
-                //    gend = "Female";
-                //}
-                //if (smokerNo.Checked == true)
-                //{
-                //    smoke = "false";
-                //}
-                //else
-                //{
-                //    smoke = "true";
-                //}
-                //newPersonelCommand.Parameters.AddWithValue("@gender", gend);
-                //newPersonelCommand.Parameters.AddWithValue("@smoker", smoke);
-
-
-                //string day, month, year;
-                //int dd, mm, yyyy;
-                //day = dp_Day.SelectedItem.ToString();
-                //dd = Convert.ToInt32(day);
-                //month = dp_month.SelectedItem.ToString();
-                //mm = Convert.ToInt32(month);
-                //year = dp_year.SelectedItem.ToString();
-                //yyyy = Convert.ToInt32(year);
-                //dateOfBirth = mm + "/" + dd + "/" + yyyy;
-                //Response.Write(dateOfBirth);
-                //newPersonelCommand.Parameters.AddWithValue("@dateOfBirth", dateOfBirth);
-                //newPersonelCommand.Parameters.AddWithValue("@nationality", dp_nationalityList.SelectedItem.ToString().Trim());
-                //newPersonelCommand.Parameters.AddWithValue("@phoneNumber", telephoneTBox.Text.Trim());
-                //newPersonelCommand.Parameters.AddWithValue("@addressLine1", AddressTBox1.Text.Trim());
-                //string address2 = "none";
-                //string address3 = "none";
-                //string address4 = "none";
-                //if (AddressTBox2.Text != "")
-                //{
-                //    address2 = AddressTBox2.Text.Trim();
-                //}
-                //if (AddressTBox3.Text != "")
-                //{
-                //    address3 = AddressTBox3.Text.Trim();
-                //}
-
-                //if (AddressTBox4.Text != "")
-                //{
-                //    address4 = AddressTBox4.Text.Trim();
-                //}
-                //newPersonelCommand.Parameters.AddWithValue("@addressLine2", address2);
-                //newPersonelCommand.Parameters.AddWithValue("@addressLine3", address3);
-                //newPersonelCommand.Parameters.AddWithValue("@addressLine4", address4);
-                //newPersonelCommand.Parameters.AddWithValue("@city_Country", CountryTBox.Text);
-                //newPersonelCommand.Parameters.AddWithValue("@postcode", PostcodeTBox.Text);
-                //newPersonelCommand.Parameters.AddWithValue("@age_preference_id", 1);
-                //newPersonelCommand.Parameters.AddWithValue("@course_preference_id", 1);
-                //newPersonelCommand.Parameters.AddWithValue("@gender_preference_id", 1);
-                //newPersonelCommand.Parameters.AddWithValue("@nationality_preference_id", 1);
-
-                //newPersonelCommand.ExecuteNonQuery();
-                //lbl_Message.Text = "Registration Complete";
-                //txt_PIvalueForm.Text = "5";
-                //Response.Redirect("Preferences.aspx?test=" + txt_PIvalueForm.Text.Trim());
-
             }
             catch (Exception ex)
             {
@@ -157,5 +129,6 @@ public partial class Preferences : System.Web.UI.Page
             lbl_Message.ForeColor = System.Drawing.Color.Red;
         }
         connect.Close();
+        Response.Redirect("adminView.aspx");
     }
 }

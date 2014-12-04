@@ -78,6 +78,11 @@ public partial class Form_Login : System.Web.UI.Page
                     {
                         Response.Redirect("Preferences.aspx?testID=" + txt_Login_userID.Text);
                     }
+                    else if (aplication_state == "2")
+                    {
+                        Response.Redirect("adminView.aspx");
+                    }
+
                 }
                 connect.Close();
             }
@@ -248,6 +253,10 @@ public partial class Form_Login : System.Web.UI.Page
                         else if (aplication_state == "1")
                         {
                             Response.Redirect("Preferences.aspx?testID=" + txt_Login_userID.Text);
+                        }
+                        else if (aplication_state == "2")
+                        {
+                            Response.Redirect("adminView.aspx");
                         }
                     }
                     connect.Close();

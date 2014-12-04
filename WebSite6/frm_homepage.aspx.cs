@@ -51,6 +51,10 @@ public partial class frm_homepage : System.Web.UI.Page
             {
                 Response.Redirect("Preferences.aspx?testID=" + txt_Home_userID.Text);
             }
+            else if (aplication_state == "2")
+            {
+                Response.Redirect("adminView.aspx");
+            }
         }
         else
         {
