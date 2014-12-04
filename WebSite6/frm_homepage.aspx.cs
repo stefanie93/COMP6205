@@ -65,4 +65,16 @@ public partial class frm_homepage : System.Web.UI.Page
     {
       
     }
+    protected void txt_Home_valueForm_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txt_home_login_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+
+    }
 }
