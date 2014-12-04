@@ -40,13 +40,13 @@ public partial class Preferences : System.Web.UI.Page
         string labelString = "";
         Boolean register = true;
 
-        if ((rb_course_dontMind.Checked == false) && (rb_noCoursePref.Checked == false) && (rb_yesCoursePref.Checked == false))
+        if ((rb_course_dontMind.Checked == false)  && (rb_yesCoursePref.Checked == false))
         {
             labelString += "Select what course preference you like @";
             register = false;
         }
 
-        if ((rb_nationality_dontMind.Checked == false) && (rb_noNationPref.Checked == false) && (rb_yesNationPref.Checked == false))
+        if ((rb_nationality_dontMind.Checked == false) && (rb_yesNationPref.Checked == false))
         {
             labelString += "Select what nationality preference you like @";
             register = false;
@@ -74,10 +74,6 @@ public partial class Preferences : System.Web.UI.Page
                 {
                     coursePreference = 5;
                 }
-                else if (rb_noCoursePref.Checked == true)
-                { 
-                    coursePreference = 2;
-                }
                 else if (rb_yesCoursePref.Checked == true)
                 {
                     coursePreference = 1;
@@ -86,10 +82,6 @@ public partial class Preferences : System.Web.UI.Page
                 if (rb_nationality_dontMind.Checked == true)
                 {
                     nationalityPreference = 3;
-                }
-                else if (rb_noNationPref.Checked == true)
-                {
-                    nationalityPreference = 2;
                 }
                 else if (rb_yesNationPref.Checked == true)
                 {

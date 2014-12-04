@@ -78,7 +78,6 @@
                             Text="Flatemate preference based on your Nationality"></asp:Label>
                         <asp:Panel ID="Panel2" runat="server">
                             <asp:RadioButton ID="rb_yesNationPref" runat="server" Text="Yes" GroupName = "a" Width="100px" />
-                            <asp:RadioButton ID="rb_noNationPref" runat="server" Text="No" GroupName = "a" Width="100px" />
                             <asp:RadioButton ID="rb_nationality_dontMind" runat="server" Text="I do not mind" GroupName = "a" Width="200px" />
                         </asp:Panel>
                         <br />
@@ -87,7 +86,6 @@
                         <br />
                         <asp:Panel ID="Panel3" runat="server">
                             <asp:RadioButton ID="rb_yesCoursePref" runat="server" Text="Yes" GroupName = "b" Width="100px" />
-                            <asp:RadioButton ID="rb_noCoursePref" runat="server" Text="No" GroupName = "b" Width="100px" />
                             <asp:RadioButton ID="rb_course_dontMind" runat="server" Text="I do not mind" GroupName = "b" Width="200px" />
                         </asp:Panel>
                         <br />
