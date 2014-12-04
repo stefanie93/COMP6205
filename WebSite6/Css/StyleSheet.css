@@ -11,7 +11,6 @@
     right:0;
     left:0;
     top:0;
-    bottom:0;
     width:100%;
     overflow:hidden;
 }
@@ -45,6 +44,7 @@
    width:100%;
    background-color:#ffffff;
    position:fixed;
+   z-index:999;
 }
 
 #navigation
@@ -124,23 +124,31 @@
 
 .wrapper
 {
-  height:60%;
+  height:100%;
   width: 1080px;  
   margin: 0 auto;
   padding:10px;
   background-color:#fff;
 }
 
-
-.content_area
+.wrap_title 
 {
-    float:left;
-    margin:0 0 0 0;
-    border:3px solid #E3E3E3;
-    z-index: 0; 
+    margin:20 10 20 10;
+    height:50px;
+}
+    
+.wrap_title h1
+{
+    border:5px solid #3232CD;
+    width:150px;
+    
+    color:#000000;
+    background-color:#3232CD;
+    
 }
 
-.content_wrap
+
+.content_wrap1
 {
     background-color:#f4f4f4;
     width:1060px;
@@ -155,24 +163,212 @@
      
 }
 
-.wrap_title h1
+#sidebar 
 {
-    border:5px solid #3232CD;
-    width:150px;
-    height:50px;
-    color:#000000;
-    background-color:#3232CD;
+    float:left;
+    width: 270px;
+    height:300px;
+    margin:10 0 10 0; 
+    border:3px solid #E3E3E3;
 }
 
-#footer
+#nav_side ul 
 {
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:none;
+}
+    
+#nav_side li
+{
+    color:#000000;
+    border:3px solid #E3E3E3; 
+    background-color:#ffffff;
+    height:45px;
+    width:200px;
+    font-size:20px;
+    float:left;
+    text-align:left;
+    position:relative;
+    margin:10 0 0 0;
+    vertical-align:middle;
+    z-index:0;
+}
+
+#nav_side li h2
+{
+    border:3px solid #00C5CD; 
+    background-color:#00C5CD;
+    font-size:30px;
+    vertical-align:middle;
+    margin:0 0 0 0;
+}
+
+#nav_side a:link 
+{
+    display:block;
+    color:Black;
+    text-decoration:none;
+    text-transform:uppercase;
+    vertical-align:middle;
+     width: 250px;
+    height:400px;
+       
+}
+
+.tab_price 
+{
+    color:#00C5CD;
+    font-size:15px;
+    text-transform:uppercase;
+}
+
+.tab_header
+{
+    margin:0 0 0 0;
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left:10px;
+    background-color:#00C5CD;
+    display:block;
+}
+
+.tab_header h2
+{
+    text-transform:uppercase;
+    background-color:#00C5CD;
+}
+
+.tab_remainRooms
+{
+    color:#ffffff;
+    font-weight:bold;
+    background-color:#00C5CD;
+}
+
+.tab_content
+{
+   margin:10 10 10 10;
+   background-color:#F4F4F4;
+}
+
+
+.tab_info_title
+{
+    display:block;
+    width:100px;
+    height:20px;
+    margin:0 0 5 0;
+    float:left;
+}
+
+.tab_info_details
+{
+    display:block;
+    text-transform:uppercase;
+    color:#00C5CD;
+    font-weight:bold;
+    width:600px;
+    height:20px;
+    margin:0 0 5 0;
+    float:right;
+    text-align:left;
+}
+
+.tab_info 
+{
+    margin:0 0 0 0;
+    height:20px;
+}
+
+.content_area
+{
+    float:right;
+    width:750px;
+    height:350px;
+    margin:0 10 0 10;
+    border:3px solid #E3E3E3; 
+}
+
+.content_area2
+{
+    height:350px;
+    margin:0 10 0 10; 
+}
+
+.content_area2 h4 
+{
+    margin:20 100 10 20;
+    color:Gray;
+    text-align:center;
+    padding-bottom:20px;
+    padding-top:10px;
+}
+
+.content_wrap
+{
+    background-color:#f4f4f4;
+    width:1030px;
+    height:400px;
+    float:left;
+    position:relative;
+    right:0;
+    left:0;
+    top:0;
+    bottom:0;
+    padding:10px;
+}
+
+.facil_col1
+{
+    display:block;
+    width:500px;
+    height:50px;
+    margin:0 10 10 0;
+    float:left;
+}
+
+.facil_col2
+{
+    display:block;
+    font-weight:bold;
+    width:500px;
+    height:50px;
+    margin:0 0 10 0;
+    float:right;
+    text-align:left;
+}
+
+.content_area3
+{
+    height:50px;
+    margin:0 10 0 10; 
+    padding:10px;
+}
+
+.content_area3 h3 
+{
+    margin:20 20 10 20;
+    padding-top:10px;
+}
+
+.content_area3 div 
+{
+    padding:10px;
+}
+
+
+footer
+{
+    background-color:#00C5CD;
+    color:#ffffff;
+    text-align:center;
     clear:both;
     width:auto;
-    height:40px;
+    height:200px;
     margin-top:20px;
+    z-index:997;
 }
 
-.wrap_itemsr2
-{
-    
-}
+
