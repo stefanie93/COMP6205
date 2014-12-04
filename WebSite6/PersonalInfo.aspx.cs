@@ -13,24 +13,23 @@ public partial class PersonalInfo : System.Web.UI.Page
     {
         txt_PIvalueForm.Text = "d";
         string user_id;
-        System.Collections.Specialized.NameValueCollection previuseFormCollection = Request.Form;
-
-
-        if (previuseFormCollection["txt_Home_valueForm"] != "d")
-        {
-            if (previuseFormCollection["txt_home_login"] == "d")
-            {
-                Server.Transfer("~/Form_Login.aspx", true);
-            }
-            else
-            {
-                user_id = previuseFormCollection["txt_Home_userID"];
-            }
-        }
-        else
-        {
-            user_id = previuseFormCollection["txt_Login_userID"];
-        }
+        //System.Collections.Specialized.NameValueCollection previuseFormCollection = Request.Form;
+        
+        //if (previuseFormCollection["txt_Home_valueForm"] != "d")
+        //{
+        //    if (previuseFormCollection["txt_home_login"] == "d")
+        //    {
+        //        Server.Transfer("~/Form_Login.aspx", true);
+        //    }
+        //    else
+        //    {
+        //        user_id = previuseFormCollection["txt_Home_userID"];
+        //    }
+        //}
+        //else
+        //{
+        //    user_id = previuseFormCollection["txt_Login_userID"];
+        //}
 
 
         if (dp_Day.Items.Count == 0)

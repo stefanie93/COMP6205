@@ -16,7 +16,7 @@ public partial class Preferences : System.Web.UI.Page
         {
             userId = Convert.ToInt32(Request.QueryString["test"]);
         }
-        lbl_Message.Text = userId.ToString();
+        
     }
     protected void dp_agePref_SelectedIndexChanged(object sender, EventArgs e)
     {

@@ -12,15 +12,27 @@ using System.Data;
 public partial class Form_Login : System.Web.UI.Page
 {
     int userID = 0;
-    bool home = false;
+    bool ishome = false;
     public void Page_Load(object sender, EventArgs e)
     {
-        System.Collections.Specialized.NameValueCollection previuseFormCollection = Request.Form;
-        if (previuseFormCollection["txt_Home_valueForm"] != "d")
+        //System.Collections.Specialized.NameValueCollection previuseFormCollection = Request.Form;
+        //if (previuseFormCollection["txt_Home_valueForm"] != "d")
+        //{
+        //    home = true;
+        //}
+        if (!string.IsNullOrEmpty(Request.QueryString["home"]))
         {
-            home = true;
+            if (Request.QueryString["home"] == "home")
+            {
+                ishome = true;
+            }
+            else
+            {
+                ishome = false;
+            }
         }
         
+        lbl_Message.Text = ishome.ToString();
     }
 
     public void btn_login_Click(object sender, EventArgs e)
@@ -47,15 +59,15 @@ public partial class Form_Login : System.Web.UI.Page
             if (password == txt_Password.Text)
             {
 
-                if (home == true)
+                if (ishome == true)
                 {
-                    Server.Transfer("~/frm_homepage.aspx");
                     txt_Login_userID.Text = "1";
+                    Response.Redirect("~/frm_homepage.aspx?userID=" + txt_Login_userID.Text);   
                 }
                 else
                 {
-                    Server.Transfer("~/PersonalInfo.aspx");
                     txt_Login_userID.Text = "1";
+                    Response.Redirect("~/PersonalInfo.aspx?userID=" + txt_Login_userID.Text); 
                 }
                 connect.Close();
             }
@@ -202,13 +214,15 @@ public partial class Form_Login : System.Web.UI.Page
 
                     newUserCommand.ExecuteNonQuery();
                     lbl_Message.Text = "Registration Complete";
-                    if (home == true)
+                    if (ishome == true)
                     {
-                        Response.Redirect("frm_homepage.aspx");
+                        txt_Login_userID.Text = "1";
+                        Response.Redirect("~/frm_homepage.aspx?userID=" + txt_Login_userID.Text);
                     }
                     else
                     {
-                        Response.Redirect("PersonalInfo.aspx");
+                        txt_Login_userID.Text = "1";
+                        Response.Redirect("~/PersonalInfo.aspx?userID=" + txt_Login_userID.Text);
                     }
                     connect.Close();
 

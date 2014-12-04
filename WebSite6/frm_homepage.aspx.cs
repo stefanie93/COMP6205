@@ -8,39 +8,38 @@ using System.Web.UI.WebControls;
 public partial class frm_homepage : System.Web.UI.Page
 {
     bool logedin = false;
-    string userid = "";
+    int userid;
     protected void Page_Load(object sender, EventArgs e)
     {
-        System.Collections.Specialized.NameValueCollection previuseFormCollection = Request.Form;
-        if (previuseFormCollection["txt_Login_userID"] != "d")
+
+        txt_Home_valueForm.Text = "home";
+
+        if (!string.IsNullOrEmpty(Request.QueryString["userID"]))
         {
-            Response.Write("<script language=javascript>alert('ERROR');</script>");
             logedin = true;
-            userid = previuseFormCollection["txt_Login_userID"];
+            userid = Convert.ToInt32(Request.QueryString["userID"]);
         }
-        txt_Home_valueForm.Text = "true";
-        if (logedin == true)
-        {
-            txt_home_login.Text = "y";
-            txt_Home_userID.Text = userid;
-        }
+        
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
 
-        Server.Transfer("~/Form_Login.aspx", true);
+        Response.Redirect("Form_Login.aspx?home=" + txt_Home_valueForm.Text);
 
     }
     protected void Button2_Click(object sender, EventArgs e)
     {
-        //if (logedin == true)
-        //{
-            Server.Transfer("~/PersonalInfo.aspx", true);
-        //}
-        //else
-        //{
-        //    Server.Transfer("~/Form_Login.aspx", true);
-        //}
+
+        txt_Home_userID.Text = userid.ToString();
+        txt_Home_valueForm.Text = "Personal";
+        if (logedin == true)
+        {
+            Response.Redirect("PersonalInfo.aspx?home=" + txt_Home_valueForm.Text.Trim() + "?userID=" + txt_Home_userID.Text);
+        }
+        else
+        {
+            Response.Redirect("Form_Login.aspx?home=" + txt_Home_valueForm.Text.Trim());
+        }
     }
     protected void Menu1_MenuItemClick(object sender, MenuEventArgs e)
     {
