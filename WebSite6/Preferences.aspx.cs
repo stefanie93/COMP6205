@@ -16,6 +16,10 @@ public partial class Preferences : System.Web.UI.Page
         {
             userId = Convert.ToInt32(Request.QueryString["test"]);
         }
+        else if (!string.IsNullOrEmpty(Request.QueryString["testID"]))
+        {
+            userId = Convert.ToInt32(Request.QueryString["testID"]);
+        }
         
     }
     protected void dp_agePref_SelectedIndexChanged(object sender, EventArgs e)
@@ -36,13 +40,13 @@ public partial class Preferences : System.Web.UI.Page
         string labelString = "";
         Boolean register = true;
 
-        if ((rb_course_dontMind.Checked == false) || (rb_noCoursePref.Checked == false) || (rb_yesCoursePref.Checked == false))
+        if ((rb_course_dontMind.Checked == false) && (rb_noCoursePref.Checked == false) && (rb_yesCoursePref.Checked == false))
         {
             labelString += "Select what course preference you like @";
             register = false;
         }
 
-        if ((rb_nationality_dontMind.Checked == false) || (rb_noNationPref.Checked == false) || (rb_yesNationPref.Checked == false))
+        if ((rb_nationality_dontMind.Checked == false) && (rb_noNationPref.Checked == false) && (rb_yesNationPref.Checked == false))
         {
             labelString += "Select what nationality preference you like @";
             register = false;
@@ -54,11 +58,19 @@ public partial class Preferences : System.Web.UI.Page
             try
             {
                 connect.Open();
-                //string age_id_pref = "select FirstName from Users where User_ID='" + id + "'";
-                //SqlCommand userCommand = new SqlCommand(user, userconnect);
-                //string userrrr = userCommand.ExecuteScalar().ToString();
-                //userrrr = userrrr.Trim();
-                //int 
+                string customer_id = "select customer_ID from PersonalData where User_ID='" + userId + "'";
+
+                SqlCommand customerCommand = new SqlCommand(customer_id, connect);
+                string customer = customerCommand.ExecuteScalar().ToString();
+                customer = customer.Trim();
+                int customerID = Convert.ToInt32(customer);
+
+                int agePreference = Convert.ToInt32(dp_agePref.SelectedValue);
+                
+                string updateQuery = "update PersonalData set age_preference_id=" +  agePreference + "where customer_ID=" + customerID;
+                SqlCommand updateQueryCommand = new SqlCommand(updateQuery, connect);
+                updateQueryCommand.ExecuteNonQuery();
+                
                 //string newPersonel = "insert into PersonalData (course, User_ID, YearOfStudy, Gender, Smoker, DateOfBirth, Nationality, PhoneNumber, AddressLine1, AddressLine2, AddressLine3, AddressLine4, City_Country, Postcode, age_preference_id, course_preference_id, gender_preference_id, nationality_preference_id) values(@course, @user_ID, @yearOfStudy, @gender, @smoker, @dateOfBirth, @nationality, @phoneNumber, @addressLine1, @addressLine2, @addressLine3, @addressLine4, @city_Country, @postcode, @age_preference_id, @course_preference_id, @gender_preference_id, @nationality_preference_id)";
                 //SqlCommand newPersonelCommand = new SqlCommand(newPersonel, connect);
 

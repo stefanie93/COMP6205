@@ -15,11 +15,7 @@ public partial class Form_Login : System.Web.UI.Page
     bool ishome = false;
     public void Page_Load(object sender, EventArgs e)
     {
-        //System.Collections.Specialized.NameValueCollection previuseFormCollection = Request.Form;
-        //if (previuseFormCollection["txt_Home_valueForm"] != "d")
-        //{
-        //    home = true;
-        //}
+
         if (!string.IsNullOrEmpty(Request.QueryString["home"]))
         {
             if (Request.QueryString["home"] == "home")
@@ -67,7 +63,21 @@ public partial class Form_Login : System.Web.UI.Page
                 else
                 {
                     txt_Login_userID.Text = "1";
-                    Response.Redirect("~/PersonalInfo.aspx?userIDlogin=" + txt_Login_userID.Text); 
+                    userID = Convert.ToInt32(txt_Login_userID.Text.Trim());
+
+                    string user = "select state from Users where User_ID='" + userID + "'";
+                    SqlCommand userCommand = new SqlCommand(user, connect);
+                    string aplication_state = userCommand.ExecuteScalar().ToString();
+                    aplication_state = aplication_state.Trim();
+
+                    if (aplication_state == "0")
+                    {
+                        Response.Redirect("PersonalInfo.aspx?userID=" + txt_Login_userID.Text);
+                    }
+                    else if (aplication_state == "1")
+                    {
+                        Response.Redirect("Preferences.aspx?testID=" + txt_Login_userID.Text);
+                    }
                 }
                 connect.Close();
             }
@@ -204,13 +214,14 @@ public partial class Form_Login : System.Web.UI.Page
                 try
                 {
                     connect.Open();
-                    string newUser = "insert into Users (Email,FirstName,LastName,Password,Title) values(@email, @first, @last, @password, @title)";
+                    string newUser = "insert into Users (Email,FirstName,LastName,Password,Title,state) values(@email, @first, @last, @password, @title, @state)";
                     SqlCommand newUserCommand = new SqlCommand(newUser, connect);
                     newUserCommand.Parameters.AddWithValue("@email", txt_RegisterEmail.Text);
                     newUserCommand.Parameters.AddWithValue("@first", txt_Name.Text);
                     newUserCommand.Parameters.AddWithValue("@last", txt_Surname.Text);
                     newUserCommand.Parameters.AddWithValue("@password", txt_RegistrationPassword.Text);
                     newUserCommand.Parameters.AddWithValue("@title", DropDownList1.SelectedItem.ToString());
+                    newUserCommand.Parameters.AddWithValue("@state", 0);
 
                     newUserCommand.ExecuteNonQuery();
                     lbl_Message.Text = "Registration Complete";
@@ -222,7 +233,22 @@ public partial class Form_Login : System.Web.UI.Page
                     else
                     {
                         txt_Login_userID.Text = "1";
-                        Response.Redirect("~/PersonalInfo.aspx?userID=" + txt_Login_userID.Text);
+                        userID = Convert.ToInt32(txt_Login_userID.Text.Trim());
+                        //Response.Redirect("~/PersonalInfo.aspx?userID=" + txt_Login_userID.Text);
+
+                        string user = "select state from Users where User_ID='" + userID + "'";
+                        SqlCommand userCommand = new SqlCommand(user, connect);
+                        string aplication_state = userCommand.ExecuteScalar().ToString();
+                        aplication_state = aplication_state.Trim();
+
+                        if (aplication_state == "0")
+                        {
+                            Response.Redirect("PersonalInfo.aspx?userID=" + txt_Login_userID.Text);
+                        }
+                        else if (aplication_state == "1")
+                        {
+                            Response.Redirect("Preferences.aspx?testID=" + txt_Login_userID.Text);
+                        }
                     }
                     connect.Close();
 

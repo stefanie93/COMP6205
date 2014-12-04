@@ -218,6 +218,11 @@ public partial class PersonalInfo : System.Web.UI.Page
             newPersonelCommand.Parameters.AddWithValue("@nationality_preference_id", 1);
 
             newPersonelCommand.ExecuteNonQuery();
+
+            string updateQuery = "update Users set state=" + 1 + "where User_ID=" + 1;
+            SqlCommand updateQueryCommand = new SqlCommand(updateQuery, connect);
+            updateQueryCommand.ExecuteNonQuery();
+
             lbl_Message.Text = "Registration Complete";
             txt_PIvalueForm.Text = "5";
             Response.Redirect("Preferences.aspx?test=" + txt_PIvalueForm.Text.Trim());
@@ -236,14 +241,7 @@ public partial class PersonalInfo : System.Web.UI.Page
         }
         connect.Close();
 
-        ////TRY
-        //userconnect.Open();
-        //string id = "5";
-        //string user = "select FirstName from Users where User_ID='" + id + "'";
-        //SqlCommand userCommand = new SqlCommand(user, userconnect);
-        //string userrrr = userCommand.ExecuteScalar().ToString();
-        //userrrr = userrrr.Trim();
-        //lbl_Message.Text = userrrr;
+
     }
 
    public string endl { get; set; }

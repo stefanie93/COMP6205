@@ -169,7 +169,8 @@
                 <h3>All our student properties come with everything to make your stay with us really comfortable. We’ve thought long and hard about every detail to make sure we’ve created a space that works for you.</h3>                    <br />
                     <h3>Contact Us: </h3>
                     <div>telephone number: (+44) 02380 000000<br />
-                    email: studentaccommodation@yahoo.com</div>
+                    email: <a href="mailto:studentaccommodation@yahoo.com">studentaccommodation@yahoo.com</a><br />
+                    </div>
                 </div>
                 </div>
                 </div>
@@ -189,6 +190,9 @@ No. 7904120
 © 2014 Unilife Ltd
                 </footer>
             </div>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+        ConnectionString="<%$ ConnectionStrings:Registration_ConnectionString %>" 
+        SelectCommand="SELECT * FROM [Users]"></asp:SqlDataSource>
     </form>
 </body>
 </html>
