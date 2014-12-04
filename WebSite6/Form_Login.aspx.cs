@@ -67,7 +67,7 @@ public partial class Form_Login : System.Web.UI.Page
                 else
                 {
                     txt_Login_userID.Text = "1";
-                    Response.Redirect("~/PersonalInfo.aspx?userID=" + txt_Login_userID.Text); 
+                    Response.Redirect("~/PersonalInfo.aspx?userIDlogin=" + txt_Login_userID.Text); 
                 }
                 connect.Close();
             }

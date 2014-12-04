@@ -34,7 +34,7 @@ public partial class frm_homepage : System.Web.UI.Page
         txt_Home_valueForm.Text = "Personal";
         if (logedin == true)
         {
-            Response.Redirect("PersonalInfo.aspx?home=" + txt_Home_valueForm.Text.Trim() + "?userID=" + txt_Home_userID.Text);
+            Response.Redirect("PersonalInfo.aspx?userID=" + txt_Home_userID.Text);
         }
         else
         {

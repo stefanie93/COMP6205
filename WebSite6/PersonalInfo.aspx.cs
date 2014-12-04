@@ -12,25 +12,16 @@ public partial class PersonalInfo : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         txt_PIvalueForm.Text = "d";
-        string user_id;
-        //System.Collections.Specialized.NameValueCollection previuseFormCollection = Request.Form;
-        
-        //if (previuseFormCollection["txt_Home_valueForm"] != "d")
-        //{
-        //    if (previuseFormCollection["txt_home_login"] == "d")
-        //    {
-        //        Server.Transfer("~/Form_Login.aspx", true);
-        //    }
-        //    else
-        //    {
-        //        user_id = previuseFormCollection["txt_Home_userID"];
-        //    }
-        //}
-        //else
-        //{
-        //    user_id = previuseFormCollection["txt_Login_userID"];
-        //}
-
+        int user_id=0;
+        if (!string.IsNullOrEmpty(Request.QueryString["userID"]))
+        {
+            user_id = Convert.ToInt32(Request.QueryString["userID"]);
+        }
+        else if (!string.IsNullOrEmpty(Request.QueryString["userIDlogin"]))
+        {
+            user_id = Convert.ToInt32(Request.QueryString["userIDlogin"]);
+        }
+        lbl_Message.Text = user_id.ToString();
 
         if (dp_Day.Items.Count == 0)
         {
