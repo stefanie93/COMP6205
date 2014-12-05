@@ -13,7 +13,7 @@ public partial class adminView : System.Web.UI.Page
     
     int userCount = 0;
     int group = 0;
-    string[,] users = new string[1000, 4];
+    string[,] users = new string[1000, 5];
     string[,] print_data = new string[100000, 10];
     int print_data_count = 0;
     string[,] roomsArray = new string[100000, 5];
@@ -57,6 +57,8 @@ public partial class adminView : System.Web.UI.Page
         int DoF_UserId_count = 0;
         string[,] preferences = new string[lastUserID, 5];
         int preferencesCount = 0;
+        string[,] studioPreferences = new string[lastUserID, 5];
+        int studioPreferencesCount = 0;
 
         DataView DataViewForCourses = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
         foreach (DataRowView DataRowViewForCourses in DataViewForCourses)
@@ -109,17 +111,25 @@ public partial class adminView : System.Web.UI.Page
             //label += nationality_UserID[nationality_UserID_count, 0] + "    " + nationality_UserID[nationality_UserID_count, 1] + "@";
             nationality_UserID_count++;
         }
-
+        
         DataView DataViewForPreferences = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
         foreach (DataRowView DataRowViewForPreferences in DataViewForPreferences)
         {
-            preferences[preferencesCount, 0] = DataRowViewForPreferences["User_ID"].ToString();
-            preferences[preferencesCount, 1] = DataRowViewForPreferences["age_preference_id"].ToString();
-            preferences[preferencesCount, 2] = DataRowViewForPreferences["course_preference_id"].ToString();
-            preferences[preferencesCount, 3] = DataRowViewForPreferences["gender_preference_id"].ToString();
-            preferences[preferencesCount, 4] = DataRowViewForPreferences["nationality_preference_id"].ToString();
-            //label += preferences[preferencesCount, 0] + "    " + preferences[preferencesCount, 1] + "   " + preferences[preferencesCount, 2] + "   " + preferences[preferencesCount, 3] + "    " + preferences[preferencesCount, 4] + "@";
-            preferencesCount++;
+            if (DataRowViewForPreferences["isStudioSelected"].ToString() == "0")
+            {
+                preferences[preferencesCount, 0] = DataRowViewForPreferences["User_ID"].ToString();
+                preferences[preferencesCount, 1] = DataRowViewForPreferences["age_preference_id"].ToString();
+                preferences[preferencesCount, 2] = DataRowViewForPreferences["course_preference_id"].ToString();
+                preferences[preferencesCount, 3] = DataRowViewForPreferences["gender_preference_id"].ToString();
+                preferences[preferencesCount, 4] = DataRowViewForPreferences["nationality_preference_id"].ToString();
+                //label += preferences[preferencesCount, 0] + "    " + preferences[preferencesCount, 1] + "   " + preferences[preferencesCount, 2] + "   " + preferences[preferencesCount, 3] + "    " + preferences[preferencesCount, 4] + "@";
+                preferencesCount++;
+            }
+            else
+            {
+                studioPreferences[studioPreferencesCount, 0] = DataRowViewForPreferences["User_ID"].ToString();
+                studioPreferencesCount++;
+            }
         }
 
         DataView DataViewForRooms = (DataView)SqlDataSource2.Select(DataSourceSelectArguments.Empty);
@@ -163,6 +173,12 @@ public partial class adminView : System.Web.UI.Page
             DoF_UserId_count++;
         }
 
+        for (int i = 0; i < studioPreferencesCount; i++)
+        {
+            group = 30;
+            save_studio(studioPreferences, i);
+        }
+
         //If all the preferences are selected
         label = all(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
         age_course_class(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
@@ -172,10 +188,9 @@ public partial class adminView : System.Web.UI.Page
         course_nationality_class(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
         dont_mind_class(preferencesCount, preferences);
         gender_nationality_class(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
-
-
         label = "";
-        rooms_allocation(lastUserID);
+
+        rooms_allocation(userCount);
 
         for (int i = 0; i < userCount; i++)
         {
@@ -185,6 +200,7 @@ public partial class adminView : System.Web.UI.Page
                 {
                     print_data[j, 5] = users[i, 2];
                     print_data[j, 6] = users[i, 3];
+                    print_data[j, 7] = users[i, 4];
                 }
             }
         }
@@ -198,6 +214,7 @@ public partial class adminView : System.Web.UI.Page
         dt.Columns.Add(new DataColumn("PhoneNumber", typeof(string)));
         dt.Columns.Add(new DataColumn("FlatNo", typeof(string)));
         dt.Columns.Add(new DataColumn("RoomNo", typeof(string)));
+        dt.Columns.Add(new DataColumn("Studio", typeof(string)));
         dr = dt.NewRow();
         dt.Rows.Add(dr);
         //saving databale into viewstate   
@@ -222,7 +239,6 @@ public partial class adminView : System.Web.UI.Page
 
                 for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
                 {
-
                     //add each row into data table  
                     drCurrentRow = dtCurrentTable.NewRow();
                     drCurrentRow["FirstName"] = print_data[j, 1];
@@ -231,6 +247,7 @@ public partial class adminView : System.Web.UI.Page
                     drCurrentRow["PhoneNumber"] = print_data[j, 4];
                     drCurrentRow["FlatNo"] = print_data[j, 5];
                     drCurrentRow["RoomNo"] = print_data[j, 6];
+                    drCurrentRow["Studio"] = print_data[j, 7];
                 }
                 //Remove initial blank row  
                 if (dtCurrentTable.Rows[0][0].ToString() == "")
@@ -290,10 +307,12 @@ public partial class adminView : System.Web.UI.Page
 
     public void age_nationality_class(int preferencesCount, string[,] preferences, string[,] course_UserID, string[,] gender_UserID, string[,] nationality_UserID, string[,] DoF_UserId, int course_UserID_count, int gender_UserID_count, int nationality_UserID_count, int DoF_UserId_count)
     {
+       
         for (int i = 0; i < preferencesCount; i++)
         {
             for (int j = i + 1; j < preferencesCount; j++)
             {
+
                 if (((Convert.ToInt32(preferences[i, 2]) == 5) && (Convert.ToInt32(preferences[j, 2]) == 5)) && ((Convert.ToInt32(preferences[i, 3]) == 1) && (Convert.ToInt32(preferences[j, 3]) == 1)) && (Convert.ToInt32(preferences[i, 1]) == Convert.ToInt32(preferences[j, 1])) && (Convert.ToInt32(preferences[i, 4]) == Convert.ToInt32(preferences[j, 4])))
                 {
                     if (nationality_UserID[i, 1].Trim() == nationality_UserID[j, 1].Trim())
@@ -626,6 +645,17 @@ public partial class adminView : System.Web.UI.Page
         return stringlabel;
     }
 
+    public void save_studio(string[,] Studio_preferences, int i)
+    {
+        string id = Studio_preferences[i,0];
+        
+        users[userCount, 0] = id;
+        users[userCount, 1] = group.ToString();
+        users[userCount, 4] = "Studio";
+        userCount++;
+            
+    }
+
     public void save(string[,] preferences, int i, int j)
     {
         string id = preferences[i, 0];
@@ -645,6 +675,7 @@ public partial class adminView : System.Web.UI.Page
             {
                 users[userCount, 0] = id;
                 users[userCount, 1] = group.ToString();
+                users[userCount, 4] = "En-Suite";
                 userCount++;
             }
             male = false;
@@ -660,6 +691,7 @@ public partial class adminView : System.Web.UI.Page
             {
                 users[userCount, 0] = id2;
                 users[userCount, 1] = group.ToString();
+                users[userCount, 4] = "En-Suite";
                 userCount++;
             }
         }
@@ -667,9 +699,11 @@ public partial class adminView : System.Web.UI.Page
         {
             users[userCount, 0] = id;
             users[userCount, 1] = group.ToString();
+            users[userCount, 4] = "En-Suite";
             userCount++;
             users[userCount, 0] = id2;
             users[userCount, 1] = group.ToString();
+            users[userCount, 4] = "En-Suite";
             userCount++;
         }
     }

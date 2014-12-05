@@ -9,19 +9,33 @@ using System.Configuration;
 
 public partial class PersonalInfo : System.Web.UI.Page
 {
+    int studio = 3; 
+    int user_id = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         txt_PIvalueForm.Text = "d";
-        int user_id=0;
-        if (!string.IsNullOrEmpty(Request.QueryString["userID"]))
+        
+        if (!string.IsNullOrEmpty(Request.QueryString["value_home"]))
         {
-            user_id = Convert.ToInt32(Request.QueryString["userID"]);
+            string value = Request.QueryString["value_home"];
+            string[] words = value.Split(' ');
+            studio = Convert.ToInt32(words[1]);
+            user_id = Convert.ToInt32(words[0]);
         }
-        else if (!string.IsNullOrEmpty(Request.QueryString["userIDlogin"]))
+        else if (!string.IsNullOrEmpty(Request.QueryString["value_login"]))
         {
-            user_id = Convert.ToInt32(Request.QueryString["userIDlogin"]);
+            string value = Request.QueryString["value_login"];
+            string[] words = value.Split(' ');
+            studio = Convert.ToInt32(words[1]);
+            user_id = Convert.ToInt32(words[0]);
         }
-        lbl_Message.Text = user_id.ToString();
+        else if (!string.IsNullOrEmpty(Request.QueryString["value_Register"]))
+        {
+            string value = Request.QueryString["value_Register"];
+            string[] words = value.Split(' ');
+            studio = Convert.ToInt32(words[1]);
+            user_id = Convert.ToInt32(words[0]);
+        }
 
         if (dp_Day.Items.Count == 0)
         {
@@ -143,17 +157,18 @@ public partial class PersonalInfo : System.Web.UI.Page
         //        register = false;
         //    }
         //}
+
         string dateOfBirth = "";
         if (register == true)
         {
             try
             {
             connect.Open();
-            string newPersonel = "insert into PersonalData (course, User_ID, YearOfStudy, Gender, Smoker, DateOfBirth, Nationality, PhoneNumber, AddressLine1, AddressLine2, AddressLine3, AddressLine4, City_Country, Postcode, age_preference_id, course_preference_id, gender_preference_id, nationality_preference_id) values(@course, @user_ID, @yearOfStudy, @gender, @smoker, @dateOfBirth, @nationality, @phoneNumber, @addressLine1, @addressLine2, @addressLine3, @addressLine4, @city_Country, @postcode, @age_preference_id, @course_preference_id, @gender_preference_id, @nationality_preference_id)";
+            string newPersonel = "insert into PersonalData (course, User_ID, YearOfStudy, Gender, Smoker, DateOfBirth, Nationality, PhoneNumber, AddressLine1, AddressLine2, AddressLine3, AddressLine4, City_Country, Postcode, age_preference_id, course_preference_id, gender_preference_id, nationality_preference_id, isStudioSelected) values(@course, @user_ID, @yearOfStudy, @gender, @smoker, @dateOfBirth, @nationality, @phoneNumber, @addressLine1, @addressLine2, @addressLine3, @addressLine4, @city_Country, @postcode, @age_preference_id, @course_preference_id, @gender_preference_id, @nationality_preference_id, @isStudioSelected)";
             SqlCommand newPersonelCommand = new SqlCommand(newPersonel, connect);
 
             newPersonelCommand.Parameters.AddWithValue("@course", CourseTextBox.Text.Trim());
-            newPersonelCommand.Parameters.AddWithValue("@user_ID", 1);
+            newPersonelCommand.Parameters.AddWithValue("@user_ID", user_id);
             newPersonelCommand.Parameters.AddWithValue("@yearOfStudy", dp_StudyYear.SelectedItem.ToString().Trim());
             string gend = "male";
             string smoke = "no";
@@ -216,16 +231,27 @@ public partial class PersonalInfo : System.Web.UI.Page
             newPersonelCommand.Parameters.AddWithValue("@course_preference_id", 1);
             newPersonelCommand.Parameters.AddWithValue("@gender_preference_id", 1);
             newPersonelCommand.Parameters.AddWithValue("@nationality_preference_id", 1);
+            newPersonelCommand.Parameters.AddWithValue("@isStudioSelected", studio);
+                
+            
 
             newPersonelCommand.ExecuteNonQuery();
 
-            string updateQuery = "update Users set state=" + 1 + "where User_ID=" + 1;
+            string updateQuery = "update Users set state=" + 1 + "where User_ID=" + user_id;
             SqlCommand updateQueryCommand = new SqlCommand(updateQuery, connect);
             updateQueryCommand.ExecuteNonQuery();
 
             lbl_Message.Text = "Registration Complete";
-            txt_PIvalueForm.Text = "5";
-            Response.Redirect("Preferences.aspx?test=" + txt_PIvalueForm.Text.Trim());
+            txt_PIvalueForm.Text = user_id.ToString();
+            if (studio == 0)
+            {
+                string sendVal = txt_PIvalueForm.Text;
+                Response.Redirect("Preferences.aspx?value_PI=" + sendVal);
+            }
+            else
+            {
+                Response.Redirect("adminView.aspx");
+            }
 
             }
             catch (Exception ex)

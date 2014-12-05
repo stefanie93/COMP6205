@@ -13,6 +13,7 @@ public partial class LoginPage : System.Web.UI.Page
 {
     int userID = 0;
     bool ishome = false;
+    int isStudio = 3;
     public void Page_Load(object sender, EventArgs e)
     {
 
@@ -27,8 +28,12 @@ public partial class LoginPage : System.Web.UI.Page
                 ishome = false;
             }
         }
+        if (!string.IsNullOrEmpty(Request.QueryString["studio"]))
+        {
+            isStudio = Convert.ToInt32(Request.QueryString["studio"]);
+        }
 
-        lbl_Message.Text = ishome.ToString();
+        //lbl_Message.Text = isStudio.ToString();
     }
 
     public void btn_login_Click(object sender, EventArgs e)
@@ -51,18 +56,22 @@ public partial class LoginPage : System.Web.UI.Page
             string password = PasswordCommantd.ExecuteScalar().ToString();
             password = password.Trim();
 
+            string findUserID = "select User_ID from Users where email='" + txt_email.Text + "'";
+            SqlCommand findUserIDCommantd = new SqlCommand(findUserID, connect);
+            string UserIDstring = findUserIDCommantd.ExecuteScalar().ToString();
+            UserIDstring = UserIDstring.Trim();
 
             if (password == txt_Password.Text)
             {
 
                 if (ishome == true)
                 {
-                    txt_Login_userID.Text = "1";
+                    txt_Login_userID.Text = UserIDstring;
                     Response.Redirect("~/frm_homepage.aspx?userID=" + txt_Login_userID.Text);
                 }
                 else
                 {
-                    txt_Login_userID.Text = "1";
+                    txt_Login_userID.Text = UserIDstring;
                     userID = Convert.ToInt32(txt_Login_userID.Text.Trim());
 
                     string user = "select state from Users where User_ID='" + userID + "'";
@@ -70,13 +79,23 @@ public partial class LoginPage : System.Web.UI.Page
                     string aplication_state = userCommand.ExecuteScalar().ToString();
                     aplication_state = aplication_state.Trim();
 
+
+                    string sendVal = UserIDstring + " " + isStudio.ToString();
+
                     if (aplication_state == "0")
                     {
-                        Response.Redirect("PersonalInfo.aspx?userID=" + txt_Login_userID.Text);
+                        Response.Redirect("PersonalInfo.aspx?value_login=" + sendVal);
                     }
                     else if (aplication_state == "1")
                     {
-                        Response.Redirect("Preferences.aspx?testID=" + txt_Login_userID.Text);
+                        if (isStudio == 0)
+                        {
+                            Response.Redirect("Preferences.aspx?testID=" + txt_Login_userID.Text);
+                        }
+                        else
+                        {
+                            Response.Redirect("adminView.aspx");
+                        }
                     }
                     else if (aplication_state == "2")
                     {
@@ -230,34 +249,24 @@ public partial class LoginPage : System.Web.UI.Page
 
                     newUserCommand.ExecuteNonQuery();
                     lbl_Message.Text = "Registration Complete";
+
+                    string findUserID = "select User_ID from Users where email='" + txt_email.Text + "'";
+                    SqlCommand findUserIDCommantd = new SqlCommand(findUserID, connect);
+                    string UserIDstring = findUserIDCommantd.ExecuteScalar().ToString();
+                    UserIDstring = UserIDstring.Trim();
+
                     if (ishome == true)
                     {
-                        txt_Login_userID.Text = "1";
+                        txt_Login_userID.Text = UserIDstring;
                         Response.Redirect("~/frm_homepage.aspx?userID=" + txt_Login_userID.Text);
                     }
                     else
                     {
-                        txt_Login_userID.Text = "1";
-                        userID = Convert.ToInt32(txt_Login_userID.Text.Trim());
-                        //Response.Redirect("~/PersonalInfo.aspx?userID=" + txt_Login_userID.Text);
 
-                        string user = "select state from Users where User_ID='" + userID + "'";
-                        SqlCommand userCommand = new SqlCommand(user, connect);
-                        string aplication_state = userCommand.ExecuteScalar().ToString();
-                        aplication_state = aplication_state.Trim();
+                        string sendVal = UserIDstring + " " + isStudio.ToString();
 
-                        if (aplication_state == "0")
-                        {
-                            Response.Redirect("PersonalInfo.aspx?userID=" + txt_Login_userID.Text);
-                        }
-                        else if (aplication_state == "1")
-                        {
-                            Response.Redirect("Preferences.aspx?testID=" + txt_Login_userID.Text);
-                        }
-                        else if (aplication_state == "2")
-                        {
-                            Response.Redirect("adminView.aspx");
-                        }
+                        Response.Redirect("PersonalInfo.aspx?value_Register=" + sendVal);
+
                     }
                     connect.Close();
 

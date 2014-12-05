@@ -22,15 +22,31 @@ public partial class frm_homepage : System.Web.UI.Page
             logedin = true;
             userid = Convert.ToInt32(Request.QueryString["userID"]);
         }
+        if (logedin == true)
+        {
+            Button1.Text = "Log Out";
+        }
         
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-
-        Response.Redirect("Form_Login.aspx?home=" + txt_Home_valueForm.Text);
+        if (Button1.Text == "Login")
+        {
+            Response.Redirect("Form_Login.aspx?home=" + txt_Home_valueForm.Text);
+        }
+        else
+        {
+            Response.Redirect("frm_homepage.aspx");   
+        }
 
     }
     protected void Button2_Click(object sender, EventArgs e)
+    {
+        int studio = 0;
+        sendToNextForm(studio);
+    }
+
+    public void sendToNextForm(int studio)
     {
 
         SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Registration_ConnectionString"].ConnectionString);
@@ -43,13 +59,23 @@ public partial class frm_homepage : System.Web.UI.Page
             SqlCommand userCommand = new SqlCommand(user, connect);
             string aplication_state = userCommand.ExecuteScalar().ToString();
             aplication_state = aplication_state.Trim();
+
+            string sendVal = txt_Home_userID.Text + " " + studio.ToString();
+
             if (aplication_state == "0")
             {
-                Response.Redirect("PersonalInfo.aspx?userID=" + txt_Home_userID.Text);
+                Response.Redirect("PersonalInfo.aspx?value_home=" + sendVal);
             }
-            else if (aplication_state == "1")
+            else if ((aplication_state == "1"))
             {
-                Response.Redirect("Preferences.aspx?testID=" + txt_Home_userID.Text);
+                if (studio == 0)
+                {
+                    Response.Redirect("Preferences.aspx?testID=" + txt_Home_userID.Text);
+                }
+                else
+                {
+                    Response.Redirect("adminView.aspx");
+                }
             }
             else if (aplication_state == "2")
             {
@@ -58,9 +84,10 @@ public partial class frm_homepage : System.Web.UI.Page
         }
         else
         {
-            Response.Redirect("Form_Login.aspx?home=" + txt_Home_valueForm.Text.Trim());
+            Response.Redirect("Form_Login.aspx?home=" + txt_Home_valueForm.Text.Trim() + "&studio=" + studio);
         }
     }
+    
     protected void Menu1_MenuItemClick(object sender, MenuEventArgs e)
     {
       
@@ -75,6 +102,7 @@ public partial class frm_homepage : System.Web.UI.Page
     }
     protected void Button3_Click(object sender, EventArgs e)
     {
-
+        int studio = 1;
+        sendToNextForm(studio);
     }
 }

@@ -12,15 +12,18 @@ public partial class Preferences : System.Web.UI.Page
     int userId;
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!string.IsNullOrEmpty(Request.QueryString["test"]))
-        {
-            userId = Convert.ToInt32(Request.QueryString["test"]);
-        }
-        else if (!string.IsNullOrEmpty(Request.QueryString["testID"]))
+        if (!string.IsNullOrEmpty(Request.QueryString["testID"]))
         {
             userId = Convert.ToInt32(Request.QueryString["testID"]);
         }
-        
+        else if (!string.IsNullOrEmpty(Request.QueryString["testID_login"]))
+        {
+            userId = Convert.ToInt32(Request.QueryString["testID_login"]);
+        }
+        else if (!string.IsNullOrEmpty(Request.QueryString["value_PI"]))
+        {
+            userId = Convert.ToInt32(Request.QueryString["value_PI"]);
+        }
     }
     protected void dp_agePref_SelectedIndexChanged(object sender, EventArgs e)
     {
