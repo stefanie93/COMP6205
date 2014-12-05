@@ -20,10 +20,23 @@
             <asp:SqlDataSource ID="SqlDataSource2" runat="server" DatasourceMode="DataSet"
             ConnectionString="<%$ ConnectionStrings:PersonalData_ConnectionString %>" 
             onselecting="SqlDataSource1_Selecting" 
+            SelectCommand="SELECT * FROM [Rooms]"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource3" runat="server" DatasourceMode="DataSet"
+            ConnectionString="<%$ ConnectionStrings:PersonalData_ConnectionString %>" 
+            onselecting="SqlDataSource1_Selecting" 
+            SelectCommand="SELECT * FROM [Flats]"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource4" runat="server" DatasourceMode="DataSet"
+            ConnectionString="<%$ ConnectionStrings:PersonalData_ConnectionString %>" 
+            onselecting="SqlDataSource1_Selecting" 
             SelectCommand="SELECT * FROM [Users]"></asp:SqlDataSource>
 
         <br />
         <asp:Label ID="lbl_Message" runat="server"></asp:Label>
+    
+        <br />
+        <br />
+        <asp:GridView ID="GridView1" runat="server">
+        </asp:GridView>
     
     </div>
     </form>

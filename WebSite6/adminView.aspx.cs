@@ -10,10 +10,13 @@ using System.Data;
 
 public partial class adminView : System.Web.UI.Page
 {
-    string[,] users = new string[1000, 2];
+    string[,] users = new string[1000, 4];
     int userCount = 0;
     int group = 0;
-
+    string[,] print_data = new string[100000, 10];
+    int print_data_count = 0;
+    string[,] roomsArray = new string[100000, 5];
+    int roomsArrayCount = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -62,11 +65,36 @@ public partial class adminView : System.Web.UI.Page
             course_UserID_count++;
         }
 
+        DataView DataViewForAllUsers = (DataView)SqlDataSource4.Select(DataSourceSelectArguments.Empty);
+        foreach (DataRowView DataRowViewForAllUsers in DataViewForAllUsers)
+        {
+            print_data[print_data_count, 0] = DataRowViewForAllUsers["User_ID"].ToString();
+            print_data[print_data_count, 1] = DataRowViewForAllUsers["FirstName"].ToString();
+            print_data[print_data_count, 2] = DataRowViewForAllUsers["LastName"].ToString();
+            print_data[print_data_count, 3] = DataRowViewForAllUsers["Email"].ToString();
+            //label += course_UserID[course_UserID_count, 0] + "    " + course_UserID[course_UserID_count, 1] + "@";
+            print_data_count++;
+        }
+        
+        DataView DataViewForRestUsers = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
+        foreach (DataRowView DataRowViewForRestUsers in DataViewForRestUsers)
+        {
+            for (int i = 0; i < print_data_count; i++)
+            {
+                if (DataRowViewForRestUsers["User_ID"].ToString() == print_data[i, 0])
+                {
+                    print_data[i, 4] = DataRowViewForRestUsers["PhoneNumber"].ToString();
+                    //label += gender_UserID[gender_UserID_count, 0] + "    " + gender_UserID[gender_UserID_count, 1] + "@";
+                }
+            }
+        }
+
         DataView DataViewForGender = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
         foreach (DataRowView DataRowViewForGender in DataViewForGender)
         {
             gender_UserID[gender_UserID_count, 0] = DataRowViewForGender["User_ID"].ToString();
             gender_UserID[gender_UserID_count, 1] = DataRowViewForGender["Gender"].ToString();
+            
             //label += gender_UserID[gender_UserID_count, 0] + "    " + gender_UserID[gender_UserID_count, 1] + "@";
             gender_UserID_count++;
         }
@@ -90,6 +118,20 @@ public partial class adminView : System.Web.UI.Page
             preferences[preferencesCount, 4] = DataRowViewForPreferences["nationality_preference_id"].ToString();
             //label += preferences[preferencesCount, 0] + "    " + preferences[preferencesCount, 1] + "   " + preferences[preferencesCount, 2] + "   " + preferences[preferencesCount, 3] + "    " + preferences[preferencesCount, 4] + "@";
             preferencesCount++;
+        }
+
+        DataView DataViewForRooms = (DataView)SqlDataSource2.Select(DataSourceSelectArguments.Empty);
+        foreach (DataRowView DataRowViewForRooms in DataViewForRooms)
+        {
+            if (DataRowViewForRooms["isStudio"].ToString() == "0")
+            {
+                roomsArray[roomsArrayCount, 0] = DataRowViewForRooms["Room_id"].ToString();
+                roomsArray[roomsArrayCount, 1] = DataRowViewForRooms["Flat_id"].ToString();
+                roomsArray[roomsArrayCount, 2] = DataRowViewForRooms["Room_num"].ToString();
+                roomsArray[roomsArrayCount, 3] = DataRowViewForRooms["Available"].ToString();
+                //label += preferences[preferencesCount, 0] + "    " + preferences[preferencesCount, 1] + "   " + preferences[preferencesCount, 2] + "   " + preferences[preferencesCount, 3] + "    " + preferences[preferencesCount, 4] + "@";
+                roomsArrayCount++;
+            }
         }
 
         string date = "";
@@ -120,15 +162,129 @@ public partial class adminView : System.Web.UI.Page
 
         //If all the preferences are selected
         label = all(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
+        age_course_class(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
+        age_gender_class(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
+        age_nationality_class(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
+        course_gender_class(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
+        course_nationality_class(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
+        dont_mind_class(preferencesCount, preferences);
+        gender_nationality_class(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
+
         label = "";
+        rooms_allocation(lastUserID);
+
         for (int i = 0; i < userCount; i++)
         {
-            label += users[i, 0] + "  " + users[i, 1] + "@";
+            for (int j = 0; j < print_data_count; j++)
+            {
+                if (users[i, 0] == print_data[j, 0])
+                {
+                    print_data[j, 5] = users[i, 2];
+                    print_data[j, 6] = users[i, 3];
+                }
+            }
         }
-        label = label.Replace("@", "<br />");
-        lbl_Message.Text = label;
+        //creating dataTable   
+        DataTable dt = new DataTable();
+        DataRow dr;
+        dt.TableName = "Users";
+        dt.Columns.Add(new DataColumn("FirstName", typeof(string)));
+        dt.Columns.Add(new DataColumn("LastName", typeof(string)));
+        dt.Columns.Add(new DataColumn("Email", typeof(string)));
+        dt.Columns.Add(new DataColumn("PhoneNumber", typeof(string)));
+        dt.Columns.Add(new DataColumn("FlatNo", typeof(string)));
+        dt.Columns.Add(new DataColumn("RoomNo", typeof(string)));
+        dr = dt.NewRow();
+        dt.Rows.Add(dr);
+        //saving databale into viewstate   
+        ViewState["Users"] = dt;
+
+        for (int i = 0; i < print_data_count; i++)
+        {
+            printToGrid(i);
+        }
+
     }
-    public void age_nationality(int preferencesCount, string[,] preferences, string[,] course_UserID, string[,] gender_UserID, string[,] nationality_UserID, string[,] DoF_UserId, int course_UserID_count, int gender_UserID_count, int nationality_UserID_count, int DoF_UserId_count)
+    public void printToGrid(int j)
+    {
+        if (ViewState["Users"] != null)
+        {
+            //get datatable from view state   
+            DataTable dtCurrentTable = (DataTable)ViewState["Users"];
+            DataRow drCurrentRow = null;
+
+            if (dtCurrentTable.Rows.Count > 0)
+            {
+
+                for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
+                {
+
+                    //add each row into data table  
+                    drCurrentRow = dtCurrentTable.NewRow();
+                    drCurrentRow["FirstName"] = print_data[j, 1];
+                    drCurrentRow["LastName"] = print_data[j, 2];
+                    drCurrentRow["Email"] = print_data[j, 3];
+                    drCurrentRow["PhoneNumber"] = print_data[j, 4];
+                    drCurrentRow["FlatNo"] = print_data[j, 5];
+                    drCurrentRow["RoomNo"] = print_data[j, 6];
+                }
+                //Remove initial blank row  
+                if (dtCurrentTable.Rows[0][0].ToString() == "")
+                {
+                    dtCurrentTable.Rows[0].Delete();
+                    dtCurrentTable.AcceptChanges();
+
+                }
+
+                //add created Rows into dataTable  
+                dtCurrentTable.Rows.Add(drCurrentRow);
+                //Save Data table into view state after creating each row  
+                ViewState["Users"] = dtCurrentTable;
+                //Bind Gridview with latest Row  
+                GridView1.DataSource = dtCurrentTable;
+                GridView1.DataBind();
+            }
+        }  
+
+    }
+
+    public void rooms_allocation(int lastUserID)
+    {
+        int flatid = 0;
+        int num = 1;
+        int j = 1;
+        for (int i = 0; i < userCount; i++)
+        {
+            if (users[i, 1] != users[j, 1])
+            {
+                flatid = flatid + 6;
+                num = 1;
+                j = i;
+            }
+            if (num <= 6)
+            {
+                if (users[i, 2] == null)
+                {
+                    users[i, 2] = roomsArray[flatid, 1];
+                    users[i, 3] = num.ToString();
+                    num++;
+                }
+            }
+            else
+            {
+                flatid++;
+                if (users[i, 2] == "")
+                {
+                    users[i, 2] = roomsArray[flatid, 1];
+                    users[i, 3] = num.ToString();
+                    num++;
+                }
+            }
+        }
+
+    }
+
+    public void age_nationality_class(int preferencesCount, string[,] preferences, string[,] course_UserID, string[,] gender_UserID, string[,] nationality_UserID, string[,] DoF_UserId, int course_UserID_count, int gender_UserID_count, int nationality_UserID_count, int DoF_UserId_count)
     {
         for (int i = 0; i < preferencesCount; i++)
         {
@@ -136,11 +292,248 @@ public partial class adminView : System.Web.UI.Page
             {
                 if (((Convert.ToInt32(preferences[i, 2]) == 5) && (Convert.ToInt32(preferences[j, 2]) == 5)) && ((Convert.ToInt32(preferences[i, 3]) == 1) && (Convert.ToInt32(preferences[j, 3]) == 1)) && (Convert.ToInt32(preferences[i, 1]) == Convert.ToInt32(preferences[j, 1])) && (Convert.ToInt32(preferences[i, 4]) == Convert.ToInt32(preferences[j, 4])))
                 {
+                    if (nationality_UserID[i, 1].Trim() == nationality_UserID[j, 1].Trim())
+                    {
+                        if ((preferences[j, 1] == "3") && (((Convert.ToInt32(DoF_UserId[i, 1]) < 20) && (Convert.ToInt32(DoF_UserId[j, 1]) < 20))))
+                        {
+                            group = 9;
+                            save(preferences, i, j);
+                        }
+                        else if ((preferences[i, 1] == "4") && (((Convert.ToInt32(DoF_UserId[i, 1]) > 20) && (Convert.ToInt32(DoF_UserId[i, 1]) < 25)) && (((Convert.ToInt32(DoF_UserId[j, 1]) > 20) && (Convert.ToInt32(DoF_UserId[j, 1]) < 25)))))
+                        {
+                            group = 10;
+                            save(preferences, i, j);
+                        }
+                        else if ((preferences[i, 1] == "5") && (((Convert.ToInt32(DoF_UserId[i, 1]) > 25) && (Convert.ToInt32(DoF_UserId[j, 1]) < 35)) && ((Convert.ToInt32(DoF_UserId[j, 1]) > 25) && (Convert.ToInt32(DoF_UserId[j, 1]) < 35))))
+                        {
+                            group = 11;
+                            save(preferences, i, j);
+                        }
+                        else if ((preferences[i, 1] == "6") && ((Convert.ToInt32(DoF_UserId[i, 1]) > 35) && (Convert.ToInt32(DoF_UserId[j, 1]) > 35)))
+                        {
+                            group = 12;
+                            save(preferences, i, j);
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+    public void course_gender_class(int preferencesCount, string[,] preferences, string[,] course_UserID, string[,] gender_UserID, string[,] nationality_UserID, string[,] DoF_UserId, int course_UserID_count, int gender_UserID_count, int nationality_UserID_count, int DoF_UserId_count)
+    {
+        for (int i = 0; i < preferencesCount; i++)
+        {
+            for (int j = i + 1; j < preferencesCount; j++)
+            {
+                if (((Convert.ToInt32(preferences[i, 4]) == 1) && (Convert.ToInt32(preferences[j, 4]) == 1)) && ((Convert.ToInt32(preferences[i, 1]) == 1) && (Convert.ToInt32(preferences[j, 1]) == 1)) && (Convert.ToInt32(preferences[i, 2]) == Convert.ToInt32(preferences[j, 2])) && (Convert.ToInt32(preferences[i, 3]) == Convert.ToInt32(preferences[j, 3])))
+                {
+                    if (course_UserID[i, 1].Trim() == course_UserID[j, 1].Trim())
+                    {
+                        if (Convert.ToInt32(preferences[i, 3]) == 2)
+                        {
+                            if (((gender_UserID[j, 1]).Trim() == "male") && (gender_UserID[i, 1].Trim() == "male"))
+                            {
+
+                                group = 25;
+                                save(preferences, i, j);
+                            }
+                            else if (((gender_UserID[j, 1]).Trim() == "female") && (gender_UserID[i, 1].Trim() == "female"))
+                            {
+                                group = 26;
+                                save(preferences, i, j);
+                            }
+                        }
+                    }
 
                 }
             }
         }
     }
+
+    public void gender_nationality_class(int preferencesCount, string[,] preferences, string[,] course_UserID, string[,] gender_UserID, string[,] nationality_UserID, string[,] DoF_UserId, int course_UserID_count, int gender_UserID_count, int nationality_UserID_count, int DoF_UserId_count)
+    {
+        for (int i = 0; i < preferencesCount; i++)
+        {
+            for (int j = i + 1; j < preferencesCount; j++)
+            {
+                if (((Convert.ToInt32(preferences[i, 2]) == 5) && (Convert.ToInt32(preferences[j, 2]) == 5)) && ((Convert.ToInt32(preferences[i, 1]) == 1) && (Convert.ToInt32(preferences[j, 1]) == 1)) && (Convert.ToInt32(preferences[i, 4]) == Convert.ToInt32(preferences[j, 4])) && (Convert.ToInt32(preferences[i, 3]) == Convert.ToInt32(preferences[j, 3])))
+                {
+                    if (nationality_UserID[i, 1].Trim() == nationality_UserID[j, 1].Trim())
+                    {
+                        if (Convert.ToInt32(preferences[i, 3]) == 2)
+                        {
+                            if (((gender_UserID[j, 1]).Trim() == "male") && (gender_UserID[i, 1].Trim() == "male"))
+                            {
+
+                                group = 28;
+                                save(preferences, i, j);
+                            }
+                            else if (((gender_UserID[j, 1]).Trim() == "female") && (gender_UserID[i, 1].Trim() == "female"))
+                            {
+                                group = 29;
+                                save(preferences, i, j);
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    public void dont_mind_class(int preferencesCount, string[,] preferences)
+    {
+        for (int i = 0; i < preferencesCount; i++)
+        {
+            bool male = false;
+            for (int m = 0; m < userCount; m++)
+            {
+                if ((users[m, 0] == preferences[i, 0]))
+                {
+                    male = true;
+                }
+            }
+            if (male == false)
+            {
+                users[userCount, 0] = preferences[i, 0];
+                users[userCount, 1] = "30";
+                userCount++;
+            }
+        }
+    }
+
+    public void course_nationality_class(int preferencesCount, string[,] preferences, string[,] course_UserID, string[,] gender_UserID, string[,] nationality_UserID, string[,] DoF_UserId, int course_UserID_count, int gender_UserID_count, int nationality_UserID_count, int DoF_UserId_count)
+    {
+        for (int i = 0; i < preferencesCount; i++)
+        {
+            for (int j = i + 1; j < preferencesCount; j++)
+            {
+                if (((Convert.ToInt32(preferences[i, 3]) == 1) && (Convert.ToInt32(preferences[j, 3]) == 1)) && ((Convert.ToInt32(preferences[i, 1]) == 1) && (Convert.ToInt32(preferences[j, 1]) == 1)) && (Convert.ToInt32(preferences[i, 2]) == Convert.ToInt32(preferences[j, 2])) && (Convert.ToInt32(preferences[i, 4]) == Convert.ToInt32(preferences[j, 4])))
+                {
+                    if (course_UserID[i, 1].Trim() == course_UserID[j, 1].Trim())
+                    {
+                        if (nationality_UserID[i, 1].Trim() == nationality_UserID[j, 1].Trim())
+                        {
+                            group = 27;
+                            save(preferences, i, j);
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+
+    public void age_gender_class(int preferencesCount, string[,] preferences, string[,] course_UserID, string[,] gender_UserID, string[,] nationality_UserID, string[,] DoF_UserId, int course_UserID_count, int gender_UserID_count, int nationality_UserID_count, int DoF_UserId_count)
+    {
+        for (int i = 0; i < preferencesCount; i++)
+        {
+            for (int j = i + 1; j < preferencesCount; j++)
+            {
+                if (((Convert.ToInt32(preferences[i, 4]) == 1) && (Convert.ToInt32(preferences[j, 4]) == 1)) && ((Convert.ToInt32(preferences[i, 2]) == 3) && (Convert.ToInt32(preferences[j, 2]) == 3)) && (Convert.ToInt32(preferences[i, 1]) == Convert.ToInt32(preferences[j, 1])) && (Convert.ToInt32(preferences[i, 3]) == Convert.ToInt32(preferences[j, 3])))
+                {
+                    if ((preferences[j, 1] == "3") && (((Convert.ToInt32(DoF_UserId[i, 1]) < 20) && (Convert.ToInt32(DoF_UserId[j, 1]) < 20))))
+                    {
+                        if (((gender_UserID[j, 1]).Trim() == "male") && (gender_UserID[i, 1].Trim() == "male"))
+                        {
+                            group = 17;
+                            save(preferences, i, j);
+                        }
+                        else if (((gender_UserID[j, 1]).Trim() == "female") && (gender_UserID[i, 1].Trim() == "female"))
+                        {
+                            group = 18;
+                            save(preferences, i, j);
+                        }
+
+                    }
+                    else if ((preferences[i, 1] == "4") && (((Convert.ToInt32(DoF_UserId[i, 1]) > 20) && (Convert.ToInt32(DoF_UserId[i, 1]) < 25)) && (((Convert.ToInt32(DoF_UserId[j, 1]) > 20) && (Convert.ToInt32(DoF_UserId[j, 1]) < 25)))))
+                    {
+                        if (((gender_UserID[j, 1]).Trim() == "male") && (gender_UserID[i, 1].Trim() == "male"))
+                        {
+                            group = 19;
+                            save(preferences, i, j);
+                        }
+                        else if (((gender_UserID[j, 1]).Trim() == "female") && (gender_UserID[i, 1].Trim() == "female"))
+                        {
+                            group = 20;
+                            save(preferences, i, j);
+                        }
+
+                    }
+                    else if ((preferences[i, 1] == "5") && (((Convert.ToInt32(DoF_UserId[i, 1]) > 25) && (Convert.ToInt32(DoF_UserId[j, 1]) < 35)) && ((Convert.ToInt32(DoF_UserId[j, 1]) > 25) && (Convert.ToInt32(DoF_UserId[j, 1]) < 35))))
+                    {
+                        if (((gender_UserID[j, 1]).Trim() == "male") && (gender_UserID[i, 1].Trim() == "male"))
+                        {
+                            group = 21;
+                            save(preferences, i, j);
+                        }
+                        else if (((gender_UserID[j, 1]).Trim() == "female") && (gender_UserID[i, 1].Trim() == "female"))
+                        {
+                            group = 22;
+                            save(preferences, i, j);
+                        }
+
+                    }
+                    else if ((preferences[i, 1] == "6") && ((Convert.ToInt32(DoF_UserId[i, 1]) > 35) && (Convert.ToInt32(DoF_UserId[j, 1]) > 35)))
+                    {
+                        if (((gender_UserID[j, 1]).Trim() == "male") && (gender_UserID[i, 1].Trim() == "male"))
+                        {
+                            group = 23;
+                            save(preferences, i, j);
+                        }
+                        else if (((gender_UserID[j, 1]).Trim() == "female") && (gender_UserID[i, 1].Trim() == "female"))
+                        {
+                            group = 24;
+                            save(preferences, i, j);
+                        }
+
+                    }
+
+                }
+                
+            }
+        }
+    }
+    public void age_course_class(int preferencesCount, string[,] preferences, string[,] course_UserID, string[,] gender_UserID, string[,] nationality_UserID, string[,] DoF_UserId, int course_UserID_count, int gender_UserID_count, int nationality_UserID_count, int DoF_UserId_count)
+    {
+        for (int i = 0; i < preferencesCount; i++)
+        {
+            for (int j = i + 1; j < preferencesCount; j++)
+            {
+                if (((Convert.ToInt32(preferences[i, 4]) == 1) && (Convert.ToInt32(preferences[j, 4]) == 1)) && ((Convert.ToInt32(preferences[i, 3]) == 1) && (Convert.ToInt32(preferences[j, 3]) == 1)) && (Convert.ToInt32(preferences[i, 1]) == Convert.ToInt32(preferences[j, 1])) && (Convert.ToInt32(preferences[i, 2]) == Convert.ToInt32(preferences[j, 2])))
+                {
+                    if (course_UserID[i, 1].Trim() == course_UserID[j, 1].Trim())
+                    {
+                        if ((preferences[j, 1] == "3") && (((Convert.ToInt32(DoF_UserId[i, 1]) < 20) && (Convert.ToInt32(DoF_UserId[j, 1]) < 20))))
+                        {
+                            group = 13;
+                            save(preferences, i, j);
+                        }
+                        else if ((preferences[i, 1] == "4") && (((Convert.ToInt32(DoF_UserId[i, 1]) > 20) && (Convert.ToInt32(DoF_UserId[i, 1]) < 25)) && (((Convert.ToInt32(DoF_UserId[j, 1]) > 20) && (Convert.ToInt32(DoF_UserId[j, 1]) < 25)))))
+                        {
+                            group = 14;
+                            save(preferences, i, j);
+                        }
+                        else if ((preferences[i, 1] == "5") && (((Convert.ToInt32(DoF_UserId[i, 1]) > 25) && (Convert.ToInt32(DoF_UserId[j, 1]) < 35)) && ((Convert.ToInt32(DoF_UserId[j, 1]) > 25) && (Convert.ToInt32(DoF_UserId[j, 1]) < 35))))
+                        {
+                            group = 15;
+                            save(preferences, i, j);
+                        }
+                        else if ((preferences[i, 1] == "6") && ((Convert.ToInt32(DoF_UserId[i, 1]) > 35) && (Convert.ToInt32(DoF_UserId[j, 1]) > 35)))
+                        {
+                            group = 16;
+                            save(preferences, i, j);
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
     public string all(int preferencesCount, string[,] preferences, string[,] course_UserID, string[,] gender_UserID, string[,] nationality_UserID, string[,] DoF_UserId, int course_UserID_count, int gender_UserID_count, int nationality_UserID_count, int DoF_UserId_count)
     {
         string stringlabel ="";
@@ -152,49 +545,43 @@ public partial class adminView : System.Web.UI.Page
                 {
                     if ((course_UserID[i, 1].Trim() == course_UserID[j, 1].Trim()) && (nationality_UserID[i, 1].Trim() == nationality_UserID[j, 1].Trim()))
                     {
-                        if (preferences[j, 1] == "3")
+                        if ((preferences[j, 1] == "3") && (((Convert.ToInt32(DoF_UserId[i, 1]) < 20) && (Convert.ToInt32(DoF_UserId[j, 1]) < 20))))
                         {
-                            if (((Convert.ToInt32(DoF_UserId[i, 1]) < 20) && (Convert.ToInt32(DoF_UserId[j, 1]) < 20)))
+                            //lbl_Message.Text = preferences[0, 3];
+                            if (Convert.ToInt32(preferences[i, 3]) == 2)
                             {
-                                //lbl_Message.Text = preferences[0, 3];
-                                if (Convert.ToInt32(preferences[i, 3]) == 2)
+                                if (((gender_UserID[j, 1]).Trim() == "male") && (gender_UserID[i, 1].Trim() == "male"))
                                 {
-                                    if (((gender_UserID[j, 1]).Trim() == "male") && (gender_UserID[i, 1].Trim() == "male"))
-                                    {
-                                        save(preferences, i, j);
-                                        group++;
-
-                                    }
-                                }
-                            }
-                            else if (Convert.ToInt32(preferences[i, 3]) == 4)
-                            {
-                                if (((gender_UserID[j, 1]).Trim() == "female") && (gender_UserID[i, 1].Trim() == "female"))
-                                {
+                                    
+                                    group = 1;
                                     save(preferences, i, j);
-                                    group++;
+                                }
+                                else if (((gender_UserID[j, 1]).Trim() == "female") && (gender_UserID[i, 1].Trim() == "female"))
+                                {
+                                    
+                                    group = 2;
+                                    save(preferences, i, j);
                                 }
                             }
                         }
-
                         else if ((preferences[i, 1] == "4") && (((Convert.ToInt32(DoF_UserId[i, 1]) > 20) && (Convert.ToInt32(DoF_UserId[i, 1]) < 25)) && (((Convert.ToInt32(DoF_UserId[j, 1]) > 20) && (Convert.ToInt32(DoF_UserId[j, 1]) < 25)))))
                         {
                             if (Convert.ToInt32(preferences[i, 3]) == 2)
                             {
                                 if (((gender_UserID[j, 1]).Trim() == "male") && (gender_UserID[i, 1].Trim() == "male"))
                                 {
+                                    
+                                    group = 3;
                                     save(preferences, i, j);
-                                    group++;
                                 }
-                            }
-                            else if (Convert.ToInt32(preferences[i, 3]) == 4)
-                            {
-                                if (((gender_UserID[j, 1]).Trim() == "female") && (gender_UserID[i, 1].Trim() == "female"))
+                                else if (((gender_UserID[j, 1]).Trim() == "female") && (gender_UserID[i, 1].Trim() == "female"))
                                 {
+                                    
+                                    group = 4;
                                     save(preferences, i, j);
-                                    group++;
                                 }
                             }
+                            
                         }
                         else if ((preferences[i, 1] == "5") && (((Convert.ToInt32(DoF_UserId[i, 1]) > 25) && (Convert.ToInt32(DoF_UserId[j, 1]) < 35)) && ((Convert.ToInt32(DoF_UserId[j, 1]) > 25) && (Convert.ToInt32(DoF_UserId[j, 1]) < 35))))
                         {
@@ -202,16 +589,15 @@ public partial class adminView : System.Web.UI.Page
                             {
                                 if (((gender_UserID[j, 1]).Trim() == "male") && (gender_UserID[i, 1].Trim() == "male"))
                                 {
+                                    
+                                    group = 5;
                                     save(preferences, i, j);
-                                    group++;
                                 }
-                            }
-                            else if (Convert.ToInt32(preferences[i, 3]) == 4)
-                            {
-                                if (((gender_UserID[j, 1]).Trim() == "female") && (gender_UserID[i, 1].Trim() == "female"))
+                                else if (((gender_UserID[j, 1]).Trim() == "female") && (gender_UserID[i, 1].Trim() == "female"))
                                 {
+                                    
+                                    group = 6;
                                     save(preferences, i, j);
-                                    group++;
                                 }
                             }
                         }
@@ -221,26 +607,28 @@ public partial class adminView : System.Web.UI.Page
                             {
                                 if (((gender_UserID[j, 1]).Trim() == "male") && (gender_UserID[i, 1].Trim() == "male"))
                                 {
-                                    save(preferences, i, j);
-                                    group++;
-                                }
-                            }
-                            else if (Convert.ToInt32(preferences[i, 3]) == 4)
-                            {
-                                if (((gender_UserID[j, 1]).Trim() == "female") && (gender_UserID[i, 1].Trim() == "female"))
-                                {
-                                    save(preferences, i, j);
                                     
+                                    group = 7;
+                                    save(preferences, i, j);
+                                }
+                                else if (((gender_UserID[j, 1]).Trim() == "female") && (gender_UserID[i, 1].Trim() == "female"))
+                                {
+                                    
+                                    group = 8;
+                                    save(preferences, i, j);
                                 }
                             }
+                           
                         }
+                        
                     }
+                    
                 }
-                
             }
+                
         }
-
-        return stringlabel;
+        
+       return stringlabel;
     }
 
     public void save(string[,] preferences, int i, int j)
