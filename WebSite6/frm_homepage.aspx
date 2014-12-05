@@ -81,7 +81,9 @@
                         </div>
                     </div>
                     <div class="wrap_box">
-                        <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="BOOK NOW" />
+                        <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="BOOK NOW" 
+                            BackColor="#FF3300" Font-Bold="True" Font-Size="Larger"
+                            Height="40px" Width="200px" />
                     </div>
                 </div>
                 <div>
@@ -128,7 +130,9 @@
                         
                     </div>
                 <div class="wrap_box">
-                    <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="BOOK NOW" />
+                    <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="BOOK NOW"
+                     BackColor="#FF3300" Font-Bold="True" Font-Size="Larger"
+                            Height="40px" Width="200px" />
                 </div>
                 </div>
                 <div>

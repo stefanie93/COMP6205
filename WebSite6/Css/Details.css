@@ -1,12 +1,13 @@
 ﻿body 
 {
+    background-color:#f4f4f4;
     font-family:Sans-Serif;
     margin: 0 0 0 0;
 }
 
 #page_wrapper 
 {
-    background:#f4f4f4 none repeat scroll 0 0;
+    background:none repeat scroll 0 0 #f4f4f4;
     position:relative;
     right:0;
     left:0;
@@ -23,18 +24,18 @@ header
 #banner
 {
    width:100%;
-   background-color:ThreeDLighShadow;
+   background-color:#dedede;
    position:fixed;
+   z-index:999;
 }
 
 #navigation
 {
     width:1080px;
-    height:50px;
+    height:60px;
     padding:10px;
     margin:0 auto;
-    background-color:black:transparent;
-    z-index:9999;
+    background-color:#dedede;
 }
 
 #nav
@@ -46,9 +47,18 @@ header
     margin-left:0;      
 }
 
-#nav li 
+#nav ul 
 {
     list-style:none;
+    margin:0;
+    padding:0;
+    width:auto;
+    display:none;
+}
+
+#nav li 
+{
+    
     font-size:20px;
     float:right;
     text-align:left;
@@ -68,58 +78,72 @@ header
 #top_title
 {
     text-transform:uppercase;
-    background-color:#f4f4f4;
+    background-color:#dedede;
     text-align:center;
     color:#000000;
     font-weight:bold;
-    margin: 10 0 0 0;
+    margin: 0 0 0 0;
 }
 
 .img_title 
 {
-    height:40%;
+    height:300px;
     width:100%;
     background-repeat:no-repeat;
-    background-size:cover;
 }
 
 
 
 #wrapper
 {
+  height:auto;
   width: 1080px;  
   margin: 0 auto;
-  padding:10px;
+  padding:20px;
   background-color:#fff;
 }
 
 .content_area
 {
+    height:90%;
     float:left;
     margin:0 0 0 0;
     border:3px solid #E3E3E3;
-    z-index: -1; 
 }
 
 .content_wrap
 {
     background-color:#f4f4f4;
-    width:1060px;
-    height:806px;
+    width:1020px;
+    height:90%;
     float:left;
     position:relative;
-    right:-10px;
-    left:10px;
+    right:0;
+    left:0;
     top:0;
     bottom:0px;
+    padding:20px;
      
 }
 
 .wrap_title h1
 {
     border:5px solid #3232CD;
-    width:200px;
+    width:190px;
     height:50px;
     color:#000000;
-    background-color:#ffffff;
+    background-color:#3232CD;
+}
+
+
+footer
+{
+    background-color:#00C5CD;
+    color:#ffffff;
+    text-align:center;
+    clear:both;
+    width:auto;
+    height:200px;
+    margin-top:20px;
+    z-index:997;
 }

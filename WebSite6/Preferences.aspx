@@ -50,7 +50,20 @@
                         <asp:SqlDataSource ID="SqlDataSource6" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:PersonalData_ConnectionString %>" 
                             SelectCommand="SELECT * FROM [PersonalData]"></asp:SqlDataSource>
+                        <asp:Label ID="Label7" runat="server" 
+                            Text="If you wish to stay with people you know please enter the group ID, so we are able to put you all together. If you do not have a Group ID, get one by clicking on the generate button below and share it with the people you wish to share the flat. Remember that only up to 6 people can enter the same ID. "></asp:Label>
                         <br />
+                        <br />
+                        <asp:Label ID="Label5" runat="server" Width="150px" Text="Enter Group ID"></asp:Label>
+                        <asp:TextBox ID="txt_GroupID" runat="server"></asp:TextBox>
+                        <asp:Label ID="Label8" runat="server" Text="OR"  Width="100px"></asp:Label>
+                        <asp:Button ID="btn_generateID" runat="server" Text="Generate" />
+                        <br />
+                        <br />
+                        <asp:Label ID="Label6" runat="server" Font-Size="Small" Text="Otherwise"></asp:Label>
+                        <br />
+                        <br />
+                        <hr />
                         <asp:Label ID="Label1" runat="server" Text="Flatemate preference based on Age"></asp:Label>
                         <br />
                         <asp:DropDownList ID="dp_agePref" runat="server" Width="800px" 
