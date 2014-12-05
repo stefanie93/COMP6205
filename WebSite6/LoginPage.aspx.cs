@@ -9,7 +9,7 @@ using System.Configuration;
 using System.Data;
 
 
-public partial class Form_Login : System.Web.UI.Page
+public partial class LoginPage : System.Web.UI.Page
 {
     int userID = 0;
     bool ishome = false;
@@ -27,7 +27,7 @@ public partial class Form_Login : System.Web.UI.Page
                 ishome = false;
             }
         }
-        
+
         lbl_Message.Text = ishome.ToString();
     }
 
@@ -58,7 +58,7 @@ public partial class Form_Login : System.Web.UI.Page
                 if (ishome == true)
                 {
                     txt_Login_userID.Text = "1";
-                    Response.Redirect("~/frm_homepage.aspx?userID=" + txt_Login_userID.Text);   
+                    Response.Redirect("~/frm_homepage.aspx?userID=" + txt_Login_userID.Text);
                 }
                 else
                 {

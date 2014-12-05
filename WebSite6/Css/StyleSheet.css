@@ -84,7 +84,7 @@
     margin-right:20px;
 }
 
-/*
+
 #nav li:after 
 {
     font-size:15px;
@@ -95,7 +95,7 @@
 # nav li.last:after {
     content: '';
 }
-*/
+
 
 #nav_book li
 {
@@ -334,11 +334,5 @@ footer
     z-index:997;
 }
 
-Button 
-{
-    text-transform:uppercase;
-    background-color:Red;
-    color:White;
-    font-weight:bold;
-}
+
     
