@@ -12,24 +12,30 @@
         <asp:GridView ID="GridView1" runat="server">
         </asp:GridView>
 
-        <asp:Button ID="btn_generate" runat="server" onclick="btn_generate_Click" 
+        <asp:Button ID="btn_generate" runat="server" onclick="btn_generate_Click" Style="height: 50px;
+                            font-size= large"
             Text="See All Room Allocation" Width="465px" />
         <br />
-        <asp:Button ID="btn_back" runat="server" onclick="btn_back_Click" Text="Back" 
+        <asp:Button ID="btn_back" runat="server" onclick="btn_back_Click" Text="Back" Style="height: 50px;
+                            font-size= large"
             Visible="False" />
         <br />
-        <asp:Button ID="btn_studios" runat="server" 
+        <asp:Button ID="btn_studios" runat="server" Style="height: 50px;
+                            font-size= large"
             Text="See the allocation only for Studios" Width="465px" 
             onclick="btn_studios_Click" />
         <br />
         <br />
-        <asp:Button ID="btn_ensuite" runat="server" 
-            Text="See the allocation only for En-Suite" Width="465px" />
+        <asp:Button ID="btn_ensuite" runat="server" Style="height: 50px;
+                            font-size= large"
+            Text="See the allocation only for En-Suite" Width="465px" 
+            onclick="btn_ensuite_Click" />
         <br />
         <br />
-        <asp:Button ID="btn_unbook" runat="server" 
+        <asp:Button ID="btn_unbook" runat="server" Style="height: 50px;
+                            font-size= large"
             Text="See all the registered users that didn't book any room" 
-            Width="465px" />
+            Width="465px" onclick="btn_unbook_Click" />
         <br />
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" DatasourceMode="DataSet"
             ConnectionString="<%$ ConnectionStrings:PersonalData_ConnectionString %>" 

@@ -78,14 +78,14 @@ public partial class adminView : System.Web.UI.Page
         string label = "";
 
         //tables for preferences
-        string[,] allSelected = new string[lastUserID,2];
-        string[,] AllDontMind = new string[lastUserID, 2];
-        string[,] age_course = new string[lastUserID, 2];
-        string[,] age_gender = new string[lastUserID, 2];
-        string[,] age_nationality = new string[lastUserID, 2];
-        string[,] course_gender = new string[lastUserID, 2];
-        string[,] course_Nationality = new string[lastUserID, 2];
-        string[,] gender_Nationality = new string[lastUserID, 2];
+        //string[,] allSelected = new string[lastUserID,2];
+        //string[,] AllDontMind = new string[lastUserID, 2];
+        //string[,] age_course = new string[lastUserID, 2];
+        //string[,] age_gender = new string[lastUserID, 2];
+        //string[,] age_nationality = new string[lastUserID, 2];
+        //string[,] course_gender = new string[lastUserID, 2];
+        //string[,] course_Nationality = new string[lastUserID, 2];
+        //string[,] gender_Nationality = new string[lastUserID, 2];
 
         string[,] course_UserID = new string[lastUserID,2];
         int course_UserID_count = 0;
@@ -99,6 +99,9 @@ public partial class adminView : System.Web.UI.Page
         int preferencesCount = 0;
         string[,] studioPreferences = new string[lastUserID, 5];
         int studioPreferencesCount = 0;
+        string[,] groupPreferences = new string[lastUserID, 5];
+        int groupPreferencesCount = 0;
+
 
         DataView DataViewForCourses = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
         foreach (DataRowView DataRowViewForCourses in DataViewForCourses)
@@ -130,21 +133,32 @@ public partial class adminView : System.Web.UI.Page
         DataView DataViewForPreferences = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
         foreach (DataRowView DataRowViewForPreferences in DataViewForPreferences)
         {
-            if (DataRowViewForPreferences["isStudioSelected"].ToString() == "0")
-            {
-                preferences[preferencesCount, 0] = DataRowViewForPreferences["User_ID"].ToString();
-                preferences[preferencesCount, 1] = DataRowViewForPreferences["age_preference_id"].ToString();
-                preferences[preferencesCount, 2] = DataRowViewForPreferences["course_preference_id"].ToString();
-                preferences[preferencesCount, 3] = DataRowViewForPreferences["gender_preference_id"].ToString();
-                preferences[preferencesCount, 4] = DataRowViewForPreferences["nationality_preference_id"].ToString();
-                //label += preferences[preferencesCount, 0] + "    " + preferences[preferencesCount, 1] + "   " + preferences[preferencesCount, 2] + "   " + preferences[preferencesCount, 3] + "    " + preferences[preferencesCount, 4] + "@";
-                preferencesCount++;
-            }
-            else
+            if ((DataRowViewForPreferences["isStudioSelected"].ToString() == "1")  )
             {
                 studioPreferences[studioPreferencesCount, 0] = DataRowViewForPreferences["User_ID"].ToString();
                 studioPreferencesCount++;
+                
             }
+            else
+            {
+                if (!string.IsNullOrEmpty(DataRowViewForPreferences["groupID"].ToString()))
+                {
+                    groupPreferences[groupPreferencesCount, 0] = DataRowViewForPreferences["User_ID"].ToString();
+                    groupPreferencesCount++;
+                   
+                }
+                else
+                {
+                    preferences[preferencesCount, 0] = DataRowViewForPreferences["User_ID"].ToString();
+                    preferences[preferencesCount, 1] = DataRowViewForPreferences["age_preference_id"].ToString();
+                    preferences[preferencesCount, 2] = DataRowViewForPreferences["course_preference_id"].ToString();
+                    preferences[preferencesCount, 3] = DataRowViewForPreferences["gender_preference_id"].ToString();
+                    preferences[preferencesCount, 4] = DataRowViewForPreferences["nationality_preference_id"].ToString();
+                    //label += preferences[preferencesCount, 0] + "    " + preferences[preferencesCount, 1] + "   " + preferences[preferencesCount, 2] + "   " + preferences[preferencesCount, 3] + "    " + preferences[preferencesCount, 4] + "@";
+                    preferencesCount++;
+                }
+            }
+            
         }
 
         DataView DataViewForRooms = (DataView)SqlDataSource2.Select(DataSourceSelectArguments.Empty);
@@ -192,6 +206,12 @@ public partial class adminView : System.Web.UI.Page
         {
             group = 30;
             save_studio(studioPreferences, i);
+        }
+
+        for (int i = 0; i < groupPreferencesCount; i++)
+        {
+            group = 31;
+            save_group(groupPreferences, i);
         }
 
         //If all the preferences are selected
@@ -320,6 +340,7 @@ public partial class adminView : System.Web.UI.Page
 
     public void rooms_allocation(int lastUserID)
     {
+
         int flatid = 0;
         int num = 1;
         int j = 1;
@@ -713,6 +734,17 @@ public partial class adminView : System.Web.UI.Page
             
     }
 
+    public void save_group(string[,] group_preferences, int i)
+    {
+        string id = group_preferences[i, 0];
+
+        users[userCount, 0] = id;
+        users[userCount, 1] = group.ToString();
+        users[userCount, 4] = "En-Suite";
+        userCount++;
+
+    }
+    
     public void save(string[,] preferences, int i, int j)
     {
         string id = preferences[i, 0];
@@ -866,9 +898,326 @@ public partial class adminView : System.Web.UI.Page
         {
             printToGrid(i);
         }
+        btn_ensuite.Visible = false;
+        btn_generate.Visible = false;
+        btn_studios.Visible = false;
+        btn_unbook.Visible = false;
+        btn_back.Visible = true;
     }
+
     protected void btn_back_Click(object sender, EventArgs e)
     {
         Response.Redirect("adminView.aspx");
+    }
+
+    protected void btn_ensuite_Click(object sender, EventArgs e)
+    {
+        emptyTables();
+        lbl_Message.Text = "";
+        //Connection with the Internal server
+        SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["PersonalData_ConnectionString"].ConnectionString);
+        connect.Open();
+        string lastQuery = "select max(User_ID) from Users";
+        SqlCommand lastCommand = new SqlCommand(lastQuery, connect);
+        string last = lastCommand.ExecuteScalar().ToString();
+        last = last.Trim();
+        int lastUserID = Convert.ToInt32(last);
+
+        string label = "";
+
+        //tables for preferences
+        //string[,] allSelected = new string[lastUserID,2];
+        //string[,] AllDontMind = new string[lastUserID, 2];
+        //string[,] age_course = new string[lastUserID, 2];
+        //string[,] age_gender = new string[lastUserID, 2];
+        //string[,] age_nationality = new string[lastUserID, 2];
+        //string[,] course_gender = new string[lastUserID, 2];
+        //string[,] course_Nationality = new string[lastUserID, 2];
+        //string[,] gender_Nationality = new string[lastUserID, 2];
+
+        string[,] course_UserID = new string[lastUserID, 2];
+        int course_UserID_count = 0;
+        string[,] gender_UserID = new string[lastUserID, 2];
+        int gender_UserID_count = 0;
+        string[,] nationality_UserID = new string[lastUserID, 2];
+        int nationality_UserID_count = 0;
+        string[,] DoF_UserId = new string[lastUserID, 3];
+        int DoF_UserId_count = 0;
+        string[,] preferences = new string[lastUserID, 5];
+        int preferencesCount = 0;
+        string[,] groupPreferences = new string[lastUserID, 5];
+        int groupPreferencesCount = 0;
+
+        DataView DataViewForCourses = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
+        foreach (DataRowView DataRowViewForCourses in DataViewForCourses)
+        {
+            course_UserID[course_UserID_count, 0] = DataRowViewForCourses["User_ID"].ToString();
+            course_UserID[course_UserID_count, 1] = DataRowViewForCourses["course"].ToString();
+            //label += course_UserID[course_UserID_count, 0] + "    " + course_UserID[course_UserID_count, 1] + "@";
+            course_UserID_count++;
+        }
+
+        DataView DataViewForGender = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
+        foreach (DataRowView DataRowViewForGender in DataViewForGender)
+        {
+            gender_UserID[gender_UserID_count, 0] = DataRowViewForGender["User_ID"].ToString();
+            gender_UserID[gender_UserID_count, 1] = DataRowViewForGender["Gender"].ToString();
+            //label += gender_UserID[gender_UserID_count, 0] + "    " + gender_UserID[gender_UserID_count, 1] + "@";
+            gender_UserID_count++;
+        }
+
+        DataView DataViewForNationalities = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
+        foreach (DataRowView DataRowViewForNationalities in DataViewForNationalities)
+        {
+            nationality_UserID[nationality_UserID_count, 0] = DataRowViewForNationalities["User_ID"].ToString();
+            nationality_UserID[nationality_UserID_count, 1] = DataRowViewForNationalities["nationality"].ToString();
+            //label += nationality_UserID[nationality_UserID_count, 0] + "    " + nationality_UserID[nationality_UserID_count, 1] + "@";
+            nationality_UserID_count++;
+        }
+
+        DataView DataViewForPreferences = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
+        foreach (DataRowView DataRowViewForPreferences in DataViewForPreferences)
+        {
+            if (DataRowViewForPreferences["isStudioSelected"].ToString().Trim() == "0")
+            {
+                if (!string.IsNullOrEmpty(DataRowViewForPreferences["groupID"].ToString()))
+                {
+                    groupPreferences[groupPreferencesCount, 0] = DataRowViewForPreferences["User_ID"].ToString();
+                    groupPreferencesCount++;
+
+                }
+                else
+                {
+                    preferences[preferencesCount, 0] = DataRowViewForPreferences["User_ID"].ToString();
+                    preferences[preferencesCount, 1] = DataRowViewForPreferences["age_preference_id"].ToString();
+                    preferences[preferencesCount, 2] = DataRowViewForPreferences["course_preference_id"].ToString();
+                    preferences[preferencesCount, 3] = DataRowViewForPreferences["gender_preference_id"].ToString();
+                    preferences[preferencesCount, 4] = DataRowViewForPreferences["nationality_preference_id"].ToString();
+                    //label += preferences[preferencesCount, 0] + "    " + preferences[preferencesCount, 1] + "   " + preferences[preferencesCount, 2] + "   " + preferences[preferencesCount, 3] + "    " + preferences[preferencesCount, 4] + "@";
+                    preferencesCount++;
+                }
+            }
+
+        }
+
+        DataView DataViewForRooms = (DataView)SqlDataSource2.Select(DataSourceSelectArguments.Empty);
+        foreach (DataRowView DataRowViewForRooms in DataViewForRooms)
+        {
+            if (DataRowViewForRooms["isStudio"].ToString().Trim() == "0")
+            {
+                roomsArray[roomsArrayCount, 0] = DataRowViewForRooms["Room_id"].ToString();
+                roomsArray[roomsArrayCount, 1] = DataRowViewForRooms["Flat_id"].ToString();
+                roomsArray[roomsArrayCount, 2] = DataRowViewForRooms["Room_num"].ToString();
+                roomsArray[roomsArrayCount, 3] = DataRowViewForRooms["Available"].ToString();
+                //label += preferences[preferencesCount, 0] + "    " + preferences[preferencesCount, 1] + "   " + preferences[preferencesCount, 2] + "   " + preferences[preferencesCount, 3] + "    " + preferences[preferencesCount, 4] + "@";
+                roomsArrayCount++;
+            }
+        }
+
+
+        string date = "";
+        int dateYear = 0;
+
+        DataView DataViewDateOfBirth = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
+        foreach (DataRowView DataRowViewDateOfBirth in DataViewDateOfBirth)
+        {
+            date = DataRowViewDateOfBirth["DateOfBirth"].ToString();
+            char[] dateChar = date.ToCharArray();
+            date = dateChar[7] + "" + dateChar[8];
+            if (Convert.ToInt32(date) >= 70 && Convert.ToInt32(date) <= 99)
+            {
+                date = 19 + "" + date;
+            }
+            else
+            {
+                date = 20 + "" + date;
+            }
+            dateYear = Convert.ToInt32(date);
+
+
+            DoF_UserId[DoF_UserId_count, 0] = DataRowViewDateOfBirth["User_ID"].ToString();
+            DoF_UserId[DoF_UserId_count, 1] = ((DateTime.Now.Year - dateYear).ToString());
+            //label += DoF_UserId[DoF_UserId_count, 0] + "    " + DoF_UserId[DoF_UserId_count, 1] + "@";
+            DoF_UserId_count++;
+        }
+
+        for (int i = 0; i < groupPreferencesCount; i++)
+        {
+            group = 31;
+            save_group(groupPreferences, i);
+        }
+
+        //If all the preferences are selected
+        label = all(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
+        age_course_class(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
+        age_gender_class(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
+        age_nationality_class(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
+        course_gender_class(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
+        course_nationality_class(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
+        dont_mind_class(preferencesCount, preferences);
+        gender_nationality_class(preferencesCount, preferences, course_UserID, gender_UserID, nationality_UserID, DoF_UserId, course_UserID_count, gender_UserID_count, nationality_UserID_count, DoF_UserId_count);
+        label = "";
+
+
+
+        rooms_allocation(userCount);
+
+        DataView DataViewForRestUsers = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
+        foreach (DataRowView DataRowViewForRestUsers in DataViewForRestUsers)
+        {
+            if ((DataRowViewForRestUsers["PhoneNumber"].ToString() != null) && (DataRowViewForRestUsers["isStudioSelected"].ToString().Trim() == "0"))
+            {
+                print_data[print_data_count, 0] = DataRowViewForRestUsers["User_ID"].ToString();
+                print_data[print_data_count, 4] = DataRowViewForRestUsers["PhoneNumber"].ToString();
+                print_data_count++;
+            }
+        }
+
+        DataView DataViewForAllUsers = (DataView)SqlDataSource4.Select(DataSourceSelectArguments.Empty);
+        foreach (DataRowView DataRowViewForAllUsers in DataViewForAllUsers)
+        {
+            for (int i = 0; i < print_data_count; i++)
+            {
+                if (print_data[i, 0] == DataRowViewForAllUsers["User_ID"].ToString())
+                {
+                    print_data[i, 1] = DataRowViewForAllUsers["FirstName"].ToString();
+                    print_data[i, 2] = DataRowViewForAllUsers["LastName"].ToString();
+                    print_data[i, 3] = DataRowViewForAllUsers["Email"].ToString();
+                }
+            }
+
+        }
+
+        for (int i = 0; i < userCount; i++)
+        {
+            for (int j = 0; j < print_data_count; j++)
+            {
+                if (users[i, 0] == print_data[j, 0])
+                {
+                    print_data[j, 5] = users[i, 2];
+                    print_data[j, 6] = users[i, 3];
+                    print_data[j, 7] = users[i, 4];
+                }
+            }
+        }
+
+        //creating dataTable   
+        DataTable dt = new DataTable();
+        DataRow dr;
+        dt.TableName = "Users";
+        dt.Columns.Add(new DataColumn("FirstName", typeof(string)));
+        dt.Columns.Add(new DataColumn("LastName", typeof(string)));
+        dt.Columns.Add(new DataColumn("Email", typeof(string)));
+        dt.Columns.Add(new DataColumn("PhoneNumber", typeof(string)));
+        dt.Columns.Add(new DataColumn("FlatNo", typeof(string)));
+        dt.Columns.Add(new DataColumn("RoomNo", typeof(string)));
+        dt.Columns.Add(new DataColumn("Studio", typeof(string)));
+        dr = dt.NewRow();
+        dt.Rows.Add(dr);
+        //saving databale into viewstate   
+        ViewState["Users"] = dt;
+
+        for (int i = 0; i < print_data_count; i++)
+        {
+            printToGrid(i);
+        }
+
+        btn_ensuite.Visible = false;
+        btn_generate.Visible = false;
+        btn_studios.Visible = false;
+        btn_unbook.Visible = false;
+        btn_back.Visible = true;
+
+    }
+
+    protected void btn_unbook_Click(object sender, EventArgs e)
+    {
+        emptyTables();
+        lbl_Message.Text = "";
+        //Connection with the Internal server
+        SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["PersonalData_ConnectionString"].ConnectionString);
+        connect.Open();
+        string lastQuery = "select max(User_ID) from Users";
+        SqlCommand lastCommand = new SqlCommand(lastQuery, connect);
+        string last = lastCommand.ExecuteScalar().ToString();
+        last = last.Trim();
+        int lastUserID = Convert.ToInt32(last);
+
+        //string label = "";
+
+       
+            DataView DataViewForAllUsers = (DataView)SqlDataSource4.Select(DataSourceSelectArguments.Empty);
+
+            foreach (DataRowView DataRowViewForAllUsers in DataViewForAllUsers)
+            {
+                
+                    if (DataRowViewForAllUsers["state"].ToString() == "0")
+                    {
+                        print_data[print_data_count, 1] = DataRowViewForAllUsers["FirstName"].ToString();
+                        print_data[print_data_count, 2] = DataRowViewForAllUsers["LastName"].ToString();
+                        print_data[print_data_count, 3] = DataRowViewForAllUsers["Email"].ToString();
+                        print_data_count++;
+                    }
+            
+
+            }
+
+            
+            //creating dataTable   
+            DataTable dt = new DataTable();
+            DataRow dr;
+            dt.TableName = "Users";
+            dt.Columns.Add(new DataColumn("FirstName", typeof(string)));
+            dt.Columns.Add(new DataColumn("LastName", typeof(string)));
+            dt.Columns.Add(new DataColumn("Email", typeof(string)));
+            dr = dt.NewRow();
+            dt.Rows.Add(dr);
+            //saving databale into viewstate   
+            ViewState["Users"] = dt;
+
+            for (int j = 0; j < print_data_count; j++)
+            {
+                if (ViewState["Users"] != null)
+                {
+                    //get datatable from view state   
+                    DataTable dtCurrentTable = (DataTable)ViewState["Users"];
+                    DataRow drCurrentRow = null;
+
+                    if (dtCurrentTable.Rows.Count > 0)
+                    {
+
+                        for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
+                        {
+                            //add each row into data table  
+                            drCurrentRow = dtCurrentTable.NewRow();
+                            drCurrentRow["FirstName"] = print_data[j, 1];
+                            drCurrentRow["LastName"] = print_data[j, 2];
+                            drCurrentRow["Email"] = print_data[j, 3];
+                        }
+                        //Remove initial blank row  
+                        if (dtCurrentTable.Rows[0][0].ToString() == "")
+                        {
+                            dtCurrentTable.Rows[0].Delete();
+                            dtCurrentTable.AcceptChanges();
+
+                        }
+
+                        //add created Rows into dataTable  
+                        dtCurrentTable.Rows.Add(drCurrentRow);
+                        //Save Data table into view state after creating each row  
+                        ViewState["Users"] = dtCurrentTable;
+                        //Bind Gridview with latest Row  
+                        GridView1.DataSource = dtCurrentTable;
+                        GridView1.DataBind();
+                    }
+                }
+            }
+
+            btn_ensuite.Visible = false;
+            btn_generate.Visible = false;
+            btn_studios.Visible = false;
+            btn_unbook.Visible = false;
+            btn_back.Visible = true;
+
     }
 }

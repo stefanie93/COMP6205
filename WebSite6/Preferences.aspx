@@ -5,7 +5,7 @@
 <head runat="server">
     <title></title>
     <link rel="Stylesheet" type="text/css" href="Css/Details.css" />
-</head>
+    </head>
 <body>
     <form id="form1" runat="server">
     <div id="page_wrapper">
@@ -50,36 +50,55 @@
                         <asp:SqlDataSource ID="SqlDataSource6" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:PersonalData_ConnectionString %>" 
                             SelectCommand="SELECT * FROM [PersonalData]"></asp:SqlDataSource>
+          
+                        <br />
                         <asp:Label ID="Label7" runat="server" 
                             Text="If you wish to stay with people you know please enter the group ID, so we are able to put you all together. If you do not have a Group ID, get one by clicking on the generate button below and share it with the people you wish to share the flat. Remember that only up to 6 people can enter the same ID. "></asp:Label>
+                            <br />
+                        <asp:Label ID="Label9" runat="server" 
+                            Text="Do you want to enter or generate a group ID?" Width="350px" 
+                            Height="20px"></asp:Label>
+                            <br />
+                            <br />
+                        <asp:Button ID="Btn_Yes" runat="server" Text="Yes" Height="20px" Width="100px" 
+                            onclick="Btn_Yes_Click" />
+
+                        <asp:Label ID="Label6" runat="server" Width="102px" 
+                            Height="20px"></asp:Label>
+                       
+                        <asp:Button ID="Btn_No" runat="server" Text="No" Height="20px" 
+                            Width="100px" onclick="Btn_No_Click" />
+
+
                         <br />
                         <br />
-                        <asp:Label ID="Label5" runat="server" Width="150px" Text="Enter Group ID"></asp:Label>
-                        <asp:TextBox ID="txt_GroupID" runat="server"></asp:TextBox>
-                        <asp:Label ID="Label8" runat="server" Text="OR"  Width="100px"></asp:Label>
-                        <asp:Button ID="btn_generateID" runat="server" Style="height:30px; width:100px;
-                            font-size:large" Text="Generate" />
+                        <asp:Label ID="Label5" runat="server" Width="150px" Text="Enter Group ID" 
+                            Enabled="False"></asp:Label>
+                        <asp:TextBox ID="txt_GroupID" runat="server" Enabled="False"></asp:TextBox>
+                        <asp:Label ID="Label8" runat="server" Text="OR"  Width="100px" 
+                            style="margin-top: 2px" Enabled="False"></asp:Label>
+                        <asp:Button ID="Button1" runat="server" Style="height:30px; width:100px;
+                            font-size:large" onclick="Button1_Click" Text="Generate" Enabled="False" />
                         <br />
                         <br />
                         <hr />
-                        <asp:Label ID="Label6" runat="server" Font-Size="Small" Text="Otherwise"></asp:Label>
                         <br />
-                        <br />
-                        <asp:Label ID="Label1" runat="server" Text="Flatemate preference based on Age"></asp:Label>
+                        <asp:Label ID="Label1" runat="server" Text="Flatemate preference based on Age" 
+                            Enabled="False"></asp:Label>
                         <br />
                         <asp:DropDownList ID="dp_agePref" runat="server" Width="800px" 
                             DataSourceID="SqlDataSource1" DataTextField="Year" DataValueField="Age_ID" 
                             onselectedindexchanged="dp_agePref_SelectedIndexChanged" 
-                            DataMember="DefaultView">
+                            DataMember="DefaultView" Enabled="False">
                         </asp:DropDownList>
                         <br />
                         <br />
                         <asp:Label ID="Label2" runat="server" 
-                            Text="Flatemate preference based on Gender"></asp:Label>
+                            Text="Flatemate preference based on Gender" Enabled="False"></asp:Label>
                         <br />
                         <asp:DropDownList ID="dp_genderPref" runat="server" Width="800px" 
                             DataSourceID="SqlDataSource3" DataTextField="Gender" 
-                            DataValueField="Gender_ID">
+                            DataValueField="Gender_ID" Enabled="False">
                             <asp:ListItem>Please select...</asp:ListItem>
                             <asp:ListItem>All females</asp:ListItem>
                             <asp:ListItem>All males</asp:ListItem>
@@ -89,18 +108,22 @@
                         <br />
                         <br />
                         <asp:Label ID="Label3" runat="server" 
-                            Text="Flatemate preference based on your Nationality"></asp:Label>
+                            Text="Flatemate preference based on your Nationality" Enabled="False"></asp:Label>
                         <asp:Panel ID="Panel2" runat="server">
-                            <asp:RadioButton ID="rb_yesNationPref" runat="server" Text="Yes" GroupName = "a" Width="100px" />
-                            <asp:RadioButton ID="rb_nationality_dontMind" runat="server" Text="I do not mind" GroupName = "a" Width="200px" />
+                            <asp:RadioButton ID="rb_yesNationPref" runat="server" Text="Yes" c 
+                                Width="100px" Enabled="False" />
+                            <asp:RadioButton ID="rb_nationality_dontMind" runat="server" 
+                                Text="I do not mind" GroupName = "a" Width="200px" Enabled="False" />
                         </asp:Panel>
                         <br />
                         <asp:Label ID="Label4" runat="server" 
-                            Text="Flatemate preference based on your Course"></asp:Label>
+                            Text="Flatemate preference based on your Course" Enabled="False"></asp:Label>
                         <br />
                         <asp:Panel ID="Panel3" runat="server">
-                            <asp:RadioButton ID="rb_yesCoursePref" runat="server" Text="Yes" GroupName = "b" Width="100px" />
-                            <asp:RadioButton ID="rb_course_dontMind" runat="server" Text="I do not mind" GroupName = "b" Width="200px" />
+                            <asp:RadioButton ID="rb_yesCoursePref" runat="server" Text="Yes" 
+                                GroupName = "b" Width="100px" Enabled="False" />
+                            <asp:RadioButton ID="rb_course_dontMind" runat="server" Text="I do not mind" 
+                                GroupName = "b" Width="200px" Enabled="False" />
                         </asp:Panel>
                         <br />
                         <br />
