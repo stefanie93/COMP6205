@@ -3,8 +3,10 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head id="Head1" runat="server">
     <title>Student Accommodation</title>
+    
     <script src="JScript_1.js" type="text/javascript"></script>
     <link rel="Stylesheet" type="text/css" href="~/Css/StyleSheet.css" />
     
@@ -72,7 +74,7 @@
                                 £100 per week</h3>
                             <hr />
                             <h3>
-                                £5610
+                                £5,610
                             </h3>
                             <hr />
                             <h3>
@@ -117,10 +119,10 @@
                                 51 weeks</h3>
                             <hr />
                             <h3>
-                                £100 per week</h3>
+                                £150 per week</h3>
                             <hr />
                             <h3>
-                                £5610
+                                £7,650
                             </h3>
                             <hr />
                             <h3>
