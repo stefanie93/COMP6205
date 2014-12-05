@@ -40,8 +40,9 @@
                     <br />
                     <br />
                     <section>
-                    <h4> Room Booked</h4>
+                    <h2> Room Booked</h2>
                     <asp:Panel ID="Panel1" runat="server">
+                        <br />
                         <asp:Label ID="Label2" runat="server" Text="Room Type:" Width="150px"></asp:Label>
                         <asp:Label ID="Lbl_roomType" runat="server"  Font-Bold="True" Font-Italic="True" 
                         Font-Size="15pt" Width="200px"></asp:Label>
@@ -60,9 +61,18 @@
                             Font-Size="15pt" Width="200px"></asp:Label>
                         <asp:Label ID="Label8" runat="server" Text="Start date:" Width="150px"></asp:Label>
                         <asp:Label ID="Label9" runat="server" Text="05/09/2015"  Font-Italic="True" 
-                            Font-Size="15pt" Width="200px"></asp:Label>
+                            Font-Size="15pt" Width="200px" Font-Bold="True"></asp:Label>
+                        <br />
                         <br />
                     </asp:Panel>
+                 
+                    <br />
+                    <br />
+                    <asp:Label ID="Label10" runat="server" Font-Underline="True" Text="Status :" 
+                        Width="200px"></asp:Label>
+                    <asp:Label ID="Label11" runat="server" BackColor="#FFCC00" Font-Bold="True" 
+                        Font-Names="center" Font-Size="20pt" Height="30px" Text="Pending" Width="110px"></asp:Label>
+                    <br />
                  
                     </section>
 
