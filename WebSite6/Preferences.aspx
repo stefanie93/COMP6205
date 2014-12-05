@@ -57,13 +57,14 @@
                         <asp:Label ID="Label5" runat="server" Width="150px" Text="Enter Group ID"></asp:Label>
                         <asp:TextBox ID="txt_GroupID" runat="server"></asp:TextBox>
                         <asp:Label ID="Label8" runat="server" Text="OR"  Width="100px"></asp:Label>
-                        <asp:Button ID="btn_generateID" runat="server" Text="Generate" />
-                        <br />
-                        <br />
-                        <asp:Label ID="Label6" runat="server" Font-Size="Small" Text="Otherwise"></asp:Label>
+                        <asp:Button ID="btn_generateID" runat="server" Style="height:30px; width:100px;
+                            font-size:large" Text="Generate" />
                         <br />
                         <br />
                         <hr />
+                        <asp:Label ID="Label6" runat="server" Font-Size="Small" Text="Otherwise"></asp:Label>
+                        <br />
+                        <br />
                         <asp:Label ID="Label1" runat="server" Text="Flatemate preference based on Age"></asp:Label>
                         <br />
                         <asp:DropDownList ID="dp_agePref" runat="server" Width="800px" 
@@ -103,7 +104,8 @@
                         </asp:Panel>
                         <br />
                         <br />
-                        <asp:Button ID="btn_Confirmation" runat="server" Text="Next - Confirmation" 
+                        <asp:Button ID="btn_Confirmation" runat="server" Text="BOOK" Style="height:50px; width:100px;
+                            font-size:large"
                             onclick="btn_Confirmation_Click" />
                         <br />
                     </asp:Panel>
@@ -111,8 +113,26 @@
                     </div>
                 </div>
             </div>
+            </div>
             <footer>
-            </footer>
+                Company address
+<br />
+
+Suite 4, Blandel Bridge House
+<br />
+56 Sloane Square
+<br />
+London
+<br />
+SW1W 8AX
+<br />
+United Kingdom
+<br />
+<br />
+Registered as a company in England & Wales
+No. 7904120
+© 2014 Unilife Ltd
+                </footer>
         </div>
     </form>
 </body>

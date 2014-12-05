@@ -9,7 +9,7 @@ using System.Configuration;
 using System.Data;
 
 
-public partial class LoginPage : System.Web.UI.Page
+public partial class Form_Login : System.Web.UI.Page
 {
     int userID = 0;
     bool ishome = false;
@@ -256,7 +256,7 @@ public partial class LoginPage : System.Web.UI.Page
                     newUserCommand.ExecuteNonQuery();
                     lbl_Message.Text = "Registration Complete";
 
-                    string findUserID = "select User_ID from Users where email='" + txt_email.Text + "'";
+                    string findUserID = "select User_ID from Users where email='" + txt_RegisterEmail.Text + "'";
                     SqlCommand findUserIDCommantd = new SqlCommand(findUserID, connect);
                     string UserIDstring = findUserIDCommantd.ExecuteScalar().ToString();
                     UserIDstring = UserIDstring.Trim();
