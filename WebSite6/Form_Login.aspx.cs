@@ -63,45 +63,51 @@ public partial class LoginPage : System.Web.UI.Page
 
             if (password == txt_Password.Text)
             {
-
-                if (ishome == true)
+                if ((txt_email.Text == "admin1") || (txt_email.Text == "admin2"))
                 {
-                    txt_Login_userID.Text = UserIDstring;
-                    Response.Redirect("~/frm_homepage.aspx?userID=" + txt_Login_userID.Text);
+                    Response.Redirect("adminView.aspx");
                 }
                 else
                 {
-                    txt_Login_userID.Text = UserIDstring;
-                    userID = Convert.ToInt32(txt_Login_userID.Text.Trim());
-
-                    string user = "select state from Users where User_ID='" + userID + "'";
-                    SqlCommand userCommand = new SqlCommand(user, connect);
-                    string aplication_state = userCommand.ExecuteScalar().ToString();
-                    aplication_state = aplication_state.Trim();
-
-
-                    string sendVal = UserIDstring + " " + isStudio.ToString();
-
-                    if (aplication_state == "0")
+                    if (ishome == true)
                     {
-                        Response.Redirect("PersonalInfo.aspx?value_login=" + sendVal);
+                        txt_Login_userID.Text = UserIDstring;
+                        Response.Redirect("~/frm_homepage.aspx?userID=" + txt_Login_userID.Text);
                     }
-                    else if (aplication_state == "1")
+                    else
                     {
-                        if (isStudio == 0)
+                        txt_Login_userID.Text = UserIDstring;
+                        userID = Convert.ToInt32(txt_Login_userID.Text.Trim());
+
+                        string user = "select state from Users where User_ID='" + userID + "'";
+                        SqlCommand userCommand = new SqlCommand(user, connect);
+                        string aplication_state = userCommand.ExecuteScalar().ToString();
+                        aplication_state = aplication_state.Trim();
+
+
+                        string sendVal = UserIDstring + " " + isStudio.ToString();
+
+                        if (aplication_state == "0")
                         {
-                            Response.Redirect("Preferences.aspx?testID=" + txt_Login_userID.Text);
+                            Response.Redirect("PersonalInfo.aspx?value_login=" + sendVal);
                         }
-                        else
+                        else if (aplication_state == "1")
+                        {
+                            if (isStudio == 0)
+                            {
+                                Response.Redirect("Preferences.aspx?testID=" + txt_Login_userID.Text);
+                            }
+                            else
+                            {
+                                Response.Redirect("adminView.aspx");
+                            }
+                        }
+                        else if (aplication_state == "2")
                         {
                             Response.Redirect("adminView.aspx");
                         }
-                    }
-                    else if (aplication_state == "2")
-                    {
-                        Response.Redirect("adminView.aspx");
-                    }
 
+                    }
                 }
                 connect.Close();
             }
