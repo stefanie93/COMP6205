@@ -13,7 +13,7 @@
             <div id="banner">
                 <div id="navigation">
                     <ul id="nav">
-                        <li><a href="#">Home</a></li>
+                        <li><a href="frm_homepage.aspx">Home</a></li>
                     </ul>
                     <h1 id="top_title">
                         Book Room</h1>
