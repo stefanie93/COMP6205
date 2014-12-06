@@ -74,12 +74,12 @@ public partial class frm_homepage : System.Web.UI.Page
                 }
                 else
                 {
-                    Response.Redirect("adminView.aspx");
+                    Response.Redirect("Status.aspx?User_ID_Home=" + txt_Home_userID.Text);
                 }
             }
             else if (aplication_state == "2")
             {
-                Response.Redirect("adminView.aspx");
+                Response.Redirect("Status.aspx?User_ID_Home=" + txt_Home_userID.Text);
             }
         }
         else

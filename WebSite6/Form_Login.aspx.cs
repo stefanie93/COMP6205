@@ -65,7 +65,7 @@ public partial class Form_Login : System.Web.UI.Page
             {
                 if ((txt_email.Text == "admin1") || (txt_email.Text == "admin2"))
                 {
-                    Response.Redirect("adminView.aspx");
+                    Response.Redirect("Status.aspx?User_ID_login=" + UserIDstring);
                 }
                 else
                 {
@@ -99,12 +99,12 @@ public partial class Form_Login : System.Web.UI.Page
                             }
                             else
                             {
-                                Response.Redirect("adminView.aspx");
+                                Response.Redirect("Status.aspx?User_ID_login=" + UserIDstring);
                             }
                         }
                         else if (aplication_state == "2")
                         {
-                            Response.Redirect("adminView.aspx");
+                            Response.Redirect("Status.aspx?User_ID_login=" + UserIDstring);
                         }
 
                     }

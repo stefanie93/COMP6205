@@ -18,7 +18,9 @@
                     <ul id="nav">
                         <li><a href="#">Home</a></li>
                     </ul>
+                </div>
             </div>
+            
             <div>
                 <img class="img_title" src="./images/soton-bridge.jpg" alt="bridge" />
             </div>
@@ -27,6 +29,12 @@
             <div class="wrap_title">
                 <h1>
                     Status</h1>
+                      <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:PersonalData_ConnectionString %>" 
+                    SelectCommand="SELECT * FROM [PersonalData]"></asp:SqlDataSource>
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:Registration_ConnectionString %>" 
+                    SelectCommand="SELECT * FROM [Users]"></asp:SqlDataSource>
                       <br />
             </div>
             <div class="content_area">
@@ -79,7 +87,7 @@
                 </div>
                 </div>
                 </div>
-                </div>
+    </div>
     </form>
 </body>
 </html>

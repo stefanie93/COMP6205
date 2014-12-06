@@ -128,7 +128,7 @@ public partial class Preferences : System.Web.UI.Page
                 lbl_Message.ForeColor = System.Drawing.Color.Red;
             }
             connect.Close();
-            Response.Redirect("adminView.aspx");
+            Response.Redirect("Status.aspx?User_ID_Pref=" + userId);
         }
         else
         {

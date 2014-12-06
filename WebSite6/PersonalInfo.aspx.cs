@@ -250,7 +250,7 @@ public partial class PersonalInfo : System.Web.UI.Page
             }
             else
             {
-                Response.Redirect("adminView.aspx");
+                Response.Redirect("Status.aspx?User_ID_PI=" + txt_PIvalueForm.Text);
             }
 
             }
