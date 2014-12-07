@@ -92,7 +92,75 @@
                     <asp:DropDownList ID="dp_nationalityList" runat="server" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged"
                         Width="1000px">
                         <asp:ListItem Selected="True">Please Select...</asp:ListItem>
-                        <asp:ListItem Value="cypriot"></asp:ListItem>
+                        <asp:ListItem>Afgan</asp:ListItem>
+                        <asp:ListItem>Albanian</asp:ListItem>
+                        <asp:ListItem>Algerian</asp:ListItem>
+                        <asp:ListItem>Andorran</asp:ListItem>
+                        <asp:ListItem>Angolan</asp:ListItem>
+                        <asp:ListItem>Argentinian</asp:ListItem>
+                        <asp:ListItem>American</asp:ListItem>
+                        <asp:ListItem>Australian</asp:ListItem>
+                        <asp:ListItem>Austrian</asp:ListItem>
+                        <asp:ListItem>Azerbaijani</asp:ListItem>
+                        <asp:ListItem>Bahamian</asp:ListItem>
+                        <asp:ListItem>Bahraini</asp:ListItem>
+                        <asp:ListItem Value="Bangladeshi"></asp:ListItem>
+                        <asp:ListItem>Barbadian</asp:ListItem>
+                        <asp:ListItem>Belarusian</asp:ListItem>
+                        <asp:ListItem Value="Belgian"></asp:ListItem>
+                        <asp:ListItem>Belizean</asp:ListItem>
+                        <asp:ListItem>Beninese</asp:ListItem>
+                        <asp:ListItem Value="Bhutanese"></asp:ListItem>
+                        <asp:ListItem>Bolivian</asp:ListItem>
+                        <asp:ListItem>Bosnian</asp:ListItem>
+                        <asp:ListItem Value="Brazilian"></asp:ListItem>
+                        <asp:ListItem Value="British"></asp:ListItem>
+                        <asp:ListItem Value="Bulgarian"></asp:ListItem>
+                        <asp:ListItem Value="Canadian"></asp:ListItem>
+                        <asp:ListItem Value="Chinese"></asp:ListItem>
+                        <asp:ListItem Value="Colombian"></asp:ListItem>
+                        <asp:ListItem Value="Costa Rican"></asp:ListItem>
+                        <asp:ListItem>Croatian</asp:ListItem>
+                        <asp:ListItem>Cuban</asp:ListItem>
+                        <asp:ListItem Value="cypriot">Cypriot</asp:ListItem>
+                        <asp:ListItem Value="Czech"></asp:ListItem>
+                        <asp:ListItem>Danish</asp:ListItem>
+                        <asp:ListItem>Dominican</asp:ListItem>
+                        <asp:ListItem Value="Egyptian"></asp:ListItem>
+                        <asp:ListItem>English</asp:ListItem>
+                        <asp:ListItem>Esthonian</asp:ListItem>
+                        <asp:ListItem>Finnish</asp:ListItem>
+                        <asp:ListItem>French</asp:ListItem>
+                        <asp:ListItem>Georgian</asp:ListItem>
+                        <asp:ListItem Value="German"></asp:ListItem>
+                        <asp:ListItem Value="Greek"></asp:ListItem>
+                        <asp:ListItem>Dutch</asp:ListItem>
+                        <asp:ListItem Value="Icelandic"></asp:ListItem>
+                        <asp:ListItem Value="Indian"></asp:ListItem>
+                        <asp:ListItem Value="Irish"></asp:ListItem>
+                        <asp:ListItem>Italian</asp:ListItem>
+                        <asp:ListItem>Kenyan</asp:ListItem>
+                        <asp:ListItem>Latvian</asp:ListItem>
+                        <asp:ListItem>Lebanese</asp:ListItem>
+                        <asp:ListItem>Lithuanian</asp:ListItem>
+                        <asp:ListItem Value="Malaysian"></asp:ListItem>
+                        <asp:ListItem Value="Mexican"></asp:ListItem>
+                        <asp:ListItem Value="Norwegian"></asp:ListItem>
+                        <asp:ListItem>Pakistani</asp:ListItem>
+                        <asp:ListItem Value="Philippine"></asp:ListItem>
+                        <asp:ListItem Value="Portuguese"></asp:ListItem>
+                        <asp:ListItem Value="Scottish"></asp:ListItem>
+                        <asp:ListItem>Singaporean</asp:ListItem>
+                        <asp:ListItem>Slovak</asp:ListItem>
+                        <asp:ListItem Value="South African"></asp:ListItem>
+                        <asp:ListItem>South Korean</asp:ListItem>
+                        <asp:ListItem Value="Spanish"></asp:ListItem>
+                        <asp:ListItem Value="Swedish"></asp:ListItem>
+                        <asp:ListItem>Syrian</asp:ListItem>
+                        <asp:ListItem Value="Thai"></asp:ListItem>
+                        <asp:ListItem Value="Turkish"></asp:ListItem>
+                        <asp:ListItem Value="Ukrainian"></asp:ListItem>
+                        <asp:ListItem></asp:ListItem>
                     </asp:DropDownList>
                     <br />
                     <br />
