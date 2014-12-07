@@ -60,15 +60,20 @@ public partial class Form_Login : System.Web.UI.Page
             SqlCommand findUserIDCommantd = new SqlCommand(findUserID, connect);
             string UserIDstring = findUserIDCommantd.ExecuteScalar().ToString();
             UserIDstring = UserIDstring.Trim();
+            int id = Convert.ToInt32(UserIDstring);
 
             if (password == txt_Password.Text)
             {
                 if ((txt_email.Text == "admin1") || (txt_email.Text == "admin2"))
                 {
-                    Response.Redirect("Status.aspx?User_ID_login=" + UserIDstring);
+                    Response.Redirect("adminView.aspx?");
                 }
                 else
                 {
+                    string isStudioQuery = "select isStudioSelected from PersonalData where User_ID='" + id + "'";
+                    SqlCommand isStudioQueryCommantd = new SqlCommand(isStudioQuery, connect);
+                    string isStudiostring = isStudioQueryCommantd.ExecuteScalar().ToString();
+                    isStudiostring = isStudiostring.Trim();
                     if (ishome == true)
                     {
                         txt_Login_userID.Text = UserIDstring;
@@ -93,7 +98,7 @@ public partial class Form_Login : System.Web.UI.Page
                         }
                         else if (aplication_state == "1")
                         {
-                            if (isStudio == 0)
+                            if (isStudiostring == "0")
                             {
                                 Response.Redirect("Preferences.aspx?testID=" + txt_Login_userID.Text);
                             }
@@ -136,7 +141,7 @@ public partial class Form_Login : System.Web.UI.Page
         //If it exist it check throw an exeption!
         if (temp == 1)
         {
-            lbl_Message.Text = "Email already exist!!";
+            lbl_Message_Reg.Text = "Email already exist!!";
         }
         else
         {
@@ -156,34 +161,6 @@ public partial class Form_Login : System.Web.UI.Page
                 register = false;
             }
 
-            //Boolean validEmail = IsValidEmail(txt_RegisterEmail.Text);
-            //if (validEmail == false)
-            //{
-            //    labelString += "Enter a Valid Email @";
-            //    register = false;
-            //}
-
-            //string emailValidator = txt_RegisterEmail.Text;
-            //int sym = 0;
-            //char[] emailarray = emailValidator.ToCharArray();
-            //try
-            //{
-            //    if (char.IsLetter(emailarray[0]))
-            //    {
-            //        for (int i = 1; i < emailValidator.Length; i++)
-            //        {
-            //            if (emailValidator[i] == '@')
-            //            {
-            //                sym += 1;
-            //            }
-            //        }
-            //        sym += 1;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{ 
-
-            //}
 
             if (txt_RegisterEmail.Text != txt_RegisterEmailConfirmation.Text)
             {
@@ -193,11 +170,6 @@ public partial class Form_Login : System.Web.UI.Page
                 register = false;
             }
 
-            //if (sym != 2)
-            //{
-            //    labelString += "Enter a Valid Email @";
-            //    register = false;
-            //}
 
             if (txt_RegistrationPassword.Text != txt_RegisterPasswordConfirmation.Text)
             {
@@ -254,7 +226,7 @@ public partial class Form_Login : System.Web.UI.Page
                     newUserCommand.Parameters.AddWithValue("@state", 0);
 
                     newUserCommand.ExecuteNonQuery();
-                    lbl_Message.Text = "Registration Complete";
+                    lbl_Message_Reg.Text = "Registration Complete";
 
                     string findUserID = "select User_ID from Users where email='" + txt_RegisterEmail.Text + "'";
                     SqlCommand findUserIDCommantd = new SqlCommand(findUserID, connect);
@@ -285,8 +257,8 @@ public partial class Form_Login : System.Web.UI.Page
             else
             {
                 labelString = labelString.Replace("@", "<br />");
-                lbl_Message.Text = labelString;
-                lbl_Message.ForeColor = System.Drawing.Color.Red;
+                lbl_Message_Reg.Text = labelString;
+                lbl_Message_Reg.ForeColor = System.Drawing.Color.Red;
             }
 
         }

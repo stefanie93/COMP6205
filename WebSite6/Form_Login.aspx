@@ -61,7 +61,7 @@
 
                 <div class="tab_content">
                     <div class="content_area_r">
-                    <asp:Label ID="lbl_Name0" runat="server" 
+                    <asp:Label ID="lbl_Message_Reg" runat="server" 
         AssociatedControlID="btn_login" Height="10px" Width="20px"></asp:Label> 
                         <br />
         <asp:DropDownList ID="DropDownList1" runat="server">

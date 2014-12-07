@@ -24,13 +24,13 @@ public partial class frm_homepage : System.Web.UI.Page
         }
         if (logedin == true)
         {
-            Button1.Text = "Log Out";
+            Btn_Login_Reg.Text = "Log Out";
         }
         
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (Button1.Text == "Login")
+        if (Btn_Login_Reg.Text == "Login/Register")
         {
             Response.Redirect("Form_Login.aspx?home=" + txt_Home_valueForm.Text);
         }

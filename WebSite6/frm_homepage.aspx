@@ -21,7 +21,8 @@
                     <li><a href="#rooms">Rooms</a></li>
                     <li><a href="#facilities">Facilities</a></li>
                     <li class="last"><a href="#about">About Us</a></li>
-                    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Login" />
+                    <asp:Button ID="Btn_Login_Reg" runat="server" OnClick="Button1_Click" 
+                            Text="Login/Register" Height="30px" Width="150px" />
                 </ul>
             </div>
         </div>
@@ -41,7 +42,11 @@
         </div>
         <div class="wrapper_1">
             <div class="content_rooms">
-                <div class="wrap_title" id="rooms">
+                <div class = "wrap_title" id=rooms>
+                    <br />
+                    <br />
+                </div>
+                <div class="wrap_title">
                     <h1>
                         Rooms</h1>
                 </div>
@@ -145,7 +150,11 @@
 
         <div class="wrapper">
             <div id="content_facilities">
-                <div class="wrap_title" id="facilities">
+                <div class = "wrap_title" id=facilities>
+                    <br />
+                    <br />
+                </div>
+              <div class="wrap_title">
                     <h1>
                         Facilities</h1>
                 </div>
@@ -197,7 +206,11 @@
 
         <div class="wrapper">
             <div id="content_about">
-                <div class="wrap_title" id="about">
+                <div class = "wrap_title" id=about>
+                    <br />
+                    <br />
+                </div>
+                <div class="wrap_title">
                     <h1>
                         About Us</h1>
                 </div>

@@ -65,6 +65,8 @@ public partial class Preferences : System.Web.UI.Page
                 try
                 {
                     connect.Open();
+
+                    //Select query
                     string customer_id = "select customer_ID from PersonalData where User_ID='" + userId + "'";
 
                     SqlCommand customerCommand = new SqlCommand(customer_id, connect);
