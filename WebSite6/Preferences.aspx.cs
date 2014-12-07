@@ -244,6 +244,7 @@ public partial class Preferences : System.Web.UI.Page
         rb_nationality_dontMind.Enabled = true;
         rb_yesCoursePref.Enabled = true;
         rb_yesNationPref.Enabled = true;
+        txt_GroupID.Text = "";
         Label5.Enabled = false;
         txt_GroupID.Enabled = false;
         Label8.Enabled = false;
