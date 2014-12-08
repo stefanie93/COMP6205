@@ -1,15 +1,11 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="frm_homepage.aspx.cs" Inherits="frm_homepage" %>
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head id="Head1" runat="server">
     <title>Student Accommodation</title>
-    
     <script src="JScript_1.js" type="text/javascript"></script>
     <link rel="Stylesheet" type="text/css" href="~/Css/StyleSheet.css" />
-    
 </head>
 <body>
     <form id="form1" runat="server">
@@ -20,9 +16,12 @@
                     <li><a href="#up">Up</a></li>
                     <li><a href="#rooms">Rooms</a></li>
                     <li><a href="#facilities">Facilities</a></li>
-                    <li class="last"><a href="#about">About Us</a></li>
-                    <asp:Button ID="Btn_Login_Reg" runat="server" OnClick="Button1_Click" 
-                            Text="Login/Register" Height="30px" Width="150px" />
+                    <li><a href="#about">About Us</a></li>
+                    <li class="last">
+                        <asp:Button ID="Btn_Login_Reg" runat="server" OnClick="Button1_Click" Text="Login/Register"
+                            Height="30px" Width="150px" BackColor="White" BorderColor="White" BorderStyle="None"
+                            BorderWidth="0px" Font-Bold="True" Font-Underline="True" ForeColor="#333399" />
+                    </li>
                 </ul>
             </div>
         </div>
@@ -41,124 +40,124 @@
             </div>
         </div>
         <div class="wrapper_1">
-            <div class="content_rooms">
-                <div class = "wrap_title" id=rooms>
+            <div class="wrap_title" id="rooms">
+                <br />
+                <br />
+                <br />
+            </div>
+            <div class="wrap_title">
+                <h1>
+                    Rooms</h1>
+            </div>
+            <section class="content_wrap_rooms">
+                <div class="content_rooms">
+                    <div class="content_area">
+                        <div class="tab_header">
+                            <h2>
+                                EN-SUITE <span class="tab_remainRooms">(Rooms Available)</span>
+                            </h2>
+                        </div>
+                        <div class="tab_content">
+                            <div class="tab_info_title">
+                                <h3>
+                                    Duration:
+                                </h3>
+                                <hr />
+                                <h3>
+                                    Price:</h3>
+                                <hr />
+                                <h3>
+                                    Total Cost:</h3>
+                                <hr />
+                                <h3>
+                                    Start:</h3>
+                            </div>
+                            <div class="tab_info_details">
+                                <h3>
+                                    51 weeks</h3>
+                                <hr />
+                                <h3>
+                                    £100 per week</h3>
+                                <hr />
+                                <h3>
+                                    £5,610
+                                </h3>
+                                <hr />
+                                <h3>
+                                    05/09/2015
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="wrap_box">
+                            <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="BOOK NOW" BackColor="#FF3300"
+                                Font-Bold="True" Font-Size="Larger" Height="40px" Width="200px" />
+                        </div>
+                    </div>
+                    <div>
+                        <img class="img_room" src="./images/en-suite.jpg" alt="en-suite" />
+                    </div>
+                </div>
+                <div class="content_rooms">
+                    <div class="content_area">
+                        <div class="tab_header">
+                            <h2>
+                                STUDIO <span class="tab_remainRooms">(Rooms Available)</span>
+                            </h2>
+                        </div>
+                        <div class="tab_content">
+                            <div class="tab_info_title">
+                                <h3>
+                                    Duration:
+                                </h3>
+                                <hr />
+                                <h3>
+                                    Price:</h3>
+                                <hr />
+                                <h3>
+                                    Total Cost:</h3>
+                                <hr />
+                                <h3>
+                                    Start:</h3>
+                            </div>
+                            <div class="tab_info_details">
+                                <h3>
+                                    51 weeks</h3>
+                                <hr />
+                                <h3>
+                                    £150 per week</h3>
+                                <hr />
+                                <h3>
+                                    £7,650
+                                </h3>
+                                <hr />
+                                <h3>
+                                    05/09/2015
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="wrap_box">
+                            <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="BOOK NOW" BackColor="#FF3300"
+                                Font-Bold="True" Font-Size="Larger" Height="40px" Width="200px" />
+                        </div>
+                    </div>
+                    <div>
+                        <img class="img_room" src="./images/studio.jpg" alt="studio" />
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="wrapper">
+            <div id="content_facilities">
+                <div class="wrap_title" id="facilities">
+                    <br />
                     <br />
                     <br />
                 </div>
                 <div class="wrap_title">
                     <h1>
-                        Rooms</h1>
-                </div>
-                <div class="content_area">
-                    <div class="tab_header">
-                        <h2>
-                            EN-SUITE <span class="tab_remainRooms">(Rooms Available)</span>
-                        </h2>
-                    </div>
-                    <div class="tab_content">
-                        <div class="tab_info_title">
-                            <h3>
-                                Duration:
-                            </h3>
-                            <hr />
-                            <h3>
-                                Price:</h3>
-                            <hr />
-                            <h3>
-                                Total Cost:</h3>
-                            <hr />
-                            <h3>
-                                Start:</h3>
-                        </div>
-                        <div class="tab_info_details">
-                            <h3>
-                                51 weeks</h3>
-                            <hr />
-                            <h3>
-                                £100 per week</h3>
-                            <hr />
-                            <h3>
-                                £5,610
-                            </h3>
-                            <hr />
-                            <h3>
-                                05/09/2015
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="wrap_box">
-                        <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="BOOK NOW" 
-                            BackColor="#FF3300" Font-Bold="True" Font-Size="Larger"
-                            Height="40px" Width="200px" />
-                    </div>
-                </div>
-                <div>
-            <img class="img_room" src="./images/en-suite.jpg" alt="en-suite" />
-        </div>
-                </div>
-                 <div class="content_rooms">
-                <div class="content_area">
-                    <div class="tab_header">
-                        <h2>
-                            STUDIO <span class="tab_remainRooms">(Rooms Available)</span>
-                        </h2>
-                    </div>
-                    <div class="tab_content">
-                        <div class="tab_info_title">
-                            <h3>
-                                Duration:
-                            </h3>
-                            <hr />
-                            <h3>
-                                Price:</h3>
-                            <hr />
-                            <h3>
-                                Total Cost:</h3>
-                            <hr />
-                            <h3>
-                                Start:</h3>
-                        </div>
-                        <div class="tab_info_details">
-                            <h3>
-                                51 weeks</h3>
-                            <hr />
-                            <h3>
-                                £150 per week</h3>
-                            <hr />
-                            <h3>
-                                £7,650
-                            </h3>
-                            <hr />
-                            <h3>
-                                05/09/2015
-                            </h3>
-                        </div>
-                        
-                    </div>
-                <div class="wrap_box">
-                    <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="BOOK NOW"
-                     BackColor="#FF3300" Font-Bold="True" Font-Size="Larger"
-                            Height="40px" Width="200px" />
-                </div>
-                </div>
-                <div>
-            <img  class="img_room" src="./images/studio.jpg" alt="studio" />
-        </div>
-            </div>
-            </div>
-
-        <div class="wrapper">
-            <div id="content_facilities">
-                <div class = "wrap_title" id=facilities>
-                    <br />
-                    <br />
-                </div>
-              <div class="wrap_title">
-                    <h1>
                         Facilities</h1>
                 </div>
-                <div class="content_area2">
+                <div class="content_area_fac">
                     <h4>
                         All our student properties come with everything to make your stay with us really
                         comfortable. We’ve thought long and hard about every detail to make sure we’ve created
@@ -203,10 +202,10 @@
                 </div>
             </div>
         </div>
-
         <div class="wrapper">
             <div id="content_about">
-                <div class = "wrap_title" id=about>
+                <div class="wrap_title" id="about">
+                    <br />
                     <br />
                     <br />
                 </div>
@@ -214,20 +213,18 @@
                     <h1>
                         About Us</h1>
                 </div>
-                <div class="content_area3">
-                    <div class="content_wrap">
-                        <h3>
-                            All our student properties come with everything to make your stay with us really
-                            comfortable. We’ve thought long and hard about every detail to make sure we’ve created
-                            a space that works for you.</h3>
-                        <br />
-                        <h3>
-                            Contact Us:
-                        </h3>
-                        <div>
-                            telephone number: (+44) 02380 000000<br />
-                            email: <a href="mailto:studentaccommodation@yahoo.com">studentaccommodation@yahoo.com</a><br />
-                        </div>
+                <div class="content_area_about">
+                    <h3>
+                        All our student properties come with everything to make your stay with us really
+                        comfortable. We’ve thought long and hard about every detail to make sure we’ve created
+                        a space that works for you.</h3>
+                    <br />
+                    <h3>
+                        Contact Us:
+                    </h3>
+                    <div>
+                        telephone number: (+44) 02380 000000<br />
+                        email: <a href="mailto:studentaccommodation@yahoo.com">studentaccommodation@yahoo.com</a><br />
                     </div>
                 </div>
             </div>
