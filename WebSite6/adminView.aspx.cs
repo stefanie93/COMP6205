@@ -62,6 +62,11 @@ public partial class adminView : System.Web.UI.Page
         roomsArrayCount = 0;
     }
 
+    protected void Home_Click(object sender, EventArgs e)
+    { 
+    
+    }
+
     protected void btn_generate_Click(object sender, EventArgs e)
     {
         emptyTables();

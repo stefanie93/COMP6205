@@ -18,7 +18,7 @@
                     <h1 id="top_title">
                         Book Room</h1>
                 </div>
-            </div>
+            </div>            
             <div>
                 <img class="img_title" src="./images/soton-bridge.jpg" alt="bridge" />
             </div>
@@ -41,7 +41,7 @@
                     <asp:Label ID="Label1" runat="server" Text="What will be the year of study? *"></asp:Label>
                     <br />
                     <asp:DropDownList ID="dp_StudyYear" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged"
-                        Width="1000px">
+                        Width="250px">
                         <asp:ListItem Selected="True">Please Select...</asp:ListItem>
                         <asp:ListItem Value="Applicant">Applicant</asp:ListItem>
                         <asp:ListItem>2nd Year</asp:ListItem>
@@ -53,7 +53,7 @@
                     <br />
                     <asp:Label ID="Label2" runat="server" Text="Course type * "></asp:Label>
                     <br />
-                    <asp:TextBox ID="CourseTextBox" runat="server" Width="1000px"></asp:TextBox>
+                    <asp:TextBox ID="CourseTextBox" runat="server" Width="250px"></asp:TextBox>
                     <br />
                     <br />
                     <asp:Label ID="Label3" runat="server" Text="Your Gender *"></asp:Label>
@@ -90,7 +90,7 @@
                     <asp:Label ID="Label7" runat="server" Text="Nationality *"></asp:Label>
                     <br />
                     <asp:DropDownList ID="dp_nationalityList" runat="server" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged"
-                        Width="1000px">
+                        Width="250px">
                         <asp:ListItem Selected="True">Please Select...</asp:ListItem>
                         <asp:ListItem>Afgan</asp:ListItem>
                         <asp:ListItem>Albanian</asp:ListItem>
@@ -176,32 +176,32 @@
                     <asp:Panel ID="Panel1" runat="server" Height="524px">
                         <asp:Label ID="Label9" runat="server" Text="Address line 1 *"></asp:Label>
                         <br />
-                        <asp:TextBox ID="AddressTBox1" runat="server" Width="1000px"></asp:TextBox>
+                        <asp:TextBox ID="AddressTBox1" runat="server" Width="250px"></asp:TextBox>
                         <br />
                         <br />
                         <asp:Label ID="Label10" runat="server" Text="Address line 2"></asp:Label>
                         <br />
-                        <asp:TextBox ID="AddressTBox2" runat="server" Width="1000px"></asp:TextBox>
+                        <asp:TextBox ID="AddressTBox2" runat="server" Width="250px"></asp:TextBox>
                         <br />
                         <br />
                         <asp:Label ID="Label11" runat="server" Text="Address line 3"></asp:Label>
                         <br />
-                        <asp:TextBox ID="AddressTBox3" runat="server" Width="1000px"></asp:TextBox>
+                        <asp:TextBox ID="AddressTBox3" runat="server" Width="250px"></asp:TextBox>
                         <br />
                         <br />
                         <asp:Label ID="Label12" runat="server" Text="Address line 4"></asp:Label>
                         <br />
-                        <asp:TextBox ID="AddressTBox4" runat="server" Width="1000px"></asp:TextBox>
+                        <asp:TextBox ID="AddressTBox4" runat="server" Width="250px"></asp:TextBox>
                         <br />
                         <br />
                         <asp:Label ID="Label13" runat="server" Text="City/Country *"></asp:Label>
                         <br />
-                        <asp:TextBox ID="CountryTBox" runat="server" Height="25px" Width="1000px"></asp:TextBox>
+                        <asp:TextBox ID="CountryTBox" runat="server" Height="25px" Width="250px"></asp:TextBox>
                         <br />
                         <br />
                         <asp:Label ID="Label14" runat="server" Text="Postcode *"></asp:Label>
                         <br />
-                        <asp:TextBox ID="PostcodeTBox" runat="server" Width="1000px"></asp:TextBox>
+                        <asp:TextBox ID="PostcodeTBox" runat="server" Width="250px"></asp:TextBox>
                         <br />
                         <br />
                         <br />

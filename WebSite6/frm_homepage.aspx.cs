@@ -30,7 +30,15 @@ public partial class frm_homepage : System.Web.UI.Page
             string FirstName = FirstNameCommand.ExecuteScalar().ToString();
             FirstName = FirstName.Trim();
 
-
+            string stateQuery = "select FirstName from Users where User_ID='" + userid + "'";
+            SqlCommand stateQueryCommand = new SqlCommand(stateQuery, connect);
+            string stateID = stateQueryCommand.ExecuteScalar().ToString();
+            stateID = stateID.Trim();
+            if (stateID != "0")
+            {
+                Button2.Text = "Continue Booking";
+                Button3.Text = "Continue Booking";
+            }
             connect.Close();
             txt_Home_valueForm.Text = "home";
             Btn_Login_Reg.Text = "Log Out";

@@ -55,6 +55,8 @@
                             <asp:Label ID="Label5" runat="server" Text="Price Per Week:" Width="150px"></asp:Label>
                             <asp:Label ID="lbl_pricePW" runat="server" Font-Bold="True" Font-Italic="True" Font-Size="15pt"
                                 Width="200px"></asp:Label>
+                                <br />
+                                <br />
                             <asp:Label ID="Label6" runat="server" Text="Total Price:" Width="150px"></asp:Label>
                             <asp:Label ID="lbl_priceTotal" runat="server" Font-Bold="True" Font-Italic="True"
                                 Font-Size="15pt" Width="200px"></asp:Label>
@@ -63,6 +65,8 @@
                             <asp:Label ID="Label7" runat="server" Text="Contract Duration:" Width="150px"></asp:Label>
                             <asp:Label ID="lbl_contract" runat="server" Text="51 weeks" Font-Bold="True" Font-Italic="True"
                                 Font-Size="15pt" Width="200px"></asp:Label>
+                                <br />
+                                <br />
                             <asp:Label ID="Label8" runat="server" Text="Start date:" Width="150px"></asp:Label>
                             <asp:Label ID="Label9" runat="server" Text="05/09/2015" Font-Italic="True" Font-Size="15pt"
                                 Width="200px" Font-Bold="True"></asp:Label>

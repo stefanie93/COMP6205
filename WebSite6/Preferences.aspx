@@ -30,6 +30,7 @@
                 <div class="content_area">
                     <div class="content_wrap">
                   
+                  <section>
                     <asp:Panel ID="Panel1" runat="server">
                         <asp:Label ID="lbl_Message" runat="server"></asp:Label>
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
@@ -52,6 +53,7 @@
                             SelectCommand="SELECT * FROM [PersonalData]"></asp:SqlDataSource>
           
                         <br />
+                        
                         <asp:Label ID="Label7" runat="server" 
                             Text="If you wish to stay with people you know please enter the group ID, so we are able to put you all together. If you do not have a Group ID, get one by clicking on the generate button below and share it with the people you wish to share the flat. Remember that only up to 6 people can enter the same ID. "></asp:Label>
                             <br />
@@ -75,7 +77,9 @@
                         <asp:Label ID="Label5" runat="server" Width="150px" Text="Enter Group ID" 
                             Enabled="False"></asp:Label>
                         <asp:TextBox ID="txt_GroupID" runat="server" Enabled="False"></asp:TextBox>
-                        <asp:Label ID="Label8" runat="server" Text="OR"  Width="100px" 
+                        <br />
+                        <br />
+                        <asp:Label ID="Label8" runat="server" Text="OR"  Width="150px" 
                             style="margin-top: 2px" Enabled="False"></asp:Label>
                         <asp:Button ID="Button1" runat="server" Style="height:30px; width:100px;
                             font-size:large" onclick="Button1_Click" Text="Generate" Enabled="False" />
@@ -86,19 +90,19 @@
                         <asp:Label ID="Label1" runat="server" Text="Flatemate preference based on Age" 
                             Enabled="False"></asp:Label>
                         <br />
-                        <asp:DropDownList ID="dp_agePref" runat="server" Width="800px" 
+                        <asp:DropDownList ID="dp_agePref" runat="server" Width="250px" 
                             DataSourceID="SqlDataSource1" DataTextField="Year" DataValueField="Age_ID" 
                             onselectedindexchanged="dp_agePref_SelectedIndexChanged" 
-                            DataMember="DefaultView" Enabled="False">
+                            DataMember="DefaultView" Enabled="False" Height="21px">
                         </asp:DropDownList>
                         <br />
                         <br />
                         <asp:Label ID="Label2" runat="server" 
                             Text="Flatemate preference based on Gender" Enabled="False"></asp:Label>
                         <br />
-                        <asp:DropDownList ID="dp_genderPref" runat="server" Width="800px" 
+                        <asp:DropDownList ID="dp_genderPref" runat="server" Width="250px" 
                             DataSourceID="SqlDataSource3" DataTextField="Gender" 
-                            DataValueField="Gender_ID" Enabled="False">
+                            DataValueField="Gender_ID" Enabled="False" Height="16px">
                             <asp:ListItem>Please select...</asp:ListItem>
                             <asp:ListItem>All females</asp:ListItem>
                             <asp:ListItem>All males</asp:ListItem>
@@ -132,6 +136,7 @@
                             onclick="btn_Confirmation_Click" />
                         <br />
                     </asp:Panel>
+                    </section>
 
                     </div>
                 </div>

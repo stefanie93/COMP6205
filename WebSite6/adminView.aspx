@@ -5,6 +5,12 @@
 <head runat="server">
     <title></title>
     <link rel="Stylesheet" type="text/css" href="~/Css/Login.css" />
+<script language="javascript" type="text/javascript">
+<!--
+
+
+// -->
+</script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -13,7 +19,7 @@
             <div id="banner">
                 <div id="navigation">
                     <ul id="nav">
-                        <li><a href="frm_homepage.aspx">Home</a></li>
+                        <li><a onserverclick="Home_Click">Home</a></li>
                     </ul>
                 </div>
             </div>
@@ -24,27 +30,23 @@
                     Student Accommodation</h1>
             </div>
         </header>
-        <div class="wrapper">
+        <div class="wrapper_admin">
             <div>
+            <section class="grid"></section>
                 <asp:GridView ID="GridView1" runat="server">
-                </asp:GridView>
-                <asp:Button ID="btn_generate" runat="server" OnClick="btn_generate_Click" Style="height: 50px;
-                    font-size= large" Text="See All Room Allocation" Width="465px" />
-                <br />
-                <asp:Button ID="btn_back" runat="server" OnClick="btn_back_Click" Text="Back" Style="height: 50px;
-                    font-size= large" Visible="False" />
-                <br />
-                <asp:Button ID="btn_studios" runat="server" Style="height: 50px; font-size= large"
-                    Text="See the allocation only for Studios" Width="465px" OnClick="btn_studios_Click" />
-                <br />
-                <br />
-                <asp:Button ID="btn_ensuite" runat="server" Style="height: 50px; font-size= large"
-                    Text="See the allocation only for En-Suite" Width="465px" OnClick="btn_ensuite_Click" />
-                <br />
-                <br />
-                <asp:Button ID="btn_unbook" runat="server" Style="height: 50px; font-size= large"
-                    Text="See all the registered users that didn't book any room" Width="465px" OnClick="btn_unbook_Click" />
-                <br />
+                </asp:GridView></section>
+                <ul>
+                <li><input type="button" ID="btn_generate" class="wrap_box" runat="server"  Style="height: 50px"
+                     value="See All Room Allocation" onserverclick="btn_generate_Click" /></li>     
+                <li><input type="button" ID="btn_back" runat="server" onserverclick="btn_back_Click" value="Back" Style="height: 50px"
+                   Visible="False" /></li>
+                <li><input type="button" ID="btn_studios" class="wrap_box" runat="server" Style="height:50px"
+                    value="See the allocation only for Studios" onserverclick="btn_studios_Click"/></li>
+                <li><input type="button" ID="btn_ensuite" class="wrap_box" runat="server" Style="height:50px" 
+                    value="See the allocation only for En-Suite" onserverclick="btn_ensuite_Click" /></li>
+                <li><input type="button" ID="btn_unbook"  class="wrap_box" runat="server" Style="height:50px"
+                    value="See all the registered users that didn't book any room" onserverclick="btn_unbook_Click" /></li>
+                </ul>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" DataSourceMode="DataSet" ConnectionString="<%$ ConnectionStrings:PersonalData_ConnectionString %>"
                     OnSelecting="SqlDataSource1_Selecting" SelectCommand="SELECT * FROM [PersonalData]">
                 </asp:SqlDataSource>
