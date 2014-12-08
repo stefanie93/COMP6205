@@ -21,6 +21,27 @@ public partial class frm_homepage : System.Web.UI.Page
             logedin = true;
             userid = Convert.ToInt32(Request.QueryString["userID"]);
         }
+        else if (!string.IsNullOrEmpty(Request.QueryString["adminView"]))
+        {
+            userid = Convert.ToInt32(Request.QueryString["adminView"]);
+        }
+        else if (!string.IsNullOrEmpty(Request.QueryString["personalInfo"]))
+        {
+            logedin = true;
+            userid = Convert.ToInt32(Request.QueryString["personalInfo"]);
+        }
+        else if (!string.IsNullOrEmpty(Request.QueryString["preferences"]))
+        {
+            logedin = true;
+            userid = Convert.ToInt32(Request.QueryString["preferences"]);
+        }
+        else if (!string.IsNullOrEmpty(Request.QueryString["status"]))
+        {
+            logedin = true;
+            userid = Convert.ToInt32(Request.QueryString["status"]);
+        }
+
+
         if (logedin == true)
         {
             SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Registration_ConnectionString"].ConnectionString);

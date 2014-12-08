@@ -53,6 +53,7 @@
     float:right;
     text-align:left;
     position:relative;
+    height: 30px;
 }
 
 #nav li a:hover, #nav li.active a

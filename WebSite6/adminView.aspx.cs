@@ -19,10 +19,17 @@ public partial class adminView : System.Web.UI.Page
     string[,] roomsArray = new string[100000, 5];
     int roomsArrayCount = 0;
     int studioNum = 0;
-
+    int User_ID_Int;
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["PersonalData_ConnectionString"].ConnectionString);
+        connect.Open();
+        string userID = "select max(User_ID) from Users";
+        SqlCommand userIDCommand = new SqlCommand(userID, connect);
+        string User_ID = userIDCommand.ExecuteScalar().ToString();
+        User_ID = User_ID.Trim();
+        int lastUserID = Convert.ToInt32(User_ID);
+        connect.Close();
     }
 
     public void emptyTables()
@@ -60,11 +67,6 @@ public partial class adminView : System.Web.UI.Page
             roomsArray[i, 4] = null;
         }
         roomsArrayCount = 0;
-    }
-
-    protected void Home_Click(object sender, EventArgs e)
-    { 
-    
     }
 
     protected void btn_generate_Click(object sender, EventArgs e)
@@ -1224,5 +1226,9 @@ public partial class adminView : System.Web.UI.Page
             btn_unbook.Visible = false;
             btn_back.Visible = true;
 
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("frm_homepage.aspx?adminView=" + User_ID_Int);
     }
 }

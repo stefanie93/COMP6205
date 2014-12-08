@@ -83,7 +83,7 @@ public partial class Form_Login : System.Web.UI.Page
                 
                 if (password == txt_Password.Text)
                 {
-                    if ((txt_email.Text == "admin1") || (txt_email.Text == "admin2"))
+                    if ((txt_email.Text.Trim() == "admin1") || (txt_email.Text.Trim() == "admin2"))
                     {
                         Response.Redirect("adminView.aspx?");
                     }
@@ -293,4 +293,8 @@ public partial class Form_Login : System.Web.UI.Page
         txt_RegisterEmailConfirmation.ForeColor = System.Drawing.Color.Black;
     }
 
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("frm_homepage.aspx");
+    }
 }

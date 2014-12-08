@@ -286,7 +286,12 @@ public partial class PersonalInfo : System.Web.UI.Page
            smokerNo.Checked = false;
        }
    }
-   protected void CountryCodeTBox_TextChanged(object sender, EventArgs e)
+
+   protected void Button1_Click(object sender, EventArgs e)
+   {
+       Response.Redirect("frm_homepage.aspx?personalInfo=" + user_id);
+   }
+   protected void MaleRButton_CheckedChanged(object sender, EventArgs e)
    {
 
    }
@@ -294,7 +299,7 @@ public partial class PersonalInfo : System.Web.UI.Page
    {
 
    }
-   protected void MaleRButton_CheckedChanged(object sender, EventArgs e)
+   protected void CountryCodeTBox_TextChanged(object sender, EventArgs e)
    {
 
    }

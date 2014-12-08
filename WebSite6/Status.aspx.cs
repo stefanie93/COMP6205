@@ -10,9 +10,10 @@ using System.Data;
 
 public partial class Status : System.Web.UI.Page
 {
+    int user_id = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
-        int user_id = 0;
+        
         if (!string.IsNullOrEmpty(Request.QueryString["User_ID_Home"]))
         {
             user_id = Convert.ToInt32(Request.QueryString["User_ID_Home"]);
@@ -67,4 +68,8 @@ public partial class Status : System.Web.UI.Page
         connect.Close();
     }
 
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Status.aspx?status=" + user_id);
+    }
 }

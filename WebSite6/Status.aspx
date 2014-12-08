@@ -15,7 +15,10 @@
             <div id="banner">
                 <div id="navigation">
                     <ul id="nav">
-                        <li><a href="frm_homepage.aspx">Home</a></li>
+                        <li><asp:Button ID="Btn_home" runat="server" OnClick="Button1_Click" Text="Home"
+                                Height="30px" Width="150px" BackColor="#C3C3C3" BorderColor="#C3C3C3" BorderStyle="None"
+                                BorderWidth="0px" Font-Bold="True" Font-Underline="True" 
+                                ForeColor="#333399" /></li>
                     </ul>
                 </div>
             </div>
