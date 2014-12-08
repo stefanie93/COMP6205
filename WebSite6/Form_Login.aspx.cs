@@ -14,9 +14,30 @@ public partial class Form_Login : System.Web.UI.Page
     int userID = 0;
     bool ishome = false;
     int isStudio = 3;
+    string home;
     public void Page_Load(object sender, EventArgs e)
     {
 
+        if (!string.IsNullOrEmpty(Request.QueryString["homePI"]))
+        {
+
+            if (!string.IsNullOrEmpty(Request.QueryString["homePI"]))
+            {
+                string value = Request.QueryString["homePI"];
+                string[] words = value.Split(' ');
+                isStudio = Convert.ToInt32(words[1]);
+                home = words[0];
+            }
+
+            if (home == "home")
+            {
+                ishome = true;
+            }
+            else
+            {
+                ishome = false;
+            }
+        }
         if (!string.IsNullOrEmpty(Request.QueryString["home"]))
         {
             if (Request.QueryString["home"] == "home")
@@ -27,10 +48,6 @@ public partial class Form_Login : System.Web.UI.Page
             {
                 ishome = false;
             }
-        }
-        if (!string.IsNullOrEmpty(Request.QueryString["studio"]))
-        {
-            isStudio = Convert.ToInt32(Request.QueryString["studio"]);
         }
 
         //lbl_Message.Text = isStudio.ToString();

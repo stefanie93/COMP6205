@@ -18,6 +18,7 @@
                     <li><a href="#facilities">Facilities</a></li>
                     <li><a href="#about">About Us</a></li>
                     <li class="last">
+                        <asp:Label ID="Label1" runat="server" Font-Size="Small"></asp:Label>
                         <asp:Button ID="Btn_Login_Reg" runat="server" OnClick="Button1_Click" Text="Login/Register"
                             Height="30px" Width="150px" BackColor="White" BorderColor="White" BorderStyle="None"
                             BorderWidth="0px" Font-Bold="True" Font-Underline="True" ForeColor="#333399" />

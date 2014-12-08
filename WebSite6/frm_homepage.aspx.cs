@@ -15,7 +15,6 @@ public partial class frm_homepage : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        txt_Home_valueForm.Text = "home";
 
         if (!string.IsNullOrEmpty(Request.QueryString["userID"]))
         {
@@ -24,7 +23,20 @@ public partial class frm_homepage : System.Web.UI.Page
         }
         if (logedin == true)
         {
+            SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Registration_ConnectionString"].ConnectionString);
+            connect.Open();
+            string FirstNameQuery = "select FirstName from Users where User_ID='" + userid + "'";
+            SqlCommand FirstNameCommand = new SqlCommand(FirstNameQuery, connect);
+            string FirstName = FirstNameCommand.ExecuteScalar().ToString();
+            FirstName = FirstName.Trim();
+
+
+            connect.Close();
+            txt_Home_valueForm.Text = "home";
             Btn_Login_Reg.Text = "Log Out";
+            Btn_Login_Reg.Height = 20;
+            Btn_Login_Reg.Width = 100;
+            Label1.Text = "Welcome, " + FirstName;
         }
         
     }
@@ -32,6 +44,7 @@ public partial class frm_homepage : System.Web.UI.Page
     {
         if (Btn_Login_Reg.Text == "Login/Register")
         {
+            txt_Home_valueForm.Text = "home";
             Response.Redirect("Form_Login.aspx?home=" + txt_Home_valueForm.Text);
         }
         else
@@ -52,7 +65,7 @@ public partial class frm_homepage : System.Web.UI.Page
         SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Registration_ConnectionString"].ConnectionString);
         connect.Open();
         txt_Home_userID.Text = userid.ToString();
-        txt_Home_valueForm.Text = "Personal";
+        txt_Home_valueForm.Text = "home";
         if (logedin == true)
         {
             string user = "select state from Users where User_ID='" + userid + "'";
@@ -84,7 +97,8 @@ public partial class frm_homepage : System.Web.UI.Page
         }
         else
         {
-            Response.Redirect("Form_Login.aspx?home=" + txt_Home_valueForm.Text.Trim() + "&studio=" + studio);
+            string t = txt_Home_valueForm.Text + " " + studio;
+            Response.Redirect("Form_Login.aspx?homePI=" + t);
         }
     }
     
