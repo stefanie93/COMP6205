@@ -14,8 +14,6 @@ public partial class frm_homepage : System.Web.UI.Page
     int userid;
     protected void Page_Load(object sender, EventArgs e)
     {
-
-
         if (!string.IsNullOrEmpty(Request.QueryString["userID"]))
         {
             logedin = true;
@@ -67,7 +65,7 @@ public partial class frm_homepage : System.Web.UI.Page
             Btn_Login_Reg.Width = 100;
             Label1.Text = "Welcome, " + FirstName;
         }
-        
+
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
@@ -108,9 +106,13 @@ public partial class frm_homepage : System.Web.UI.Page
             {
                 Response.Redirect("PersonalInfo.aspx?value_home=" + sendVal);
             }
-            else if ((aplication_state == "1"))
+            else if (aplication_state == "1")
             {
-                if (studio == 0)
+                string studioQuery = "select state from Users where User_ID='" + userid + "'";
+                SqlCommand studioQueryCommand = new SqlCommand(studioQuery, connect);
+                string studio_string = studioQueryCommand.ExecuteScalar().ToString();
+                studio_string = studio_string.Trim();
+                if (studio_string == "0")
                 {
                     Response.Redirect("Preferences.aspx?testID=" + txt_Home_userID.Text);
                 }
@@ -126,7 +128,7 @@ public partial class frm_homepage : System.Web.UI.Page
         }
         else
         {
-            string t = txt_Home_valueForm.Text + " " + studio;
+            string t = "home" + " " + studio;
             Response.Redirect("Form_Login.aspx?homePI=" + t);
         }
     }

@@ -38,7 +38,7 @@
         <div class="wrapper_admin">
             <div>
             <section class="grid"></section>
-                <asp:GridView ID="GridView1" runat="server">
+                <asp:GridView horizontalalign="Center" ID="GridView1" runat="server">
                 </asp:GridView></section>
                 <ul>
                 <li><input type="button" ID="btn_generate" class="wrap_box" runat="server"  Style="height: 50px"

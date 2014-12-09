@@ -4,7 +4,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Student Accommodation</title>
-    <script src="JScript_1.js" type="text/javascript"></script>
     <link rel="Stylesheet" type="text/css" href="~/Css/StyleSheet.css" />
 </head>
 <body>

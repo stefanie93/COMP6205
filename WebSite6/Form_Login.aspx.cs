@@ -20,37 +20,31 @@ public partial class Form_Login : System.Web.UI.Page
 
         if (!string.IsNullOrEmpty(Request.QueryString["homePI"]))
         {
-
-            if (!string.IsNullOrEmpty(Request.QueryString["homePI"]))
-            {
-                string value = Request.QueryString["homePI"];
-                string[] words = value.Split(' ');
-                isStudio = Convert.ToInt32(words[1]);
-                home = words[0];
-            }
-
-            if (home == "home")
-            {
-                ishome = true;
-            }
-            else
-            {
-                ishome = false;
-            }
+            string value = Request.QueryString["homePI"];
+            string[] words = value.Split(' ');
+            isStudio = Convert.ToInt32(words[1]);
+            home = words[0];
         }
-        if (!string.IsNullOrEmpty(Request.QueryString["home"]))
+
+        if (home == "home")
         {
-            if (Request.QueryString["home"] == "home")
-            {
-                ishome = true;
-            }
-            else
-            {
-                ishome = false;
-            }
+            ishome = true;
+        }
+        else
+        {
+            ishome = false;
+        }
+        if (Request.QueryString["home"] == "home")
+        {
+            ishome = true;
+        }
+        else
+        {
+            ishome = false;
         }
 
-        //lbl_Message.Text = isStudio.ToString();
+        btn_login.Click += new EventHandler(this.btn_login_Click);
+
     }
 
     public void btn_login_Click(object sender, EventArgs e)
@@ -59,92 +53,92 @@ public partial class Form_Login : System.Web.UI.Page
         SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["Registration_ConnectionString"].ConnectionString);
         connect.Open();
 
-            string malevi = ConfigurationManager.ConnectionStrings["Registration_ConnectionString"].ConnectionString;
-            //Create the query in order to check if the email exist
-            string validateUser = "select count(*) from Users where email='" + txt_email.Text + "'";
-            SqlCommand Emailcommand = new SqlCommand(validateUser, connect);
-            int temp = Convert.ToInt32(Emailcommand.ExecuteScalar().ToString());
-            connect.Close();
-            //If it exist it check if the password of that user is valid!
-            if (temp == 1)
-            {
-                connect.Open();
-                string validatePassword = "select password from Users where email='" + txt_email.Text + "'";
-                SqlCommand PasswordCommantd = new SqlCommand(validatePassword, connect);
-                string password = PasswordCommantd.ExecuteScalar().ToString();
-                password = password.Trim();
+        string malevi = ConfigurationManager.ConnectionStrings["Registration_ConnectionString"].ConnectionString;
+        //Create the query in order to check if the email exist
+        string validateUser = "select count(*) from Users where email='" + txt_email.Text + "'";
+        SqlCommand Emailcommand = new SqlCommand(validateUser, connect);
+        int temp = Convert.ToInt32(Emailcommand.ExecuteScalar().ToString());
+        connect.Close();
+        //If it exist it check if the password of that user is valid!
+        if (temp == 1)
+        {
+            connect.Open();
+            string validatePassword = "select password from Users where email='" + txt_email.Text + "'";
+            SqlCommand PasswordCommantd = new SqlCommand(validatePassword, connect);
+            string password = PasswordCommantd.ExecuteScalar().ToString();
+            password = password.Trim();
 
-                string findUserID = "select User_ID from Users where email='" + txt_email.Text + "'";
-                SqlCommand findUserIDCommantd = new SqlCommand(findUserID, connect);
-                string UserIDstring = findUserIDCommantd.ExecuteScalar().ToString();
-                UserIDstring = UserIDstring.Trim();
-                int id = Convert.ToInt32(UserIDstring);
+            string findUserID = "select User_ID from Users where email='" + txt_email.Text + "'";
+            SqlCommand findUserIDCommantd = new SqlCommand(findUserID, connect);
+            string UserIDstring = findUserIDCommantd.ExecuteScalar().ToString();
+            UserIDstring = UserIDstring.Trim();
+            int id = Convert.ToInt32(UserIDstring);
 
                 
-                if (password == txt_Password.Text)
+            if (password == txt_Password.Text)
+            {
+                if ((txt_email.Text.Trim() == "admin1") || (txt_email.Text.Trim() == "admin2"))
                 {
-                    if ((txt_email.Text.Trim() == "admin1") || (txt_email.Text.Trim() == "admin2"))
-                    {
-                        Response.Redirect("adminView.aspx?");
-                    }
-                    else
-                    {
-
-                        if (ishome == true)
-                        {
-                            txt_Login_userID.Text = UserIDstring;
-                            Response.Redirect("~/frm_homepage.aspx?userID=" + txt_Login_userID.Text);
-                        }
-                        else
-                        {
-                            txt_Login_userID.Text = UserIDstring;
-                            userID = Convert.ToInt32(txt_Login_userID.Text.Trim());
-
-                            string stateQuery = "select state from Users where User_ID='" + userID + "'";
-                            SqlCommand stateQueryCommand = new SqlCommand(stateQuery, connect);
-                            string aplication_state = stateQueryCommand.ExecuteScalar().ToString();
-                            aplication_state = aplication_state.Trim();
-
-
-                            string sendVal = UserIDstring + " " + isStudio.ToString();
-
-                            if (aplication_state == "0")
-                            {
-                                Response.Redirect("PersonalInfo.aspx?value_login=" + sendVal);
-                            }
-                            else if (aplication_state == "1")
-                            {
-                                string isStudioQuery = "select isStudioSelected from PersonalData where User_ID='" + id + "'";
-                                SqlCommand isStudioQueryCommand = new SqlCommand(isStudioQuery, connect);
-                                string isStudiostring = isStudioQueryCommand.ExecuteScalar().ToString();
-                                isStudiostring = isStudiostring.Trim();
-                                if (isStudiostring == "0")
-                                {
-                                    Response.Redirect("Preferences.aspx?testID=" + txt_Login_userID.Text);
-                                }
-                                else
-                                {
-                                    Response.Redirect("Status.aspx?User_ID_login=" + UserIDstring);
-                                }
-                            }
-                            else if (aplication_state == "2")
-                            {
-                                Response.Redirect("Status.aspx?User_ID_login=" + UserIDstring);
-                            }
-
-                        }
-                    }
-                    connect.Close();
+                    Response.Redirect("adminView.aspx");
                 }
                 else
                 {
-                    lbl_Message.Text = "password is not correct!!";
+
+                    if (ishome == true)
+                    {
+                        txt_Login_userID.Text = UserIDstring;
+                        Response.Redirect("~/frm_homepage.aspx?userID=" + txt_Login_userID.Text);
+                    }
+                    else
+                    {
+                        txt_Login_userID.Text = UserIDstring;
+                        userID = Convert.ToInt32(txt_Login_userID.Text.Trim());
+
+                        string stateQuery = "select state from Users where User_ID='" + userID + "'";
+                        SqlCommand stateQueryCommand = new SqlCommand(stateQuery, connect);
+                        string aplication_state = stateQueryCommand.ExecuteScalar().ToString();
+                        aplication_state = aplication_state.Trim();
+
+
+                        string sendVal = UserIDstring + " " + isStudio.ToString();
+
+                        if (aplication_state == "0")
+                        {
+                            Response.Redirect("PersonalInfo.aspx?value_login=" + sendVal);
+                        }
+                        else if (aplication_state == "1")
+                        {
+                            string isStudioQuery = "select isStudioSelected from PersonalData where User_ID='" + id + "'";
+                            SqlCommand isStudioQueryCommand = new SqlCommand(isStudioQuery, connect);
+                            string isStudiostring = isStudioQueryCommand.ExecuteScalar().ToString();
+                            isStudiostring = isStudiostring.Trim();
+                            if (isStudiostring == "0")
+                            {
+                                Response.Redirect("Preferences.aspx?testID=" + txt_Login_userID.Text);
+                            }
+                            else
+                            {
+                                Response.Redirect("Status.aspx?User_ID_login=" + UserIDstring);
+                            }
+                        }
+                        else if (aplication_state == "2")
+                        {
+                            Response.Redirect("Status.aspx?User_ID_login=" + UserIDstring);
+                        }
+
+                    }
                 }
+                connect.Close();
             }
             else
             {
-                lbl_Message.Text = "Email is not correct!!";
+                lbl_Message.Text = "password is not correct!!";
             }
+        }
+        else
+        {
+            lbl_Message.Text = "Email is not correct!!";
+        }
 
     }
     public void cmd_Register_Click(object sender, EventArgs e)

@@ -14,7 +14,7 @@
                 <ul id="nav">
                     <li>
                         <asp:Button ID="Button2" runat="server" Text="Home" Height="30px" Width="150px" 
-                            BackColor="#C3C3C3" BorderColor="#C3C3C3" BorderStyle="None"
+                            BackColor="#dedede" BorderColor="#dedede" BorderStyle="None"
                                 BorderWidth="0px" Font-Bold="True" Font-Underline="True" 
                             ForeColor="#333399" onclick="Button2_Click" />
                     </li>

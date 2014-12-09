@@ -70,6 +70,6 @@ public partial class Status : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        Response.Redirect("Status.aspx?status=" + user_id);
+        Response.Redirect("frm_homepage.aspx?status=" + user_id);
     }
 }

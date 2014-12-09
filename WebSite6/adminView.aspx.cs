@@ -844,6 +844,7 @@ public partial class adminView : System.Web.UI.Page
             group = 30;
             save_studio(studioPreferences, i);
         }
+
         rooms_allocation(userCount);
 
         DataView DataViewForRestUsers = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
@@ -878,7 +879,7 @@ public partial class adminView : System.Web.UI.Page
             {
                 if (users[i, 0] == print_data[j, 0])
                 {
-                    print_data[j, 5] = users[i, 2];
+                    print_data[j, 5] = "1";
                     print_data[j, 6] = users[i, 3];
                     print_data[j, 7] = users[i, 4];
                 }
