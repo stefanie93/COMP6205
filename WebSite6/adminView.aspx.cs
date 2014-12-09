@@ -312,7 +312,6 @@ public partial class adminView : System.Web.UI.Page
 
             if (dtCurrentTable.Rows.Count > 0)
             {
-
                 for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
                 {
                     //add each row into data table  
@@ -332,11 +331,12 @@ public partial class adminView : System.Web.UI.Page
                     dtCurrentTable.AcceptChanges();
 
                 }
-
                 //add created Rows into dataTable  
                 dtCurrentTable.Rows.Add(drCurrentRow);
+
                 //Save Data table into view state after creating each row  
                 ViewState["Users"] = dtCurrentTable;
+
                 //Bind Gridview with latest Row  
                 GridView1.DataSource = dtCurrentTable;
                 GridView1.DataBind();

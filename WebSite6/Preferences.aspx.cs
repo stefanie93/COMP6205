@@ -34,6 +34,7 @@ public partial class Preferences : System.Web.UI.Page
     protected void btn_Confirmation_Click(object sender, EventArgs e)
     {
         SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["PersonalData_ConnectionString"].ConnectionString);
+        connect.Open();
         SqlConnection userconnect = new SqlConnection(ConfigurationManager.ConnectionStrings["Registration_ConnectionString"].ConnectionString);
         SqlConnection ageConnnect = new SqlConnection(ConfigurationManager.ConnectionStrings["Age_Preferences_ConnectionString"].ConnectionString);
         SqlConnection genderConnnect = new SqlConnection(ConfigurationManager.ConnectionStrings["Gender_Preferences_ConnectionString"].ConnectionString);
@@ -64,7 +65,7 @@ public partial class Preferences : System.Web.UI.Page
             {
                 try
                 {
-                    connect.Open();
+
 
                     //Select query
                     string customer_id = "select customer_ID from PersonalData where User_ID='" + userId + "'";
@@ -141,8 +142,11 @@ public partial class Preferences : System.Web.UI.Page
             DataView DataViewForgroups = (DataView)SqlDataSource6.Select(DataSourceSelectArguments.Empty);
             foreach (DataRowView DataRowViewForGroups in DataViewForgroups)
             {
-                groupids[groupidsCount] = Convert.ToInt32(DataRowViewForGroups["groupID"].ToString());
-                groupidsCount++;
+                if (!string.IsNullOrEmpty(DataRowViewForGroups["groupID"].ToString()))
+                {
+                    groupids[groupidsCount] = Convert.ToInt32(DataRowViewForGroups["groupID"].ToString().Trim());
+                    groupidsCount++;
+                }
             }
 
             int dd = 0;
